@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'jwt_auth',
     'credit_cards',
+    'credit_range',
+    'cash_back_category',
+    'issuer',
 ]
 
 MIDDLEWARE = [
@@ -79,7 +82,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'bettercred',
-        'HOST': 'locahost',
+        'HOST': 'localhost',
         'PORT': 5432
     }
 }

@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import CreditCard
+from .models import CreditRange
 
 # Register your models here.
 
-admin.site.register(CreditCard)
+admin.site.register(CreditRange)
