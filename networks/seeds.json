@@ -1,0 +1,34 @@
+[
+{
+  "model": "networks.network",
+  "pk": 1,
+  "fields": {
+    "name": "Visa",
+    "logo": "https://www.freepnglogos.com/pics/visa-logo-png"
+  }
+},
+{
+  "model": "networks.network",
+  "pk": 2,
+  "fields": {
+    "name": "American Express",
+    "logo": "https://www.logo.wine/logo/American_Express"
+  }
+},
+{
+  "model": "networks.network",
+  "pk": 3,
+  "fields": {
+    "name": "Mastercard",
+    "logo": "https://commons.wikimedia.org/wiki/File:Mastercard-logo.svg"
+  }
+},
+{
+  "model": "networks.network",
+  "pk": 4,
+  "fields": {
+    "name": "Discover",
+    "logo": "https://1000logos.net/discover-logo/"
+  }
+}
+]

@@ -1,7 +1,9 @@
+from psycopg2 import IntegrityError
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
-from rest_framework.exceptions import PermissionDenied
+from rest_framework.exceptions import PermissionDenied, ValidationError
+# from django.core.exceptions import ValidationError
 
 # For tokenization
 import jwt
@@ -28,10 +30,13 @@ class RegisterView(APIView):
         user_to_register = UserSerializer(data = request.data)
 
         try:
-            user_to_register.is_valid()
+            user_to_register.is_valid(raise_exception = True)
             user_to_register.save()
             return Response({ 'message': 'Registration successful!' }, status.HTTP_201_CREATED)
+        except ValidationError:
+            return Response(user_to_register.errors, status.HTTP_422_UNPROCESSABLE_ENTITY)
         except Exception as e:
+            print("error", e)
             return Response({ 'message': str(e) }, status.HTTP_422_UNPROCESSABLE_ENTITY)
 
 # Endpoint: /login/
@@ -91,8 +96,10 @@ class ProfileView(APIView):
 
     # PUT - Update user profile
     def put(self, request, pk):
+
         user_to_edit = self.get_user(pk)
         deserialized_user = UserSerializer(user_to_edit, request.data)
+
         try:
             deserialized_user.is_valid()
             deserialized_user.save()

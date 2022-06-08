@@ -1,0 +1,58 @@
+[
+{
+  "model": "cash_back_categories.cashbackcategory",
+  "pk": 1,
+  "fields": {
+    "type": "Restaurants"
+  }
+},
+{
+  "model": "cash_back_categories.cashbackcategory",
+  "pk": 2,
+  "fields": {
+    "type": "Gas Stations"
+  }
+},
+{
+  "model": "cash_back_categories.cashbackcategory",
+  "pk": 3,
+  "fields": {
+    "type": "Travel"
+  }
+},
+{
+  "model": "cash_back_categories.cashbackcategory",
+  "pk": 4,
+  "fields": {
+    "type": "Streaming Services"
+  }
+},
+{
+  "model": "cash_back_categories.cashbackcategory",
+  "pk": 5,
+  "fields": {
+    "type": "Rotating"
+  }
+},
+{
+  "model": "cash_back_categories.cashbackcategory",
+  "pk": 6,
+  "fields": {
+    "type": "Transit"
+  }
+},
+{
+  "model": "cash_back_categories.cashbackcategory",
+  "pk": 7,
+  "fields": {
+    "type": "Supermarkets"
+  }
+},
+{
+  "model": "cash_back_categories.cashbackcategory",
+  "pk": 8,
+  "fields": {
+    "type": "Drugstores"
+  }
+}
+]

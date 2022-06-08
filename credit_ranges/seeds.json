@@ -1,0 +1,30 @@
+[
+{
+  "model": "credit_ranges.creditrange",
+  "pk": 1,
+  "fields": {
+    "range": "Bad"
+  }
+},
+{
+  "model": "credit_ranges.creditrange",
+  "pk": 2,
+  "fields": {
+    "range": "Fair"
+  }
+},
+{
+  "model": "credit_ranges.creditrange",
+  "pk": 3,
+  "fields": {
+    "range": "Good"
+  }
+},
+{
+  "model": "credit_ranges.creditrange",
+  "pk": 4,
+  "fields": {
+    "range": "Excellent"
+  }
+}
+]
