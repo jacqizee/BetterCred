@@ -7,9 +7,9 @@ from .serializers.common import CreditRangeSerializer
 
 # Create your views here.
 
-class CashBackView(APIView):
+class CreditRangeView(APIView):
 
-    # GET Request - return all cash back categories
+    # GET Request - return all credit ranges
     def get(self, _request):
-        serialized_categories = CreditRangeSerializer(CreditRange.objects.all(), many=True)
-        return Response(serialized_categories.data)
+        serialized_ranges = CreditRangeSerializer(CreditRange.objects.all(), many=True)
+        return Response(serialized_ranges.data)

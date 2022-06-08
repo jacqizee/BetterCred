@@ -68,7 +68,7 @@ class LoginView(APIView):
         token = jwt.encode(
             {
                 'sub': user_to_login.id,
-                'exp': int(exp_time.strftime('%S')),
+                'exp': int(exp_time.strftime('%s')),
             }, 
             settings.SECRET_KEY,
             'HS256'
@@ -77,7 +77,7 @@ class LoginView(APIView):
         # Return response with token
         return Response(
             { 
-                'message': f'Welcome back {user_to_login.name}!',
+                'message': f'Welcome back {user_to_login.first_name}!',
                 'token': token,
             },
             status.HTTP_202_ACCEPTED

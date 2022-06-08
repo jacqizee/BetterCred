@@ -7,9 +7,9 @@ from .serializers.common import NetworkSerializer
 
 # Create your views here.
 
-class CashBackView(APIView):
+class NetworkView(APIView):
 
-    # GET Request - return all cash back categories
+    # GET Request - return all networks
     def get(self, _request):
-        serialized_categories = NetworkSerializer(Network.objects.all(), many=True)
-        return Response(serialized_categories.data)
+        serialized_networks = NetworkSerializer(Network.objects.all(), many=True)
+        return Response(serialized_networks.data)
