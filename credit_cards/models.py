@@ -17,7 +17,10 @@ class CreditCard(models.Model):
     con_1 = models.CharField(max_length = 75, default = None)
     con_2 = models.CharField(max_length = 75, default = None)
     con_3 = models.CharField(max_length = 75, default = None)
-    # issuer = models.ManyToOneRel()
+    # network = models.ManyToOneRel()
     # cash_back_categories = models.ManyToManyField()
     # credit_range = models.ManyToOneRel()
     # bonus_offers = models.OneToMany()
+
+    def __str__(self):
+        return f'{self.name}'

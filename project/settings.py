@@ -40,9 +40,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'jwt_auth',
     'credit_cards',
-    'credit_range',
-    'cash_back_category',
-    'issuer',
+    'credit_ranges',
+    'cash_back_categories',
+    'networks',
 ]
 
 MIDDLEWARE = [

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Issuer
+from .models import Network
 # Register your models here.
 
-admin.site.register(Issuer)
+admin.site.register(Network)

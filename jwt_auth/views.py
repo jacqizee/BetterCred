@@ -19,8 +19,11 @@ User = get_user_model()
 
 # Create your views here.
 
+# Endpoint: /register/
+# Methods: POST
 class RegisterView(APIView):
     
+    # POST - register a user
     def post(self, request):
         user_to_register = UserSerializer(data = request.data)
 
@@ -31,8 +34,11 @@ class RegisterView(APIView):
         except Exception as e:
             return Response({ 'message': str(e) }, status.HTTP_422_UNPROCESSABLE_ENTITY)
 
+# Endpoint: /login/
+# Methods: POST
 class LoginView(APIView):
 
+    # POST - Login a user and return a token
     def post(self, request):
 
         # Save username and password from request to variables
@@ -71,3 +77,32 @@ class LoginView(APIView):
             },
             status.HTTP_202_ACCEPTED
         )
+
+# Endpoint: /profile/<int:pk>
+# Methods: PUT, DELETE
+class ProfileView(APIView):
+
+    # Method - Find and returns a user or raises a DoesNotExist error
+    def get_user(self, pk):
+        try:
+            return User.objects.get(pk = pk)
+        except User.DoesNotExist:
+            raise Response({ 'message': 'User not found.'}, status.HTTP_422_UNPROCESSABLE_ENTITY)
+
+    # PUT - Update user profile
+    def put(self, request, pk):
+        user_to_edit = self.get_user(pk)
+        deserialized_user = UserSerializer(user_to_edit, request.data)
+        try:
+            deserialized_user.is_valid()
+            deserialized_user.save()
+            return Response(deserialized_user.data, status.HTTP_202_ACCEPTED)
+        except Exception as e:
+            return Response({ "error": e }, status.HTTP_422_UNPROCESSABLE_ENTITY)
+
+
+    # DELETE - Delete user profile
+    def delete(self, _request, pk):
+        user_to_delete = self.get_user(pk)
+        user_to_delete.delete()
+        return Response(status = status.HTTP_204_NO_CONTENT)
