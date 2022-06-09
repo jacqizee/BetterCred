@@ -1,7 +1,10 @@
+import Box from '@mui/material/Box'
 
 const CreditCards = () => {
   return (
-    <h1> CreditCards </h1>
+    <Box>
+      <h1> CreditCards </h1>
+    </Box>
   )
 }
 

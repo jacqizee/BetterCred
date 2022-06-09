@@ -1,9 +1,7 @@
-from psycopg2 import IntegrityError
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.exceptions import PermissionDenied, ValidationError
-# from django.core.exceptions import ValidationError
 
 # For tokenization
 import jwt
@@ -110,6 +108,7 @@ class ProfileView(APIView):
 
     # DELETE - Delete user profile
     def delete(self, _request, pk):
+
         user_to_delete = self.get_user(pk)
         user_to_delete.delete()
         return Response(status = status.HTTP_204_NO_CONTENT)
