@@ -1,0 +1,193 @@
+[
+{
+  "model": "credit_cards.creditcard",
+  "pk": 1,
+  "fields": {
+    "name": "Freedom Unlimited",
+    "image": "https://cdn.wallethub.com/common/product/images/creditcards/500/chase-freedom-unlimited-10082293c.png",
+    "link": "https://creditcards.chase.com/cash-back-credit-cards/freedom/unlimited?CELL=6TKV",
+    "annual_fee": 0,
+    "foreign_fee": 3.0,
+    "base_reward_rate": 1.5,
+    "regular_APR_min": 15.74,
+    "regular_APR_max": 24.49,
+    "pro_1": "No annual fee",
+    "pro_2": "Earn 3% on dining at restaurants, including takeout and delivery services",
+    "pro_3": "Earn 3% on drugstore purchases",
+    "con_1": "Balance transfer fee",
+    "con_2": "Foreign transaction fee",
+    "con_3": "",
+    "issuer": 1,
+    "network": 1,
+    "credit_range": 3,
+    "cash_back_category": [
+      8,
+      1
+    ]
+  }
+},
+{
+  "model": "credit_cards.creditcard",
+  "pk": 2,
+  "fields": {
+    "name": "Active Cash Card",
+    "image": "https://cdn.wallethub.com/common/product/images/creditcards/500/wells-fargo-active-cash-card-15273346c.png",
+    "link": "https://creditcards.wellsfargo.com/active-cash-credit-card/?sub_channel=WEB&vendor_code=WF&product_code=CC&subproduct_code=AC&cx_nm=CXNAME_CSM&FPID=012688IDF40000",
+    "annual_fee": 0,
+    "foreign_fee": 3.0,
+    "base_reward_rate": 2.0,
+    "regular_APR_min": 15.74,
+    "regular_APR_max": 25.74,
+    "pro_1": "No annual fee",
+    "pro_2": "0% introductory APR",
+    "pro_3": "",
+    "con_1": "High regular APR",
+    "con_2": "Foreign transaction fee",
+    "con_3": "Balance transfer fee",
+    "issuer": 2,
+    "network": 1,
+    "credit_range": 3,
+    "cash_back_category": []
+  }
+},
+{
+  "model": "credit_cards.creditcard",
+  "pk": 3,
+  "fields": {
+    "name": "Sapphire Preferred",
+    "image": "https://cdn.wallethub.com/common/product/images/creditcards/500/chase-sapphire-reserve-credit-card-17201842c.png",
+    "link": "https://creditcards.chase.com/rewards-credit-cards/sapphire/preferred?CELL=6TKV",
+    "annual_fee": 95,
+    "foreign_fee": 0.0,
+    "base_reward_rate": 1.0,
+    "regular_APR_min": 16.74,
+    "regular_APR_max": 23.74,
+    "pro_1": "Earn 3x points on dining at restaurants including delivery services",
+    "pro_2": "Earn 2x on travel purchases",
+    "pro_3": "$50 annual hotel credit",
+    "con_1": "High annual fee",
+    "con_2": "High APR",
+    "con_3": "",
+    "issuer": 1,
+    "network": 1,
+    "credit_range": 3,
+    "cash_back_category": [
+      1,
+      3
+    ]
+  }
+},
+{
+  "model": "credit_cards.creditcard",
+  "pk": 4,
+  "fields": {
+    "name": "Sapphire Reserve",
+    "image": "https://cdn.wallethub.com/common/product/images/creditcards/500/chase-sapphire-reserve-credit-card-17201842c.png",
+    "link": "https://creditcards.chase.com/rewards-credit-cards/sapphire/reserve?CELL=6TKV",
+    "annual_fee": 550,
+    "foreign_fee": 0.0,
+    "base_reward_rate": 1.0,
+    "regular_APR_min": 17.74,
+    "regular_APR_max": 24.74,
+    "pro_1": "$300 annual travel credit",
+    "pro_2": "Earn 5x total points on flights, 10x total points on hotels and car rentals",
+    "pro_3": "50% more redemption value",
+    "con_1": "High annual fee",
+    "con_2": "High APR",
+    "con_3": "",
+    "issuer": 1,
+    "network": 1,
+    "credit_range": 4,
+    "cash_back_category": [
+      1,
+      3
+    ]
+  }
+},
+{
+  "model": "credit_cards.creditcard",
+  "pk": 5,
+  "fields": {
+    "name": "Double Cash Card",
+    "image": "https://cdn.wallethub.com/common/product/images/creditcards/500/citi-double-cash-card-1235121c.png",
+    "link": "https://www.citi.com/credit-cards/citi-double-cash-credit-card",
+    "annual_fee": 0,
+    "foreign_fee": 3.0,
+    "base_reward_rate": 2.0,
+    "regular_APR_min": 14.74,
+    "regular_APR_max": 24.74,
+    "pro_1": "2% cash back on all purchases",
+    "pro_2": "No annual fee",
+    "pro_3": "Low intro APR on balance transfers",
+    "con_1": "Foreign transaction fee",
+    "con_2": "Must have at least $25 in rewards to redeem",
+    "con_3": "",
+    "issuer": 4,
+    "network": 3,
+    "credit_range": 3,
+    "cash_back_category": []
+  }
+},
+{
+  "model": "credit_cards.creditcard",
+  "pk": 6,
+  "fields": {
+    "name": "Savor Cash Rewards",
+    "image": "https://ecm.capitalone.com/WCM/card/products/savor-card-art/tablet.png",
+    "link": "https://www.capitalone.com/credit-cards/savor-dining-rewards/",
+    "annual_fee": 95,
+    "foreign_fee": 0.0,
+    "base_reward_rate": 1.0,
+    "regular_APR_min": 16.24,
+    "regular_APR_max": 24.24,
+    "pro_1": "4% cash back on dining, entertainment, and streaming services",
+    "pro_2": "3% cash back on grocery stores",
+    "pro_3": "Complimentary concierge service",
+    "con_1": "Annual fee",
+    "con_2": "No intro APR on purchases",
+    "con_3": "No intro APR on balance transfers",
+    "issuer": 3,
+    "network": 3,
+    "credit_range": 3,
+    "cash_back_category": [
+      1,
+      4,
+      9,
+      7
+    ]
+  }
+},
+{
+  "model": "credit_cards.creditcard",
+  "pk": 7,
+  "fields": {
+    "name": "Custom Cash Card",
+    "image": "https://cdn.wallethub.com/common/product/images/creditcards/500/citi-custom-cash-card-09333345c.png",
+    "link": "https://www.citi.com/credit-cards/citi-custom-cash-credit-card?category=view-all-credit-cards&intc=megamenu~creditcards~vac&afc=135",
+    "annual_fee": 0,
+    "foreign_fee": 3.0,
+    "base_reward_rate": 1.0,
+    "regular_APR_min": 14.74,
+    "regular_APR_max": 24.74,
+    "pro_1": "Earn 5% cash back on your highest eligible spend category",
+    "pro_2": "0% introductory APRs",
+    "pro_3": "",
+    "con_1": "Bonus rewards limit",
+    "con_2": "High regular APR",
+    "con_3": "Foreign transaction fee",
+    "issuer": 4,
+    "network": 3,
+    "credit_range": 3,
+    "cash_back_category": [
+      1,
+      2,
+      3,
+      4,
+      6,
+      7,
+      8,
+      9
+    ]
+  }
+}
+]
