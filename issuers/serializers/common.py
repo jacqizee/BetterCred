@@ -1,7 +1,7 @@
 from rest_framework.serializers import ModelSerializer
-from ..models import Network
+from ..models import Issuer
 
-class NetworkSerializer(ModelSerializer):
+class IssuerSerializer(ModelSerializer):
     class Meta:
-        model = Network
+        model = Issuer
         fields = '__all__'

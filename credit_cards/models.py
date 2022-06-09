@@ -17,10 +17,11 @@ class CreditCard(models.Model):
     con_1 = models.CharField(max_length = 75, default = None)
     con_2 = models.CharField(max_length = 75, default = None)
     con_3 = models.CharField(max_length = 75, default = None)
-    # network = models.ManyToOneRel()
-    # cash_back_categories = models.ManyToManyField()
-    # credit_range = models.ManyToOneRel()
-    # bonus_offers = models.OneToMany()
+    issuer = models.ForeignKey('issuers.Issuer', related_name = 'credit_cards', on_delete = models.PROTECT, default=None)
+    network = models.ForeignKey('networks.Network', related_name = 'credit_cards', on_delete = models.PROTECT, default=None)
+    cash_back_category = models.ManyToManyField('cash_back_categories.CashBackCategory', related_name = 'credit_cards', default=None)
+    credit_range = models.ForeignKey('credit_ranges.CreditRange', related_name = 'credit_cards', on_delete = models.PROTECT, default=None)
+    # bonus_offers = models.ManyToOneRel
 
     def __str__(self):
         return f'{self.name}'

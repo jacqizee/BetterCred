@@ -1,0 +1,56 @@
+[
+{
+  "model": "issuers.issuer",
+  "pk": 1,
+  "fields": {
+    "name": "Chase",
+    "logo": "https://logos-world.net/chase-logo/",
+    "link": "https://www.chase.com/"
+  }
+},
+{
+  "model": "issuers.issuer",
+  "pk": 2,
+  "fields": {
+    "name": "Wells Fargo",
+    "logo": "https://commons.wikimedia.org/wiki/File:Wells_Fargo_Logo_%282020%29.png",
+    "link": "https://www.wellsfargo.com/"
+  }
+},
+{
+  "model": "issuers.issuer",
+  "pk": 3,
+  "fields": {
+    "name": "Capital One",
+    "logo": "https://commons.wikimedia.org/wiki/File:Capital_One_logo.svg",
+    "link": "https://www.capitalone.com/"
+  }
+},
+{
+  "model": "issuers.issuer",
+  "pk": 4,
+  "fields": {
+    "name": "Citi",
+    "logo": "https://commons.wikimedia.org/wiki/File:Citi.svg",
+    "link": "https://www.citi.com/"
+  }
+},
+{
+  "model": "issuers.issuer",
+  "pk": 5,
+  "fields": {
+    "name": "Barclays",
+    "logo": "http://assets.stickpng.com/images/584825d2cef1014c0b5e49d6.png",
+    "link": "https://cards.barclaycardus.com/"
+  }
+},
+{
+  "model": "issuers.issuer",
+  "pk": 6,
+  "fields": {
+    "name": "American Express",
+    "logo": "https://en.wikipedia.org/wiki/American_Express",
+    "link": "https://www.americanexpress.com/"
+  }
+}
+]

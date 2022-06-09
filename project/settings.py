@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'credit_ranges',
     'cash_back_categories',
     'networks',
+    'issuers',
 ]
 
 MIDDLEWARE = [
