@@ -76,11 +76,10 @@ const Join = () => {
               <TextField id='password-confirm' name='password_confirm' label='Password Confirmation' variant='filled' fullWidth />
             </Grid>
             <Grid item xs={12} sx={{ textAlign: 'center' }}>
-              <Button type='submit' variant='contained'>Submit</Button>
+              <Button type='submit' variant='contained' sx={{ mt: 2 }}>Submit</Button>
             </Grid>
           </Grid>
-          
-
+          <Typography></Typography>
         </Box>
       </Modal>
     </Box>

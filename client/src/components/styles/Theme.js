@@ -11,7 +11,7 @@ const theme = (mode) => ({
         contrastText: '#000',
       },
       background: {
-        default: '#fafafa',
+        default: '#f1f1f1',
         paper: '#ffffff',
       },
     } : {
