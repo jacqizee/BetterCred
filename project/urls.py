@@ -18,8 +18,9 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('api/credit/', include('credit_cards.urls')),
     path('api/auth/', include('jwt_auth.urls')),
+    path('api/credit/', include('credit_cards.urls')),
+    path('api/issuers/', include('issuers.urls')),
     path('api/network/', include('networks.urls')),
     path('api/cash-back/', include('cash_back_categories.urls')),
     path('api/credit-ranges/', include('credit_ranges.urls')),

@@ -7,7 +7,7 @@ from .serializers.common import IssuerSerializer
 
 # Create your views here.
 
-class issuerView(APIView):
+class IssuerView(APIView):
 
     # GET Request - return all issuers
     def get(self, _request):

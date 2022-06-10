@@ -15,7 +15,7 @@ import CloseIcon from '@mui/icons-material/Close'
 // Styling
 import { flexCentered } from '../styles/Styling'
 
-const Login = () => {
+const Join = () => {
 
   const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(true)
@@ -30,7 +30,7 @@ const Login = () => {
     bgcolor: 'background.paper',
     borderRadius: 18,
     boxShadow: 2,
-    py: 6,
+    py: 5,
     px: 4,
     ...flexCentered,
   }
@@ -46,8 +46,8 @@ const Login = () => {
       <Modal
         open={open}
         onClose={handleClose}
-        aria-labelledby="login-modal"
-        aria-describedby="modal with login form"
+        aria-labelledby="register-modal"
+        aria-describedby="modal with register form"
       >
         <Box sx={style}>
           <IconButton onClick={handleClose} sx={{ position: 'fixed', right: '2.25rem', top: '1.25rem' }} >
@@ -76,7 +76,7 @@ const Login = () => {
               <TextField id='password-confirm' name='password_confirm' label='Password Confirmation' variant='filled' fullWidth />
             </Grid>
             <Grid item xs={12} sx={{ textAlign: 'center' }}>
-              <Button type='submit'>Submit</Button>
+              <Button type='submit' variant='contained'>Submit</Button>
             </Grid>
           </Grid>
           
@@ -88,4 +88,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default Join

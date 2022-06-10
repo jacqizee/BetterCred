@@ -1,7 +1,8 @@
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
-from rest_framework.exceptions import PermissionDenied, ValidationError
+from rest_framework.exceptions import PermissionDenied, ValidationError, NotFound
+from rest_framework.permissions import IsAuthenticated
 
 # For tokenization
 import jwt
@@ -84,19 +85,23 @@ class LoginView(APIView):
 # Endpoint: /profile/<int:pk>
 # Methods: PUT, DELETE
 class ProfileView(APIView):
+    permission_classes = (IsAuthenticated, )
 
     # Method - Find and returns a user or raises a DoesNotExist error
     def get_user(self, pk):
         try:
             return User.objects.get(pk = pk)
         except User.DoesNotExist:
-            raise Response({ 'message': 'User not found.'}, status.HTTP_422_UNPROCESSABLE_ENTITY)
+            raise NotFound('User not found.')
 
     # PUT - Update user profile
     def put(self, request, pk):
 
         user_to_edit = self.get_user(pk)
         deserialized_user = UserSerializer(user_to_edit, request.data)
+
+        if user_to_edit.id != request.user.id:
+            raise PermissionDenied()
 
         try:
             deserialized_user.is_valid()
@@ -105,10 +110,13 @@ class ProfileView(APIView):
         except Exception as e:
             return Response({ "error": e }, status.HTTP_422_UNPROCESSABLE_ENTITY)
 
-
     # DELETE - Delete user profile
-    def delete(self, _request, pk):
+    def delete(self, request, pk):
 
         user_to_delete = self.get_user(pk)
+
+        if user_to_delete.id != request.user.id:
+            raise PermissionDenied()
+
         user_to_delete.delete()
         return Response(status = status.HTTP_204_NO_CONTENT)

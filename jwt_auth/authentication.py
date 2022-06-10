@@ -20,7 +20,7 @@ class JWTAuthentication(BasicAuthentication):
             return None
 
         # If token is not correct format, raise error
-        if not auth_header.startsWith('Bearer '):
+        if not auth_header.startswith('Bearer '):
             raise PermissionDenied('Token is invalid.')
 
         # If token is valid, replace Bearer so we can use the token
