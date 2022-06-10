@@ -83,26 +83,34 @@ class LoginView(APIView):
         )
 
 # Endpoint: /profile/<int:pk>
-# Methods: PUT, DELETE
+# Methods: GET, PUT, DELETE
 class ProfileView(APIView):
     permission_classes = (IsAuthenticated, )
 
     # Method - Find and returns a user or raises a DoesNotExist error
-    def get_user(self, pk):
+    def get_user(self, pk, request_user_id):
         try:
-            return User.objects.get(pk = pk)
+            user = User.objects.get(pk = pk)
+            if user.id != request_user_id:
+                raise PermissionDenied('You do not have permission to make requests on other profiles.')
+            return user
         except User.DoesNotExist:
-            raise NotFound('User not found.')
+            raise NotFound('User with this id not found.')
+
+
+    # GET - gets user profile details
+    def get(self, request, pk):
+        user_to_get = self.get_user(pk, request.user.id)
+        serialized_user = UserSerializer(user_to_get)
+        return Response(serialized_user.data)
+
 
     # PUT - Update user profile
     def put(self, request, pk):
         
-        user_to_edit = self.get_user(pk=pk)
+        user_to_edit = self.get_user(pk, request.user.id)
 
         deserialized_user = UserSerializer(user_to_edit, data=request.data)
-
-        if user_to_edit.id != request.user.id:
-            raise PermissionDenied()
 
         try:
             deserialized_user.is_valid(True)
@@ -113,11 +121,8 @@ class ProfileView(APIView):
 
     # DELETE - Delete user profile
     def delete(self, request, pk):
-
-        user_to_delete = self.get_user(pk)
-
-        if user_to_delete.id != request.user.id:
-            raise PermissionDenied()
+        print(pk)
+        user_to_delete = self.get_user(pk, request.user.id)
 
         user_to_delete.delete()
         return Response(status = status.HTTP_204_NO_CONTENT)

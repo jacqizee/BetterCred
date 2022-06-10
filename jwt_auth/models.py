@@ -9,3 +9,8 @@ class User(AbstractUser):
     first_name: models.CharField(max_length=20)
     last_name: models.CharField(max_length=20)
     profile_picture: models.CharField(max_length=300)
+    credit_cards: models.ManyToManyField(
+        'credit_cards.CreditCard',
+        'users',
+        blank = True
+    )
