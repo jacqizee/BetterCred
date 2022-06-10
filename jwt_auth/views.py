@@ -96,19 +96,20 @@ class ProfileView(APIView):
 
     # PUT - Update user profile
     def put(self, request, pk):
+        
+        user_to_edit = self.get_user(pk=pk)
 
-        user_to_edit = self.get_user(pk)
-        deserialized_user = UserSerializer(user_to_edit, request.data)
+        deserialized_user = UserSerializer(user_to_edit, data=request.data)
 
         if user_to_edit.id != request.user.id:
             raise PermissionDenied()
 
         try:
-            deserialized_user.is_valid()
+            deserialized_user.is_valid(True)
             deserialized_user.save()
             return Response(deserialized_user.data, status.HTTP_202_ACCEPTED)
         except Exception as e:
-            return Response({ "error": e }, status.HTTP_422_UNPROCESSABLE_ENTITY)
+            return Response({ 'error': str(e) }, status.HTTP_422_UNPROCESSABLE_ENTITY)
 
     # DELETE - Delete user profile
     def delete(self, request, pk):
