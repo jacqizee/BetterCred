@@ -1,6 +1,11 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
+// React components
+import Login from '../auth/Login'
+import Join from '../auth/Join'
+
+// MUI Components
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
@@ -22,7 +27,7 @@ import LightModeRoundedIcon from '@mui/icons-material/LightModeRounded'
 
 const Navigation = ({ mode, setMode }) => {
 
-  const menu = ['cards', 'bonuses', 'learn']
+  const menu = ['cards']
   const [ drawerOpen, setDrawerOpen ] = useState(false)
   const [ switchStatus, setSwitchStatus ] = useState(false)
 
@@ -67,6 +72,8 @@ const Navigation = ({ mode, setMode }) => {
             {/* Row Menu on md or larger */}
             <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
               {menu.map(item => <Typography component={Link} to={`/${item}`} key={item} sx={{ textDecoration: 'none' }}><Button sx={{ color: 'secondary.light', textTransform: 'none' }}>{item}</Button></Typography>)}
+              <Login />
+              <Join />
 
               {/* Light/Dark Mode */}
               <Box color='primary' sx={{ display: 'flex', alignItems: 'center' }}>
