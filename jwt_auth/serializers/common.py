@@ -20,7 +20,6 @@ class UserSerializer(serializers.ModelSerializer):
             raise ValidationError({ 'error': 'Passwords do not match' })
 
         # Once we confirm passwords match, validate password strength
-
         try:
             password_validation.validate_password(password)
         except ValidationError as e:

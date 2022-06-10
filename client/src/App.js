@@ -6,7 +6,7 @@ import CreditCards from './components/CreditCards'
 import CreditCardShow from './components/CreditCardShow'
 import Profile from './components/Profile'
 
-import theme from './components/Theme'
+import theme from './components/styles/Theme'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 
 const App = () => {
