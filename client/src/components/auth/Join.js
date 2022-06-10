@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import axios from 'axios'
 
 // MUI Components
 import Box from '@mui/material/Box'
@@ -13,37 +14,44 @@ import Grid from '@mui/material/Grid'
 import CloseIcon from '@mui/icons-material/Close'
 
 // Styling
-import { flexCentered } from '../styles/Styling'
+import { loginModalStyle } from '../styles/Styling'
 
 import Login from './Login'
 
 const Join = () => {
 
+  // State of Modal
   const [open, setOpen] = useState(false)
+
+  // Handle Modal Open and Close
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
-  const handleSwitch = () => {
-    setOpen(false)
-    return <Login />
+
+  // State of Modal Submit Button
+  const [ registered, setRegistered ] = useState(false)
+
+  const [ formData, setFormData ] = useState({
+    username: '',
+    email: '',
+    first_name: '',
+    last_name: '',
+    password: '',
+    password_confirmation: '',
+    profile_picture: '',
+  })
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
-  const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: { xs: '90vw', md: '65vw' },
-    bgcolor: 'background.paper',
-    borderRadius: 18,
-    boxShadow: 2,
-    py: 5,
-    px: 4,
-    ...flexCentered,
-  }
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log('submitted')
+    try {
+      await axios.post('/api/auth/register/', formData)
+      setRegistered(true)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
@@ -55,7 +63,7 @@ const Join = () => {
         aria-labelledby="register-modal"
         aria-describedby="modal with register form"
       >
-        <Box sx={style}>
+        <Box sx={loginModalStyle}>
           <IconButton onClick={handleClose} sx={{ position: 'fixed', right: '2.25rem', top: '1.25rem' }} >
             <CloseIcon />
           </IconButton>
@@ -64,28 +72,31 @@ const Join = () => {
           </Typography>
           <Grid container spacing={2} component='form' onSubmit={handleSubmit} sx={{ width: '85%', pt: 3, pb: 2 }}>
             <Grid item xs={12}>
-              <TextField type='email' id='email' label='Email' variant='filled' fullWidth />
+              <TextField type='email' id='email' name='email' label='Email' variant='filled' value={formData.email} onChange={handleChange} fullWidth />
             </Grid>
             <Grid item xs={12} md={6}>
-              <TextField id='first-name' name='first-name' label='First Name' variant='filled' fullWidth />
+              <TextField id='first-name' name='first_name' label='First Name' variant='filled' value={formData.first_name} onChange={handleChange} fullWidth />
             </Grid>
             <Grid item xs={12} md={6}>
-              <TextField id='last-name' name='last-name' label='Last Name' variant='filled' fullWidth />
+              <TextField id='last-name' name='last_name' label='Last Name' variant='filled' value={formData.last_name} onChange={handleChange} fullWidth />
             </Grid>
             <Grid item xs={12}>
-              <TextField id='username' label='Username' variant='filled' fullWidth />
+              <TextField id='username' name='username' label='Username' variant='filled' value={formData.username} onChange={handleChange} fullWidth />
             </Grid>
             <Grid item xs={12} md={6}>
-              <TextField id='password' name='password' label='Password' variant='filled' fullWidth />
+              <TextField type='password' id='password' name='password' label='Password' variant='filled' value={formData.password} onChange={handleChange} fullWidth />
             </Grid>
             <Grid item xs={12} md={6}>
-              <TextField id='password-confirm' name='password_confirm' label='Password Confirmation' variant='filled' fullWidth />
+              <TextField type='password' id='password-confirmation' name='password_confirmation' label='Password Confirmation' variant='filled' value={formData.password_confirmation} onChange={handleChange} fullWidth />
             </Grid>
             <Grid item xs={12} sx={{ textAlign: 'center' }}>
-              <Button type='submit' variant='contained' sx={{ mt: 2 }}>Submit</Button>
+              { !registered ?
+                <Button type='submit' variant='contained' sx={{ mt: 2 }}>Submit</Button> : 
+                <Button type='submit' variant='contained' sx={{ mt: 2 }} disabled>Registered!</Button>
+              }
             </Grid>
           </Grid>
-          <Typography onClick={handleSwitch}>Login</Typography>
+          <Typography>Already a Member? Login</Typography>
         </Box>
       </Modal>
     </Box>

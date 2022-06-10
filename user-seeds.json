@@ -3,72 +3,20 @@
   "model": "jwt_auth.user",
   "pk": 1,
   "fields": {
-    "password": "pbkdf2_sha256$320000$0M6w67YgGlArK7Bf0xgP7H$kIdKn42b8w/oclvWthoXYxsvfqd2q3eAk2QQv4K0dpw=",
-    "last_login": "2022-06-08T21:19:57.057Z",
+    "password": "pbkdf2_sha256$320000$HDOjJVdlRrFqyvGkBOwuR3$goG78pyLBAkJMcMDcURDm/2+p7rBIvMW0ATSuCRbgNU=",
+    "last_login": null,
     "is_superuser": true,
     "username": "admin",
-    "first_name": "",
-    "last_name": "",
-    "email": "admin@email.com",
     "is_staff": true,
     "is_active": true,
-    "date_joined": "2022-06-08T16:08:53.559Z",
+    "date_joined": "2022-06-10T19:02:13.578Z",
+    "email": "admin@email.com",
+    "first_name": "",
+    "last_name": "",
+    "profile_picture": "",
     "groups": [],
-    "user_permissions": []
-  }
-},
-{
-  "model": "jwt_auth.user",
-  "pk": 2,
-  "fields": {
-    "password": "pbkdf2_sha256$320000$9N7DV2jnxCLSqQGgMtmomK$qCV4oKYw5meTL/+kTNY87lJ2sh7yjkXbAqBJp5LhL4g=",
-    "last_login": null,
-    "is_superuser": false,
-    "username": "jackie",
-    "first_name": "jackie",
-    "last_name": "zhou",
-    "email": "email@email.com",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2022-06-08T20:21:03.414Z",
-    "groups": [],
-    "user_permissions": []
-  }
-},
-{
-  "model": "jwt_auth.user",
-  "pk": 6,
-  "fields": {
-    "password": "pbkdf2_sha256$320000$GrB2MV04zNjZtrQfSmBlj4$feeoUjN9TGZgTOSK4b+Q0GBcBWylJVCJu8+7CFvDV7Q=",
-    "last_login": null,
-    "is_superuser": false,
-    "username": "julie",
-    "first_name": "julie",
-    "last_name": "zhou",
-    "email": "email@email.com",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2022-06-10T14:31:16.665Z",
-    "groups": [],
-    "user_permissions": []
-  }
-},
-{
-  "model": "jwt_auth.user",
-  "pk": 7,
-  "fields": {
-    "password": "pbkdf2_sha256$320000$Nap5Vh87Iu06PAeCShwuAz$ney+sMY2IaMuJ/DDI5KoPte4xU/53dLq7udHvz3LShI=",
-    "last_login": null,
-    "is_superuser": false,
-    "username": "tom",
-    "first_name": "tom",
-    "last_name": "kotak",
-    "email": "email@email.com",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2022-06-10T15:06:26.960Z",
-    "groups": [],
-    "user_permissions": []
+    "user_permissions": [],
+    "wallet": []
   }
 }
 ]
