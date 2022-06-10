@@ -11,8 +11,8 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import Divider from '@mui/material/Divider'
 
-import Error from './utility/Error.js'
-import Loading from './utility/Loading.js'
+import Error from './utilities/Error.js'
+import Loading from './utilities/Loading.js'
 
 import { flexCentered } from './styles/Styling'
 

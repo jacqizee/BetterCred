@@ -47,7 +47,7 @@ const Join = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      await axios.post('/api/auth/register/', formData)
+      const response = await axios.post('/api/auth/register/', formData)
       setRegistered(true)
     } catch (error) {
       console.log(error)

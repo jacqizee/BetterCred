@@ -31,11 +31,11 @@ class RegisterView(APIView):
         user_to_register = UserSerializer(data = request.data)
 
         try:
-            user_to_register.is_valid(raise_exception = True)
+            user_to_register.is_valid(True)
             user_to_register.save()
             return Response({ 'message': 'Registration successful!' }, status.HTTP_201_CREATED)
         except ValidationError:
-            return Response(user_to_register.errors, status.HTTP_422_UNPROCESSABLE_ENTITY)
+            return Response({ 'message': user_to_register.errors }, status.HTTP_422_UNPROCESSABLE_ENTITY)
         except Exception as e:
             print("error", e)
             return Response({ 'message': str(e) }, status.HTTP_422_UNPROCESSABLE_ENTITY)
@@ -144,3 +144,8 @@ class ProfileView(APIView):
 
         # Return empty response
         return Response(status = status.HTTP_204_NO_CONTENT)
+
+
+# class FavoriteView(APIView):
+
+#     def put()
