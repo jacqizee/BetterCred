@@ -45,7 +45,7 @@
   "model": "cash_back_categories.cashbackcategory",
   "pk": 7,
   "fields": {
-    "type": "Supermarkets"
+    "type": "Grocery Stores"
   }
 },
 {
@@ -53,6 +53,13 @@
   "pk": 8,
   "fields": {
     "type": "Drugstores"
+  }
+},
+{
+  "model": "cash_back_categories.cashbackcategory",
+  "pk": 9,
+  "fields": {
+    "type": "Entertainment"
   }
 }
 ]
