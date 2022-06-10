@@ -89,29 +89,41 @@ class ProfileView(APIView):
 
     # Method - Find and returns a user or raises a DoesNotExist error
     def get_user(self, pk, request_user_id):
+
+        # Attempt to get User, returning only if requesting user is that user
         try:
             user = User.objects.get(pk = pk)
             if user.id != request_user_id:
                 raise PermissionDenied('You do not have permission to make requests on other profiles.')
             return user
+
+        # If User ID is not found, raise an error
         except User.DoesNotExist:
             raise NotFound('User with this id not found.')
 
 
     # GET - gets user profile details
     def get(self, request, pk):
+        # Get User
         user_to_get = self.get_user(pk, request.user.id)
+
+        # Serialize User if returned
         serialized_user = UserSerializer(user_to_get)
+
+        # Return User
         return Response(serialized_user.data)
 
 
     # PUT - Update user profile
     def put(self, request, pk):
         
+        # Get User
         user_to_edit = self.get_user(pk, request.user.id)
 
+        # Deserialize User if returned
         deserialized_user = UserSerializer(user_to_edit, data=request.data)
 
+        # Check if deserialized User data is valid, saving if yes or returning an error if no
         try:
             deserialized_user.is_valid(True)
             deserialized_user.save()
@@ -121,8 +133,12 @@ class ProfileView(APIView):
 
     # DELETE - Delete user profile
     def delete(self, request, pk):
-        print(pk)
+
+        # Get User
         user_to_delete = self.get_user(pk, request.user.id)
 
+        # Delete User if found
         user_to_delete.delete()
+
+        # Return empty response
         return Response(status = status.HTTP_204_NO_CONTENT)
