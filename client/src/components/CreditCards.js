@@ -11,6 +11,9 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import Divider from '@mui/material/Divider'
 
+import Error from './utility/Error.js'
+import Loading from './utility/Loading.js'
+
 import { flexCentered } from './styles/Styling'
 
 const CreditCards = () => {
@@ -42,7 +45,7 @@ const CreditCards = () => {
     <Box sx={{ flexCentered, textAlign: 'center', bgcolor: 'background.default', px: 5, pb: 5 }}>
       <Typography variant='h4' component='h2' sx={{ pt: 3, pb: 2, color: 'primary.contrastText' }}>Explore Credit Cards</Typography>
       <Grid container columnSpacing={3} rowSpacing={2}>
-        { loading ? <h1>Loading</h1> : error ? <h1>Error</h1> : cards.map(card => {
+        { loading ? <Loading /> : error ? <Error /> : cards.map(card => {
           return (
             <Grid item key={card.id} xs={12} sm={6} md={4}>
               <Card sx={{ borderRadius: 5 }}>
@@ -54,18 +57,18 @@ const CreditCards = () => {
                   <Box component='img' src={card.image} alt={`image of ${card.name} card`} sx={{ width: '65%', my: 2 }} />
 
                   {/* Card Feature Overview */}
-                  <Box sx={{ display: 'flex', mb: 2 }}>
+                  <Box sx={{ display: 'flex', mb: 2, width: '100%', py: 2, textAlign: 'center', bgcolor: 'primary.main' }}>
                     <Box sx={{ ...cardFeature }}>
-                      <Typography variant='subtitle1'>Credit Score</Typography>
+                      <Typography variant='subtitle2'>Credit Score</Typography>
                     </Box>
                     <Divider orientation="vertical" flexItem></Divider>
                     <Box sx={{ ...cardFeature }}>
-                      <Typography variant='subtitle1'>Rewards On</Typography>
+                      <Typography variant='subtitle2'>Rewards On</Typography>
                     </Box>
                     <Divider orientation="vertical" flexItem></Divider>
                     <Box sx={{ ...cardFeature }}>
-                      <Typography variant='subtitle1'>Annual Fee</Typography>
-                      <Typography variant='subtitle2'>{card.annual_fee}</Typography>
+                      <Typography variant='subtitle2'>Annual Fee</Typography>
+                      <Typography variant='subtitle1'>${card.annual_fee}</Typography>
                     </Box>
                   </Box>
                   <Button component={Link} to={`/cards/${card.id}`} variant='contained' color='secondary'>Learn More</Button>

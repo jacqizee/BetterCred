@@ -30,7 +30,7 @@ const theme = (mode) => ({
     },
   },
   typography: {
-    fontFamily: 'Inconsolata, Arial',
+    fontFamily: 'Raleway, sans-serif',
     h1: {
       fontSize: '4.5rem',
     },
@@ -48,6 +48,12 @@ const theme = (mode) => ({
     },
     h6: {
       fontSize: '1.6rem',
+    },
+    subtitle1: {
+      fontSize: '1.3rem',
+    },
+    subtitle2: {
+      fontSize: '1.1rem',
     },
   },
 })

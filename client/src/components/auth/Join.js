@@ -15,11 +15,17 @@ import CloseIcon from '@mui/icons-material/Close'
 // Styling
 import { flexCentered } from '../styles/Styling'
 
+import Login from './Login'
+
 const Join = () => {
 
   const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
+  const handleSwitch = () => {
+    setOpen(false)
+    return <Login />
+  }
 
   const style = {
     position: 'absolute',
@@ -79,7 +85,7 @@ const Join = () => {
               <Button type='submit' variant='contained' sx={{ mt: 2 }}>Submit</Button>
             </Grid>
           </Grid>
-          <Typography></Typography>
+          <Typography onClick={handleSwitch}>Login</Typography>
         </Box>
       </Modal>
     </Box>
