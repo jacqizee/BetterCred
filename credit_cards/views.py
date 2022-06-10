@@ -15,7 +15,7 @@ class AllCreditCardView(APIView):
     # GET request - returns all credit cards
     def get(self, _request):
         serialized_credit_cards = CreditCardSerializer(CreditCard.objects.all(), many=True)
-        return Response(serialized_credit_cards)
+        return Response(serialized_credit_cards.data)
     
 class OneCreditCardView(APIView):
     permission_classes = (IsAuthenticated, )
@@ -27,7 +27,8 @@ class OneCreditCardView(APIView):
         except CreditCard.DoesNotExist:
             raise NotFound('Card not found. :(')
 
+    # GET request - returns a card
     def get(self, _request, pk):
         card = self.get_credit_card(pk)
-        serialized_card = CreditCardSerializer(data = card)
+        serialized_card = CreditCardSerializer(card)
         return Response(serialized_card.data)
