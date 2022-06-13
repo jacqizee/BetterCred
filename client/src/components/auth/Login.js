@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import Modal from '@mui/material/Modal'
 
-const Login = () => {
+const Login = ({ loginOpen, setLoginOpen, joinOpen, setJoinOpen }) => {
 
   const style = {
     position: 'absolute',
@@ -19,15 +19,15 @@ const Login = () => {
     p: 4,
   }
 
-  const [open, setOpen] = useState(false)
-  const handleOpen = () => setOpen(true)
-  const handleClose = () => setOpen(false)
+  // const [loginOpen, setLoginOpen] = useState(false)
+  const handleOpen = () => setLoginOpen(true)
+  const handleClose = () => setLoginOpen(false)
 
   return (
     <Box>
       <Button color='secondary' onClick={handleOpen} sx={{ textTransform: 'none' }}>login</Button>
       <Modal
-        open={open}
+        open={loginOpen}
         onClose={handleClose}
         aria-labelledby="login-modal"
         aria-describedby="modal with login form"

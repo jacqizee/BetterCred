@@ -5,6 +5,7 @@ import NavBar from './components/common/NavBar'
 import CreditCards from './components/CreditCards'
 import CreditCardShow from './components/CreditCardShow'
 import Profile from './components/Profile'
+import NotFound from './components/utilities/NotFound'
 
 import theme from './components/styles/Theme'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
@@ -22,6 +23,7 @@ const App = () => {
           <Route path='/cards' element={<CreditCards />} />
           <Route path='/cards/:cardId' element={<CreditCardShow />} />
           <Route path='/profile/:userId' element={<Profile />} />
+          {/* <Route path='*' element={<NotFound />} /> */}
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

@@ -16,16 +16,11 @@ import CloseIcon from '@mui/icons-material/Close'
 // Styling
 import { loginModalStyle } from '../styles/Styling'
 
-import Login from './Login'
-
-const Join = () => {
-
-  // State of Modal
-  const [open, setOpen] = useState(false)
+const Join = ({ loginOpen, setLoginOpen, joinOpen, setJoinOpen }) => {
 
   // Handle Modal Open and Close
-  const handleOpen = () => setOpen(true)
-  const handleClose = () => setOpen(false)
+  const handleOpen = () => setJoinOpen(true)
+  const handleClose = () => setJoinOpen(false)
 
   // State of Modal Submit Button
   const [ registered, setRegistered ] = useState(false)
@@ -40,6 +35,11 @@ const Join = () => {
     profile_picture: '',
   })
 
+  const handleSwap = (e) => {
+    setJoinOpen(false)
+    setLoginOpen(true)
+  }
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
@@ -50,7 +50,7 @@ const Join = () => {
       const response = await axios.post('/api/auth/register/', formData)
       setRegistered(true)
     } catch (error) {
-      console.log(error)
+      console.log(error.response.data.message.error)
     }
   }
 
@@ -58,7 +58,7 @@ const Join = () => {
     <Box>
       <Button color='secondary' variant='outlined' onClick={handleOpen} sx={{ textTransform: 'none', mr: 1 }}>join</Button>
       <Modal
-        open={open}
+        open={joinOpen}
         onClose={handleClose}
         aria-labelledby="register-modal"
         aria-describedby="modal with register form"
@@ -96,7 +96,7 @@ const Join = () => {
               }
             </Grid>
           </Grid>
-          <Typography>Already a Member? Login</Typography>
+          <Typography>Already a Member? <Button onClick={handleSwap}>Login</Button></Typography>
         </Box>
       </Modal>
     </Box>

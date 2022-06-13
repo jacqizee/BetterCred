@@ -31,6 +31,9 @@ const Navigation = ({ mode, setMode }) => {
   const [ drawerOpen, setDrawerOpen ] = useState(false)
   const [ switchStatus, setSwitchStatus ] = useState(false)
 
+  const [ loginOpen, setLoginOpen ] = useState(false)
+  const [ joinOpen, setJoinOpen ] = useState(false)
+
   const toggleDrawer = (open) => (e) => {
     if (e.type === 'keydown' && (e.key === 'Tab' || e.key === 'Shift')) {
       return
@@ -72,8 +75,8 @@ const Navigation = ({ mode, setMode }) => {
             {/* Row Menu on md or larger */}
             <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
               {menu.map(item => <Typography component={Link} to={`/${item}`} key={item} sx={{ textDecoration: 'none' }}><Button sx={{ color: 'secondary.light', textTransform: 'none' }}>{item}</Button></Typography>)}
-              <Login />
-              <Join />
+              <Login loginOpen={loginOpen} setLoginOpen={setLoginOpen} joinOpen={joinOpen} setJoinOpen={setJoinOpen} />
+              <Join loginOpen={loginOpen} setLoginOpen={setLoginOpen} joinOpen={joinOpen} setJoinOpen={setJoinOpen} />
 
               {/* Light/Dark Mode */}
               <Box color='primary' sx={{ display: 'flex', alignItems: 'center' }}>
