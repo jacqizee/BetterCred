@@ -42,8 +42,8 @@ const Navigation = ({ mode, setMode }) => {
   }
 
   useEffect(() => {
-    if (window.localStorage.getItem('bettercred')) {
-      setMode(window.localStorage.getItem('bettercred'))
+    if (window.localStorage.getItem('bettercred-mode')) {
+      setMode(window.localStorage.getItem('bettercred-mode'))
     }
     const loadSwitch = () => {
       mode === 'light' ? setSwitchStatus(false) : setSwitchStatus(true)
@@ -56,8 +56,7 @@ const Navigation = ({ mode, setMode }) => {
     e.target.value === 'light' ? newMode = 'dark' : newMode = 'light'
 
     setMode(newMode)
-    window.localStorage.setItem('bettercred', newMode)
-
+    window.localStorage.setItem('bettercred-mode', newMode)
   }
 
   const trigger = useScrollTrigger()
@@ -94,10 +93,14 @@ const Navigation = ({ mode, setMode }) => {
             {/* Drawer Menu on XS screens */}
             <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
 
+              <Login loginOpen={loginOpen} setLoginOpen={setLoginOpen} joinOpen={joinOpen} setJoinOpen={setJoinOpen} />
+              <Join loginOpen={loginOpen} setLoginOpen={setLoginOpen} joinOpen={joinOpen} setJoinOpen={setJoinOpen} />
+
               {/* Hamburger Icon */}
               <Button onClick={toggleDrawer(true)}>
                 <MenuIcon color='secondary' />
               </Button>
+              
             
               {/* Drawer */}
               <Drawer
