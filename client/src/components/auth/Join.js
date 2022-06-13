@@ -60,6 +60,7 @@ const Join = ({ loginOpen, setLoginOpen, joinOpen, setJoinOpen }) => {
         password_confirmation: '',
         profile_picture: '',
       })
+      setJoinOpen(false)
     } catch (error) {
       console.log(error.response.data.message.error)
     }

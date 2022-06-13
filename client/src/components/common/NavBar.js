@@ -59,6 +59,11 @@ const Navigation = ({ mode, setMode }) => {
     window.localStorage.setItem('bettercred-mode', newMode)
   }
 
+  const handleLogOut = () => {
+    window.localStorage.removeItem('bettercred')
+    window.location.reload(false)
+  }
+
   const trigger = useScrollTrigger()
 
   return (
@@ -78,6 +83,7 @@ const Navigation = ({ mode, setMode }) => {
                 <Login loginOpen={loginOpen} setLoginOpen={setLoginOpen} joinOpen={joinOpen} setJoinOpen={setJoinOpen} />
                 <Join loginOpen={loginOpen} setLoginOpen={setLoginOpen} joinOpen={joinOpen} setJoinOpen={setJoinOpen} />
               </> }
+              { window.localStorage.getItem('bettercred') ? <Button onClick={handleLogOut} color='secondary' variant='outlined' sx={{ textTransform: 'none' }} >Log Out</Button> : ''}
 
               {/* Light/Dark Mode */}
               <Box color='primary' sx={{ display: 'flex', alignItems: 'center' }}>
