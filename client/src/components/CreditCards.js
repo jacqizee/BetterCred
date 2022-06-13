@@ -57,7 +57,7 @@ const CreditCards = () => {
                   <Typography variant='h6' sx={{ my: 1, py: 1, width: '100%', textAlign: 'center', bgcolor: 'primary.main' }}>{card.name}</Typography>
 
                   {/* Card Image */}
-                  <Box component={Link} to={`/cards/${card.id}`}><Box component='img' src={card.image} alt={`image of ${card.name} card`} sx={{ width: '65%', my: 2 }} /></Box>
+                  <Box component={Link} to={`/cards/${card.id}`}><Box component='img' src={card.image} alt={`image of ${card.name} card`} sx={{ my: 2, height: '12rem', maxWidth: '95%', objectFit: 'contain' }} /></Box>
                   {/* Card Feature Overview */}
                   <Box sx={{ display: 'flex', flexDirection: 'column', mb: 2, width: '100%', py: 2, alignItems: 'center', bgcolor: 'primary.main', px: 2 }}>
                     <Box sx={{ display: 'flex', justifyContent: 'space-evenly', width: '100%', mb: 2 }}>

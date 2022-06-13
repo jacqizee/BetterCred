@@ -5,6 +5,12 @@ export const flexCentered = {
   flexDirection: 'column',
 }
 
+export const flexRowCentered = {
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+}
+
 export const loginModalStyle = {
   position: 'absolute',
   top: '50%',
