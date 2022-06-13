@@ -74,8 +74,10 @@ const Navigation = ({ mode, setMode }) => {
             {/* Row Menu on md or larger */}
             <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
               {menu.map(item => <Typography component={Link} to={`/${item}`} key={item} sx={{ textDecoration: 'none' }}><Button sx={{ color: 'secondary.light', textTransform: 'none' }}>{item}</Button></Typography>)}
-              <Login loginOpen={loginOpen} setLoginOpen={setLoginOpen} joinOpen={joinOpen} setJoinOpen={setJoinOpen} />
-              <Join loginOpen={loginOpen} setLoginOpen={setLoginOpen} joinOpen={joinOpen} setJoinOpen={setJoinOpen} />
+              { !window.localStorage.getItem('bettercred') && <>
+                <Login loginOpen={loginOpen} setLoginOpen={setLoginOpen} joinOpen={joinOpen} setJoinOpen={setJoinOpen} />
+                <Join loginOpen={loginOpen} setLoginOpen={setLoginOpen} joinOpen={joinOpen} setJoinOpen={setJoinOpen} />
+              </> }
 
               {/* Light/Dark Mode */}
               <Box color='primary' sx={{ display: 'flex', alignItems: 'center' }}>
@@ -92,9 +94,10 @@ const Navigation = ({ mode, setMode }) => {
 
             {/* Drawer Menu on XS screens */}
             <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-
-              <Login loginOpen={loginOpen} setLoginOpen={setLoginOpen} joinOpen={joinOpen} setJoinOpen={setJoinOpen} />
-              <Join loginOpen={loginOpen} setLoginOpen={setLoginOpen} joinOpen={joinOpen} setJoinOpen={setJoinOpen} />
+              { !window.localStorage.getItem('bettercred') && <>
+                <Login loginOpen={loginOpen} setLoginOpen={setLoginOpen} joinOpen={joinOpen} setJoinOpen={setJoinOpen} />
+                <Join loginOpen={loginOpen} setLoginOpen={setLoginOpen} joinOpen={joinOpen} setJoinOpen={setJoinOpen} />
+              </> }
 
               {/* Hamburger Icon */}
               <Button onClick={toggleDrawer(true)}>
