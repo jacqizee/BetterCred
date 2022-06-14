@@ -13,15 +13,15 @@ import Divider from '@mui/material/Divider'
 import Icon from '@mui/material/Icon'
 
 // Error Handling
-import Error from './utilities/Error.js'
-import Loading from './utilities/Loading.js'
+import Error from '../utilities/Error.js'
+import Loading from '../utilities/Loading.js'
 
 // Icons
-import { creditRangeIcon, rewardIcon, iconStyle } from './styles/Icons'
+import { creditRangeIcon, rewardIcon, iconStyle } from '../styles/Icons'
 import HorizontalRuleRoundedIcon from '@mui/icons-material/HorizontalRuleRounded'
 
 // Styling
-import { flexCentered } from './styles/Styling'
+import { flexCentered } from '../styles/Styling'
 
 const CreditCards = () => {
 
@@ -34,7 +34,6 @@ const CreditCards = () => {
     const getCards = async () => {
       try {
         const { data } = await axios.get('/api/credit/')
-        console.log(data)
         setCards(data)
       } catch (error) {
         console.log(error)

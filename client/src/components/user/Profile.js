@@ -56,7 +56,7 @@ const Profile = () => {
     // Get Profile Details
     const getProfileDetails = async () => {
       try {
-        const { data } = await axios.get(`/api/auth/profile/${userId}`, {
+        const { data } = await axios.get(`/api/auth/profile/${userId}/`, {
           headers: {
             'Authorization': `Bearer ${token}`,
           },
@@ -82,7 +82,7 @@ const Profile = () => {
     console.log(profileDetails)
     console.log(token)
     try {
-      const { data } = await axios.put(`/api/auth/profile/${userId}`, profileDetails, {
+      const { data } = await axios.put(`/api/auth/profile/${userId}/`, profileDetails, {
         headers: {
           'Authorization': `Bearer ${token}`,
         },

@@ -3,11 +3,11 @@ import { useParams, Link } from 'react-router-dom'
 import axios from 'axios'
 
 // Error Handling
-import Error from './utilities/Error.js'
-import Loading from './utilities/Loading.js'
+import Error from '../utilities/Error.js'
+import Loading from '../utilities/Loading.js'
 
 // Helper Functions
-import { getLocalToken } from './helpers/auth'
+import { getLocalToken } from '../helpers/auth'
 
 // MUI Components
 import Box from '@mui/material/Box'
@@ -26,7 +26,7 @@ import ThumbUpRoundedIcon from '@mui/icons-material/ThumbUpRounded'
 import ThumbDownRoundedIcon from '@mui/icons-material/ThumbDownRounded'
 
 // Styling
-import { flexCentered } from './styles/Styling'
+import { flexCentered } from '../styles/Styling'
 
 const CreditCardShow = () => {
 

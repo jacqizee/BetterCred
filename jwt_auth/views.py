@@ -145,8 +145,17 @@ class ProfileView(APIView):
         # Return empty response
         return Response(status = status.HTTP_204_NO_CONTENT)
 
+# Endpoint: /profile/<int:pk>/wallet
+# Methods: PUT
+class WalletView(APIView):
+    permission_classes = (IsAuthenticated, )
 
-# class WalletView(APIView):
-#     def post(self, request, pk):
+    # PUT - update user wallet, add or remove a card
+    def put(self, request, pk):
+        if pk != request.user.id:
+            raise PermissionDenied()
+        
 
 
+
+# PUT - get wallet, update wallet (add/remove item), save wallet
