@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom'
 import Login from '../auth/Login'
 import Join from '../auth/Join'
 
+// Helper Functions
+import { getPayload } from '../helpers/auth'
+
 // MUI Components
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
@@ -19,6 +22,8 @@ import useScrollTrigger from '@mui/material/useScrollTrigger'
 import Slide from '@mui/material/Slide'
 import ListItemText from '@mui/material/ListItemText'
 import Switch from '@mui/material/Switch'
+import Menu from '@mui/material/Menu'
+import MenuItem from '@mui/material/MenuItem'
 
 // Styling
 import { flexRowCentered } from '../styles/Styling'
@@ -31,13 +36,31 @@ import Logo from '../../assets/bettercred-logo.png'
 
 const Navigation = ({ mode, setMode }) => {
 
-  const menu = ['cards', 'profile']
+  // Navbar Menu Items
+  const menu = ['cards', 'bonuses', 'learn']
+
+  // Drawer State
   const [ drawerOpen, setDrawerOpen ] = useState(false)
+
+  // Light/Dark Mode Switch State
   const [ switchStatus, setSwitchStatus ] = useState(false)
 
+  // Login/Join modal buttons
   const [ loginOpen, setLoginOpen ] = useState(false)
   const [ joinOpen, setJoinOpen ] = useState(false)
 
+  // Profile Menu
+  const [ profileAnchorEl, setProfileAnchorEl] = useState(null)
+  const openProfile = Boolean(profileAnchorEl)
+  const handleProfileClick = (event) => {
+    setProfileAnchorEl(event.currentTarget)
+  }
+
+  const handleProfileClose = () => {
+    setProfileAnchorEl(null)
+  }
+
+  // Drawer
   const toggleDrawer = (open) => (e) => {
     if (e.type === 'keydown' && (e.key === 'Tab' || e.key === 'Shift')) {
       return
@@ -45,6 +68,7 @@ const Navigation = ({ mode, setMode }) => {
     setDrawerOpen(open)
   }
 
+  // Light/Dark Mode on Local Storage
   useEffect(() => {
     if (window.localStorage.getItem('bettercred-mode')) {
       setMode(window.localStorage.getItem('bettercred-mode'))
@@ -63,6 +87,7 @@ const Navigation = ({ mode, setMode }) => {
     window.localStorage.setItem('bettercred-mode', newMode)
   }
 
+  // Handle Log Out
   const handleLogOut = () => {
     window.localStorage.removeItem('bettercred')
     window.location.reload(false)
@@ -96,8 +121,19 @@ const Navigation = ({ mode, setMode }) => {
                   <Join loginOpen={loginOpen} setLoginOpen={setLoginOpen} joinOpen={joinOpen} setJoinOpen={setJoinOpen} />
                 </Box>}
 
+                {/* Profile Button */}
                 {/* Logout Button */}
-                { window.localStorage.getItem('bettercred') ? <Button onClick={handleLogOut} color='secondary' variant='outlined' sx={{ textTransform: 'none' }} >Log Out</Button> : ''}
+                { window.localStorage.getItem('bettercred') &&
+                  <>
+                    {/* <Button color='secondary' component={Link} to={`/profile/${getPayload().sub}/`} sx={{ textTransform: 'none' }}>profile</Button> */}
+                    <Button color='secondary' onClick={handleProfileClick} sx={{ textTransform: 'none' }}>profile</Button>
+                    <Menu anchorEl={profileAnchorEl} open={openProfile} onClose={handleProfileClose}>
+                      <MenuItem component={Link} to={`/profile/${getPayload().sub}/`}>Profile</MenuItem>
+                      <MenuItem onClick={handleProfileClose}>My Cards</MenuItem>
+                      <MenuItem onClick={handleLogOut}>Log Out</MenuItem>
+                    </Menu>
+                  </>
+                }
               
                 {/* Light/Dark Mode */}
                 <Box color='primary'>
