@@ -20,6 +20,7 @@ import { loginModalStyle } from '../styles/Styling'
 
 const Login = ({ loginOpen, setLoginOpen, joinOpen, setJoinOpen }) => {
 
+  // Error Handling
   const [ formErrors, setFormErrors ] = useState(false)
 
   // Handle Modal Open and Close
@@ -30,10 +31,11 @@ const Login = ({ loginOpen, setLoginOpen, joinOpen, setJoinOpen }) => {
   const [ loggedIn, setLoggedIn ] = useState(false)
 
   // Form Data State
-  const [ formData, setFormData ] = useState({
+  const clearedForm = {
     username: '',
     password: '',
-  })
+  }
+  const [ formData, setFormData ] = useState(clearedForm)
 
   // Swap from Login Modal to Join Modal
   const handleSwap = (e) => {
@@ -53,14 +55,12 @@ const Login = ({ loginOpen, setLoginOpen, joinOpen, setJoinOpen }) => {
       const { data } = await axios.post('/api/auth/login/', formData)
       window.localStorage.setItem('bettercred', data.token)
       setLoggedIn(true)
-      setFormData({
-        username: '',
-        password: '',
-      })
+      setFormData(clearedForm)
       setLoginOpen(false)
     } catch (error) {
       console.log(error.response)
       setFormErrors(error.response.data.detail)
+      setFormData(clearedForm)
     }
   }
 
