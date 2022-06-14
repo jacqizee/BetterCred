@@ -32,9 +32,13 @@ const CreditCardShow = () => {
 
   const { cardId } = useParams()
   const [ cardData, setCardData ] = useState(false)
+  const [ addButtonText, setAddButtonText ] = useState('Add to Wallet')
+
+  // Error Handling
   const [ loading, setLoading ] = useState(true)
   const [ errors, setErrors ] = useState(false)
 
+  // Get Token
   const token = getLocalToken()
 
   // Get Card Data
@@ -58,12 +62,13 @@ const CreditCardShow = () => {
     getCard()
   }, [])
 
+  // Map Pros and Cons with Icons
   const displayFeatures = (type) => {
     const elements = []
     for (let i = 1; i < 4; i++) {
       if (cardData[`${type}_${i}`]){
         elements.push(
-          <ListItem key={type}>
+          <ListItem key={i}>
             <ListItemIcon>
               { type === 'pro' ? <ThumbUpRoundedIcon sx={{ color: 'green' }} /> : <ThumbDownRoundedIcon sx={{ color: 'darkred' }} /> }
             </ListItemIcon>
@@ -75,10 +80,17 @@ const CreditCardShow = () => {
     return elements
   }
 
+  // Add Card to User Wallet
   const handleAddCard = async () => {
     const payload = getPayload()
     try {
-      await axios.post(`/api/profile/${payload.sub}/wallet/`)
+      await axios.post(`/api/auth/profile/${payload.sub}/wallet/`, {
+        cardId: cardId,
+      }, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      })
     } catch (error) {
       console.log(error)
     }
@@ -96,7 +108,7 @@ const CreditCardShow = () => {
             <Box component='img' src={cardData.image} alt={`image of ${cardData.name} card`} sx={{ my: 3, height: '12rem', objectFit: 'contain', maxWidth: '100%' }} />
             
             {/* Add to Wallet Button */}
-            <Button color='secondary' variant='contained' onClick={handleAddCard}>Add to Wallet</Button>
+            <Button color='secondary' variant='contained' onClick={handleAddCard}>{addButtonText}</Button>
             
             {/* Link to Issuer Site */}
             <Typography

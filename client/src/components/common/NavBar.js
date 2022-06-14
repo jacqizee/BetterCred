@@ -6,7 +6,7 @@ import Login from '../auth/Login'
 import Join from '../auth/Join'
 
 // Helper Functions
-import { getPayload } from '../helpers/auth'
+import { getPayload, handleLogOut } from '../helpers/auth'
 
 // MUI Components
 import AppBar from '@mui/material/AppBar'
@@ -45,7 +45,7 @@ const Navigation = ({ mode, setMode }) => {
   // Light/Dark Mode Switch State
   const [ switchStatus, setSwitchStatus ] = useState(false)
 
-  // Login/Join modal buttons
+  // Login/Join Modal Buttons
   const [ loginOpen, setLoginOpen ] = useState(false)
   const [ joinOpen, setJoinOpen ] = useState(false)
 
@@ -87,12 +87,6 @@ const Navigation = ({ mode, setMode }) => {
     window.localStorage.setItem('bettercred-mode', newMode)
   }
 
-  // Handle Log Out
-  const handleLogOut = () => {
-    window.localStorage.removeItem('bettercred')
-    window.location.reload(false)
-  }
-
   const trigger = useScrollTrigger()
 
   return (
@@ -104,7 +98,6 @@ const Navigation = ({ mode, setMode }) => {
             <Typography variant='h6' component={Link} to={'/'} sx={{ textDecoration: 'none', color: 'secondary.light', ...flexRowCentered }}>
               BetterCred <Box component='img' src={Logo} sx={{ ml: 1.5, height: '2rem' }}/>
             </Typography>
-            
 
             {/* Row Menu on md or larger */}
             <Box sx={{ display: { xs: 'none', md: 'flex' }, justifyContent: 'space-between', width: '100%' }}>
@@ -150,8 +143,6 @@ const Navigation = ({ mode, setMode }) => {
 
             {/* Drawer Menu on XS screens */}
             <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-
-              
 
               {/* Hamburger Icon */}
               <Button onClick={toggleDrawer(true)}>

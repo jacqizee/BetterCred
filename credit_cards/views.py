@@ -6,6 +6,7 @@ from rest_framework.exceptions import NotFound
 
 from .models import CreditCard
 from .serializers.common import CreditCardSerializer
+from .serializers.populated import PopulatedCreditCardSerializer
 
 # Create your views here.
 
@@ -30,5 +31,5 @@ class OneCreditCardView(APIView):
     # GET request - returns a card
     def get(self, _request, pk):
         card = self.get_credit_card(pk)
-        serialized_card = CreditCardSerializer(card)
+        serialized_card = PopulatedCreditCardSerializer(card)
         return Response(serialized_card.data)
