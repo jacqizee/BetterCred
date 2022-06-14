@@ -20,6 +20,9 @@ import { loginModalStyle } from '../styles/Styling'
 
 const Join = ({ loginOpen, setLoginOpen, joinOpen, setJoinOpen }) => {
 
+  // Error Handling
+  const [ formErrors, setFormErrors ] = useState(false)
+
   // Handle Modal Open and Close
   const handleOpen = () => setJoinOpen(true)
   const handleClose = () => setJoinOpen(false)
@@ -62,7 +65,8 @@ const Join = ({ loginOpen, setLoginOpen, joinOpen, setJoinOpen }) => {
       })
       setJoinOpen(false)
     } catch (error) {
-      console.log(error.response.data.message.error)
+      console.log(error.response.data.message)
+      setFormErrors(error.response.data.message)
     }
   }
 
@@ -85,23 +89,79 @@ const Join = ({ loginOpen, setLoginOpen, joinOpen, setJoinOpen }) => {
           </Typography>
           <Grid container spacing={{ xs: 1, md: 2 }} component='form' onSubmit={handleSubmit} sx={{ width: '85%', pt: 3, pb: 2 }}>
             <Grid item xs={12}>
-              <TextField type='email' className='email' name='email' label='Email' variant='filled' value={formData.email} onChange={handleChange} fullWidth />
+              <TextField className='email'
+                type='email'
+                name='email'
+                label='Email'
+                variant='filled'
+                value={formData.email}
+                onChange={handleChange}
+                error={Boolean(formErrors.email)}
+                helperText={formErrors.email}
+                fullWidth />
             </Grid>
             <Grid item xs={6}>
-              <TextField className='first-name' name='first_name' label='First Name' variant='filled' value={formData.first_name} onChange={handleChange} fullWidth />
+              <TextField className='first-name'
+                name='first_name'
+                label='First Name'
+                variant='filled'
+                value={formData.first_name}
+                onChange={handleChange}
+                error={Boolean(formErrors.first_name)}
+                helperText={formErrors.first_name}
+                fullWidth />
             </Grid>
             <Grid item xs={6}>
-              <TextField className='last-name' name='last_name' label='Last Name' variant='filled' value={formData.last_name} onChange={handleChange} fullWidth />
+              <TextField className='last-name'
+                name='last_name'
+                label='Last Name'
+                variant='filled'
+                value={formData.last_name}
+                onChange={handleChange}
+                error={Boolean(formErrors.last_name)}
+                helperText={formErrors.last_name}
+                fullWidth />
             </Grid>
             <Grid item xs={12}>
-              <TextField className='username' name='username' label='Username' variant='filled' value={formData.username} onChange={handleChange} fullWidth />
+              <TextField className='username'
+                name='username'
+                label='Username'
+                variant='filled'
+                value={formData.username}
+                onChange={handleChange}
+                error={Boolean(formErrors.username)}
+                helperText={formErrors.username}
+                fullWidth />
             </Grid>
             <Grid item xs={12} md={6}>
-              <TextField type='password' className='password' name='password' label='Password' variant='filled' value={formData.password} onChange={handleChange} fullWidth />
+              <TextField className='password'
+                type='password'
+                name='password'
+                label='Password'
+                variant='filled'
+                value={formData.password}
+                onChange={handleChange}
+                error={Boolean(formErrors.password)}
+                helperText={formErrors.password}
+                fullWidth />
             </Grid>
             <Grid item xs={12} md={6}>
-              <TextField type='password' className='password-confirmation' name='password_confirmation' label='Password Confirmation' variant='filled' value={formData.password_confirmation} onChange={handleChange} fullWidth />
+              <TextField className='password-confirmation'
+                type='password'
+                name='password_confirmation'
+                label='Password Confirmation'
+                variant='filled'
+                value={formData.password_confirmation}
+                error={Boolean(formErrors.password_confirmation)}
+                helperText={formErrors.password_confirmation}
+                onChange={handleChange}
+                fullWidth />
             </Grid>
+            { formErrors.error && 
+              <Grid item xs={12} sx={{ textAlign: 'center' }}>
+                { formErrors.error.map(err => <Typography variant='caption' key={err} sx={{ color: 'red', display: 'block' }}>{err}</Typography>)}
+              </Grid>
+            }
             <Grid item xs={12} sx={{ textAlign: 'center' }}>
               { !registered ?
                 <Button type='submit' variant='contained' sx={{ mt: 2 }}>Submit</Button> : 
