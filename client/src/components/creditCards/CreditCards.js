@@ -46,6 +46,7 @@ const CreditCards = () => {
 
   return (
     <Box sx={{ flexCentered, textAlign: 'center', bgcolor: 'background.default', px: 5, pb: 10 }}>
+      {/* Heading */}
       <Typography variant='h4' component='h2' sx={{ pt: 3, pb: 2, color: 'primary.contrastText' }}>Explore Credit Cards</Typography>
       <Grid container columnSpacing={3} rowSpacing={2}>
         { loading ? <Loading /> : error ? <Error /> : cards.map(card => {
@@ -62,12 +63,14 @@ const CreditCards = () => {
                   {/* Card Feature Overview */}
                   <Box sx={{ display: 'flex', flexDirection: 'column', mb: 2, width: '100%', py: 2, alignItems: 'center', bgcolor: 'primary.main', px: 2 }}>
                     <Box sx={{ display: 'flex', justifyContent: 'space-evenly', width: '100%', mb: 2 }}>
+
                       {/* Credit Score */}
                       <Box sx={{ textAlign: 'center' }}>
                         <Typography variant='body1' sx={{ lineHeight: 1.25, mb: 1 }}>Credit Score</Typography>
                         { creditRangeIcon(card.credit_range) }
                       </Box>
                       <Divider orientation="vertical" flexItem></Divider>
+
                       {/* Annual Fee */}
                       <Box sx={{ textAlign: 'center' }}>
                         <Typography variant='body1' sx={{ lineHeight: 1.25 }}>Annual Fee</Typography>
@@ -75,6 +78,7 @@ const CreditCards = () => {
                       </Box>
                     </Box>
                     <Divider orientation="horizontal" flexItem></Divider>
+
                     {/* Rewards On */}
                     <Box sx={{ textAlign: 'center', mt: 1 }}>
                       <Typography variant='body1' sx={{ lineHeight: 1.25, my: .75 }}>Rewards On</Typography>
@@ -85,7 +89,8 @@ const CreditCards = () => {
                       </Box>
                     </Box>
                   </Box>
-                  
+
+                  {/* Learn More */}
                   <Button component={Link} to={`/cards/${card.id}`} variant='contained' color='secondary' sx={{ textTransform: 'none' }}>Learn More</Button>
                 </CardContent>
               </Card>
