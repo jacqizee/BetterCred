@@ -40,15 +40,18 @@ const Join = ({ loginOpen, setLoginOpen, joinOpen, setJoinOpen }) => {
     profile_picture: '',
   })
 
+  // Handle Modal Swap Join -> Login
   const handleSwap = (e) => {
     setJoinOpen(false)
     setLoginOpen(true)
   }
 
+  // Handle Form Change
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
+  // Handle Form Submit
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
@@ -72,6 +75,7 @@ const Join = ({ loginOpen, setLoginOpen, joinOpen, setJoinOpen }) => {
 
   return (
     <Box>
+      {/* Join Button */}
       <Button color='secondary' variant='contained' onClick={handleOpen} sx={{ textTransform: 'none', mr: 1 }}>join</Button>
       <Modal
         open={joinOpen}
@@ -80,14 +84,22 @@ const Join = ({ loginOpen, setLoginOpen, joinOpen, setJoinOpen }) => {
         aria-describedby="modal with register form"
       >
         <Box sx={loginModalStyle}>
+          {/* Close Icon (X) */}
           <IconButton onClick={handleClose} sx={{ position: 'fixed', right: '2.25rem', top: '1.25rem' }} >
             <CloseIcon />
           </IconButton>
+
+          {/* Lock Icon */}
           <LockRoundedIcon sx={{ boxShadow: 1, p: 1, borderRadius: 10, height: '2rem', width: '2rem', mb: 2 }} />
+
+          {/* Heading */}
           <Typography id="modal-modal-title" variant="h6" component="h2" sx={{ color: 'primary.contrastText' }}>
             Join BetterCred
           </Typography>
+          
+          {/* Form */}
           <Grid container spacing={{ xs: 1, md: 2 }} component='form' onSubmit={handleSubmit} sx={{ width: '85%', pt: 3, pb: 2 }}>
+            {/* Email */}
             <Grid item xs={12}>
               <TextField className='email'
                 type='email'
@@ -100,6 +112,8 @@ const Join = ({ loginOpen, setLoginOpen, joinOpen, setJoinOpen }) => {
                 helperText={formErrors.email}
                 fullWidth />
             </Grid>
+
+            {/* First Name */}
             <Grid item xs={6}>
               <TextField className='first-name'
                 name='first_name'
@@ -111,6 +125,8 @@ const Join = ({ loginOpen, setLoginOpen, joinOpen, setJoinOpen }) => {
                 helperText={formErrors.first_name}
                 fullWidth />
             </Grid>
+
+            {/* Last Name */}
             <Grid item xs={6}>
               <TextField className='last-name'
                 name='last_name'
@@ -122,6 +138,8 @@ const Join = ({ loginOpen, setLoginOpen, joinOpen, setJoinOpen }) => {
                 helperText={formErrors.last_name}
                 fullWidth />
             </Grid>
+
+            {/* Username */}
             <Grid item xs={12}>
               <TextField className='username'
                 name='username'
@@ -133,6 +151,8 @@ const Join = ({ loginOpen, setLoginOpen, joinOpen, setJoinOpen }) => {
                 helperText={formErrors.username}
                 fullWidth />
             </Grid>
+
+            {/* Password */}
             <Grid item xs={12} md={6}>
               <TextField className='password'
                 type='password'
@@ -145,6 +165,8 @@ const Join = ({ loginOpen, setLoginOpen, joinOpen, setJoinOpen }) => {
                 helperText={formErrors.password}
                 fullWidth />
             </Grid>
+
+            {/* Password Confirmation */}
             <Grid item xs={12} md={6}>
               <TextField className='password-confirmation'
                 type='password'
@@ -157,11 +179,15 @@ const Join = ({ loginOpen, setLoginOpen, joinOpen, setJoinOpen }) => {
                 onChange={handleChange}
                 fullWidth />
             </Grid>
+
+            {/* For Errors - if errors are returned */}
             { formErrors.error && 
               <Grid item xs={12} sx={{ textAlign: 'center' }}>
                 { formErrors.error.map(err => <Typography variant='caption' key={err} sx={{ color: 'red', display: 'block' }}>{err}</Typography>)}
               </Grid>
             }
+
+            {/* Submit Button */}
             <Grid item xs={12} sx={{ textAlign: 'center' }}>
               { !registered ?
                 <Button type='submit' variant='contained' sx={{ mt: 2 }}>Submit</Button> : 
@@ -169,6 +195,8 @@ const Join = ({ loginOpen, setLoginOpen, joinOpen, setJoinOpen }) => {
               }
             </Grid>
           </Grid>
+
+          {/* Modal Swap */}
           <Typography>Already a Member? <Link onClick={handleSwap} underline='hover' sx={{ '&:hover': { cursor: 'pointer' } }}>Login</Link></Typography>
         </Box>
       </Modal>
