@@ -23,26 +23,36 @@ import Icon from '@mui/material/Icon'
 
 const Profile = () => {
 
+  // Navigate
   const nav = useNavigate()
 
+  // Params
+  const { userId } = useParams()
+
+  // Token
+  const token = getLocalToken()
+
+  // Error Handling
   const [ loading, setLoading ] = useState(true)
   const [ error, setError ] = useState(false)
+  const [ formErrors, setFormErrors ] = useState(false)
+
+  // Form Submit State
   const [ submitted, setSubmitted ] = useState(false)
 
+  // Form Details
   const [ profileDetails, setProfileDetails ] = useState({
     password: '',
     password_confirmation: '',
   })
-  const { userId } = useParams()
-
-  const token = getLocalToken()
  
+  // Populate Form Details
   useEffect(() => {
     // Confirm User is Logged In + Owner
     if (!confirmUser(userId)) {
       nav('/cards')
     }
-    
+
     // Get Profile Details
     const getProfileDetails = async () => {
       try {
@@ -54,7 +64,6 @@ const Profile = () => {
         setProfileDetails({ ...profileDetails, ...data })
       } catch (error) {
         console.log(error)
-        console.log(error.response.data.detail)
         setError(true)
       }
       setLoading(false)
@@ -62,10 +71,12 @@ const Profile = () => {
     getProfileDetails()
   }, [])
 
+  // Handle Form Change
   const handleChange = (e) => {
     setProfileDetails({ ...profileDetails, [e.target.name]: e.target.value })
   }
 
+  // Handle Form Submit
   const handleSubmit = async (e) => {
     e.preventDefault()
     console.log(profileDetails)
@@ -76,15 +87,17 @@ const Profile = () => {
           'Authorization': `Bearer ${token}`,
         },
       })
+      setFormErrors(false)
       setSubmitted(true)
     } catch (error) {
-      console.log(error)
-      console.log(error.response)
+      console.log(error.response.data)
+      setFormErrors(error.response.data)
     }
   }
 
   return (
     <Box sx={{ display: 'flex', p: 10, bgcolor: 'background.default' }}>
+      {/* Profile Menu */}
       <Box id='profile-menu' sx={{ width: '25%' }}>
         <List sx={{ bgcolor: 'primary.main', color: 'white' }}>
           <ListItem>
@@ -95,49 +108,70 @@ const Profile = () => {
           </ListItem>
         </List>
       </Box>
+      {/* Profile Settings */}
       { loading ? <Loading /> : error ? <Error /> : 
-        <Box id='profile-settings' component='form' onSubmit={handleSubmit}
+        <Box id='profile-settings'
+          component='form'
+          onSubmit={handleSubmit}
           sx={{ width: '75%', display: 'flex', flexDirection: 'column', mx: { sm: 5, md: 10 }, bgcolor: 'background.paper', p: 5 }}>
+          
+          {/* Heading and Subheading */}
           <Typography variant='h5' sx={{ color: 'primary.contrastText' }}>Edit Profile</Typography>
           <Typography variant='body1' sx={{ color: 'primary.contrastText', mb: 1 }}>Update your profile settings</Typography>
           
+          {/* Username */}
           <TextField className='username'
             name='username'
             value={profileDetails.username} label='Username'
             variant='standard'
             onChange={handleChange}
+            error={Boolean(formErrors.username)}
+            helperText={formErrors.username}
             sx={{ mt: 1 }} />
 
+          {/* First Name */}
           <TextField className='firstName'
             name='first_name'
             value={profileDetails.first_name} label='First Name'
             variant='standard'
             onChange={handleChange}
+            error={Boolean(formErrors.first_name)}
+            helperText={formErrors.first_name}
             sx={{ mt: 1 }} />
 
+          {/* Last Name */}
           <TextField className='lastName'
             name='last_name'
             value={profileDetails.last_name} label='Last Name'
             variant='standard'
             onChange={handleChange}
+            error={Boolean(formErrors.last_name)}
+            helperText={formErrors.last_name}
             sx={{ mt: 1 }} />
 
+          {/* Email */}
           <TextField className='email'
             type='email'
             name='email'
             value={profileDetails.email} label='Email'
             variant='standard'
             onChange={handleChange}
+            error={Boolean(formErrors.email)}
+            helperText={formErrors.email}
             sx={{ mt: 1 }} />
 
+          {/* Password */}
           <TextField className='password'
             type='password'
             name='password'
             value={profileDetails.password} label='Password'
             variant='standard'
             onChange={handleChange}
+            error={Boolean(formErrors.password)}
+            helperText={formErrors.password}
             sx={{ mt: 1 }} />
 
+          {/* Password Confirmation */}
           <TextField className='passwordConfirmation'
             type='password'
             name='password_confirmation'
@@ -145,7 +179,14 @@ const Profile = () => {
             label='Password Confirmation'
             variant='standard'
             onChange={handleChange}
+            error={Boolean(formErrors.password_confirmation)}
+            helperText={formErrors.password_confirmation}
             sx={{ mt: 1 }} />
+
+          {/* Error Field - if error is returned */}
+          { formErrors.error && 
+            formErrors.error.map(err => <Typography variant='caption' key={err} sx={{ display: 'block', color: 'red' }}>{err}</Typography>)
+          }
 
           {/* Submit Button */}
           { !submitted ?
