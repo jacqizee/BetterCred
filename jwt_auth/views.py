@@ -146,6 +146,6 @@ class ProfileView(APIView):
         return Response(status = status.HTTP_204_NO_CONTENT)
 
 
-# class FavoriteView(APIView):
+# class WalletView(APIView):
+#     def post(self, request, pk):
 
-#     def put()

@@ -63,7 +63,7 @@ const CreditCardShow = () => {
     for (let i = 1; i < 4; i++) {
       if (cardData[`${type}_${i}`]){
         elements.push(
-          <ListItem>
+          <ListItem key={type}>
             <ListItemIcon>
               { type === 'pro' ? <ThumbUpRoundedIcon sx={{ color: 'green' }} /> : <ThumbDownRoundedIcon sx={{ color: 'darkred' }} /> }
             </ListItemIcon>
@@ -106,7 +106,7 @@ const CreditCardShow = () => {
                   </List>
                 </Grid>
                 <Grid item xs={6}>
-                  <Typography variant='h6' >Cons</Typography>
+                  <Typography variant='h6'>Cons</Typography>
                   { featureMap('con') }
                 </Grid>
               </Grid>
