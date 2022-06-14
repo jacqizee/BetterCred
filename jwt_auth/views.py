@@ -1,3 +1,4 @@
+from urllib import request
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
@@ -11,14 +12,17 @@ from django.conf import settings
 # DateTime for Token
 from datetime import datetime, timedelta
 
-from jwt_auth.serializers.populated import PopulatedUserSerializer
-
 # Serializers
 from .serializers.common import UserSerializer
+from jwt_auth.serializers.populated import PopulatedUserSerializer
+from credit_cards.serializers.common import SimpleCreditCardSerializer
 
-# User Model
+# Models
+from credit_cards.models import CreditCard
 from django.contrib.auth import get_user_model
 User = get_user_model()
+
+
 
 # Create your views here.
 
@@ -146,16 +150,55 @@ class ProfileView(APIView):
         return Response(status = status.HTTP_204_NO_CONTENT)
 
 # Endpoint: /profile/<int:pk>/wallet
-# Methods: PUT
+# Methods: POST
 class WalletView(APIView):
     permission_classes = (IsAuthenticated, )
 
-    # PUT - update user wallet, add or remove a card
-    def put(self, request, pk):
-        if pk != request.user.id:
+    def get_object(self, Model, id):
+        try:
+            object = Model.objects.get(pk = id)
+            return object
+        except Model.DoesNotExist:
+            raise NotFound(f'{str(Model)} with this id not found.')
+
+    def check_user(self, requestId, userId):
+        if requestId != userId:
             raise PermissionDenied()
+
+    # POST - add card to user wallet
+    def post(self, request, pk):
+        cardId = request.data.get("cardId")
+
+        # Check if request user is right user
+        self.check_user(request.user.id, pk)
+        
+        # Get User and Card objects
+        user = self.get_object(User, pk)
+        card = self.get_object(CreditCard, cardId)
+
+        # Add Card to User Wallet
+        user.wallet.add(card)
+
+        # Serialize User
+        serialized_user = PopulatedUserSerializer(user)
+
+        # Return User and 202 status
+        return Response(serialized_user.data, status.HTTP_201_CREATED)
+    
+    def delete(self, request, pk):
+        cardId = request.data.get("cardId")
+
+        # Check if request user is right user
+        self.check_user(request.user.id, pk)
+        
+        # Get User and Card objects
+        user = self.get_object(User, pk)
+        card = self.get_object(CreditCard, cardId)
+
+        # Delete card from wallet
+        user.wallet.remove(card)
+
+        # Return User and 202 status
+        return Response(status = status.HTTP_204_NO_CONTENT)
         
 
-
-
-# PUT - get wallet, update wallet (add/remove item), save wallet

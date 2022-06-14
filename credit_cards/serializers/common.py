@@ -9,4 +9,4 @@ class CreditCardSerializer(ModelSerializer):
 class SimpleCreditCardSerializer(ModelSerializer):
     class Meta:
         model = CreditCard
-        fields = ('name', 'image', 'credit_range', 'annual_fee', 'cash_back_category')
+        fields = ('id', 'name', 'image', 'credit_range', 'annual_fee', 'cash_back_category')
