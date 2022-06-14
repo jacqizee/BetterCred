@@ -7,7 +7,7 @@ import Error from '../utilities/Error.js'
 import Loading from '../utilities/Loading.js'
 
 // Helper Functions
-import { getLocalToken } from '../helpers/auth'
+import { getLocalToken, getPayload } from '../helpers/auth'
 
 // MUI Components
 import Box from '@mui/material/Box'
@@ -58,7 +58,7 @@ const CreditCardShow = () => {
     getCard()
   }, [])
 
-  const featureMap = (type) => {
+  const displayFeatures = (type) => {
     const elements = []
     for (let i = 1; i < 4; i++) {
       if (cardData[`${type}_${i}`]){
@@ -74,6 +74,15 @@ const CreditCardShow = () => {
     }
     return elements
   }
+
+  const handleAddCard = async () => {
+    const payload = getPayload()
+    try {
+      await axios.post(`/api/profile/${payload.sub}/wallet/`)
+    } catch (error) {
+      console.log(error)
+    }
+  }
   
   return (
     <Box>
@@ -82,10 +91,13 @@ const CreditCardShow = () => {
           <Grid item xs={12} md={4} sx={{ ...flexCentered, bgcolor: 'background.default', borderRadius: 15, my: 5 }}>
             {/* Card Name */}
             <Typography variant='h6' sx={{ color: 'primary.contrastText', width: '100%', textAlign: 'center', mt: 3 }}>{cardData.name}</Typography>
+            
             {/* Card Image */}
             <Box component='img' src={cardData.image} alt={`image of ${cardData.name} card`} sx={{ my: 3, height: '12rem', objectFit: 'contain', maxWidth: '100%' }} />
+            
             {/* Add to Wallet Button */}
-            <Button color='secondary' variant='contained'>Add to Wallet</Button>
+            <Button color='secondary' variant='contained' onClick={handleAddCard}>Add to Wallet</Button>
+            
             {/* Link to Issuer Site */}
             <Typography
               component='a'
@@ -102,12 +114,12 @@ const CreditCardShow = () => {
                 <Grid item xs={6}>
                   <Typography variant='h6' >Pros</Typography>
                   <List>
-                    { featureMap('pro') }
+                    { displayFeatures('pro') }
                   </List>
                 </Grid>
                 <Grid item xs={6}>
                   <Typography variant='h6'>Cons</Typography>
-                  { featureMap('con') }
+                  { displayFeatures('con') }
                 </Grid>
               </Grid>
             </Box>

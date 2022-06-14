@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 
 // Helper Functions
-import { getPayload, getLocalToken, confirmUser } from '../helpers/auth.js'
+import { getPayload, getLocalToken, confirmUser, handleLogOut } from '../helpers/auth.js'
 
 // Components
 import Loading from '../utilities/Loading'
@@ -49,7 +49,7 @@ const Profile = () => {
   // Populate Form Details
   useEffect(() => {
     // Confirm User is Logged In + Owner
-    if (!confirmUser(userId)) {
+    if (!token || !confirmUser(userId)) {
       nav('/cards')
     }
 
@@ -95,10 +95,34 @@ const Profile = () => {
     }
   }
 
+  const [ deleteText, setDeleteText ] = useState('Delete Account') 
+  const confirmDelete = () => {
+
+    // Handle Delete Function
+    const handleDelete = async () => {
+      try {
+        await axios.delete(`/api/auth/profile/${userId}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        })
+        console.log('account deleted')
+        handleLogOut()
+        nav('/')
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    // If user confirms, execute delete function
+    deleteText === 'Delete Account' ? setDeleteText('Are you sure you want to delete?') : handleDelete()
+  }
+
   return (
-    <Box sx={{ display: 'flex', p: 10, bgcolor: 'background.default' }}>
+    <Box sx={{ display: 'flex', p: 5, bgcolor: 'background.default', justifyContent: 'center', height: '100vh' }}>
       {/* Profile Menu */}
-      <Box id='profile-menu' sx={{ width: '25%' }}>
+      <Box id='profile-menu'
+        sx={{ width: '25%', maxWidth: '350px' }}>
         <List sx={{ bgcolor: 'primary.main', color: 'white' }}>
           <ListItem>
             <ListItemText>My Profile</ListItemText>
@@ -113,12 +137,12 @@ const Profile = () => {
         <Box id='profile-settings'
           component='form'
           onSubmit={handleSubmit}
-          sx={{ width: '75%', display: 'flex', flexDirection: 'column', mx: { sm: 5, md: 10 }, bgcolor: 'background.paper', p: 5 }}>
+          sx={{ width: '75%', maxWidth: '850px', display: 'flex', flexDirection: 'column', mx: { sm: 5, md: 7 }, bgcolor: 'background.paper', p: 5, height: 'fit-content' }}>
           
           {/* Heading and Subheading */}
           <Typography variant='h5' sx={{ color: 'primary.contrastText' }}>Edit Profile</Typography>
           <Typography variant='body1' sx={{ color: 'primary.contrastText', mb: 1 }}>Update your profile settings</Typography>
-          
+          <Divider sx={{ my: 1 }} />
           {/* Username */}
           <TextField className='username'
             name='username'
@@ -190,9 +214,14 @@ const Profile = () => {
 
           {/* Submit Button */}
           { !submitted ?
-            <Button type='submit' color='primary' variant='outlined' sx={{ mt: 3 }}>Edit</Button> :
+            <Button type='submit' color='secondary' variant='contained' sx={{ mt: 3 }}>Edit</Button> :
             <Button type='submit' color='success' variant='outlined' sx={{ mt: 3 }} disabled>Submitted!</Button>
           }
+
+          {/* Delete Account Option */}
+          <Box sx={{ width: '100%', textAlign: 'center', mt: .5 }}>
+            <Typography variant='caption' onClick={confirmDelete} sx={{ color: 'red', '&:hover': { textDecoration: 'underline', cursor: 'pointer' } }}>{deleteText}</Typography>
+          </Box>
         </Box>
       }
     </Box>

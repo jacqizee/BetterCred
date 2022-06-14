@@ -13,3 +13,7 @@ export const confirmUser = (userId) => {
   const payload = getPayload()
   return payload.sub === parseInt(userId)
 }
+
+export const handleLogOut = () => {
+  window.localStorage.removeItem('bettercred')
+}
