@@ -50,7 +50,7 @@ const Profile = () => {
   useEffect(() => {
     // Confirm User is Logged In + Owner
     if (!token || !confirmUser(userId)) {
-      nav('/cards')
+      nav('/')
     }
 
     // Get Profile Details
@@ -106,9 +106,7 @@ const Profile = () => {
             'Authorization': `Bearer ${token}`,
           },
         })
-        console.log('account deleted')
         handleLogOut()
-        nav('/')
       } catch (error) {
         console.log(error)
       }

@@ -24,6 +24,7 @@ import ListItemText from '@mui/material/ListItemText'
 import Switch from '@mui/material/Switch'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
+import Collapse from '@mui/material/Collapse'
 
 // Styling
 import { flexRowCentered } from '../styles/Styling'
@@ -33,6 +34,8 @@ import MenuIcon from '@mui/icons-material/Menu'
 import DarkModeRoundedIcon from '@mui/icons-material/DarkModeRounded'
 import LightModeRoundedIcon from '@mui/icons-material/LightModeRounded'
 import Logo from '../../assets/bettercred-logo.png'
+import ExpandLess from '@mui/icons-material/ExpandLess'
+import ExpandMore from '@mui/icons-material/ExpandMore'
 
 const Navigation = ({ mode, setMode }) => {
 
@@ -59,6 +62,9 @@ const Navigation = ({ mode, setMode }) => {
   const handleProfileClose = () => {
     setProfileAnchorEl(null)
   }
+
+  // Profile Burger Menu
+  const [ openBurgerProfile, setOpenBurgerProfile ] = useState(false)
 
   // Drawer
   const toggleDrawer = (open) => (e) => {
@@ -122,7 +128,7 @@ const Navigation = ({ mode, setMode }) => {
                     <Menu anchorEl={profileAnchorEl} open={openProfile} onClose={handleProfileClose}>
                       <MenuItem component={Link} to={`/profile/${getPayload().sub}/`}>Profile</MenuItem>
                       <MenuItem onClick={handleProfileClose}>My Cards</MenuItem>
-                      <MenuItem onClick={handleLogOut}>Log Out</MenuItem>
+                      <MenuItem onClick={handleLogOut}>Logout</MenuItem>
                     </Menu>
                   </>
                 }
@@ -162,28 +168,44 @@ const Navigation = ({ mode, setMode }) => {
                     {menu.map(item => {
                       return (
                         <ListItem key={item}>
-                          <Typography component={Link} to={`/${item}`} color='primary' sx={{ textDecoration: 'none' }}>
-                            <ListItemButton onClick={toggleDrawer(false)}>
-                              <ListItemText primary={item} />
-                            </ListItemButton>
-                          </Typography>
+                          <ListItemButton component={Link} to={`/${item}`}  sx={{ textDecoration: 'none' }} onClick={toggleDrawer(false)}>
+                            <ListItemText primary={item} />
+                          </ListItemButton>
                         </ListItem>
                       )
                     })}
 
                     {/* Profile Menu */}
-                    <ListItem>
-                      { window.localStorage.getItem('bettercred') &&
-                        <>
-                          <Button color='secondary' onClick={handleProfileClick} sx={{ textTransform: 'none' }}>profile</Button>
-                          <Menu anchorEl={profileAnchorEl} open={openProfile} onClose={handleProfileClose}>
-                            <MenuItem component={Link} to={`/profile/${getPayload().sub}/`}>Profile</MenuItem>
-                            <MenuItem onClick={handleProfileClose}>My Cards</MenuItem>
-                            <MenuItem onClick={handleLogOut}>Log Out</MenuItem>
-                          </Menu>
-                        </>
-                      }
-                    </ListItem>
+                    { window.localStorage.getItem('bettercred') &&
+                      <>
+                        <ListItem sx={{ pb: 0 }}>
+                          <ListItemButton onClick={() => setOpenBurgerProfile(!openBurgerProfile)}>
+                            <ListItemText primary='profile' />
+                            { openBurgerProfile ? <ExpandLess /> : <ExpandMore /> }
+                          </ListItemButton>
+                        </ListItem>
+                        <Collapse in={openBurgerProfile} timeout='auto' unmountOnExit>
+                          <List component='div' disablePadding>
+                            <ListItem sx={{ py: 0 }} >
+                              <ListItemButton sx={{ pl: 4 }}>
+                                <ListItemText primary='my cards' />
+                              </ListItemButton>
+                            </ListItem>
+                            <ListItem sx={{ py: 0 }} >
+                              <ListItemButton as={Link} to={`/profile/${getPayload().sub}/`} sx={{ pl: 4 }}>
+                                <ListItemText primary='my profile' />
+                              </ListItemButton>
+                            </ListItem>
+                            <ListItem sx={{ py: 0 }} >
+                              <ListItemButton sx={{ pl: 4 }} onClick={handleLogOut}>
+                                <ListItemText primary='logout' />
+                              </ListItemButton>
+                            </ListItem>
+                          </List>
+                        </Collapse>
+                      </>
+                    }
+                    
                     {/* Login/Join Buttons */}
                     { !window.localStorage.getItem('bettercred') &&
                       <ListItem sx={{ display: 'flex', justifyContent: 'center' }} fullWidth>
@@ -217,3 +239,13 @@ const Navigation = ({ mode, setMode }) => {
 }
 
 export default Navigation
+
+
+{/* // <>
+                        //   <Button color='secondary' onClick={handleProfileClick} sx={{ textTransform: 'none' }}>profile</Button>
+                        //   <Menu anchorEl={profileAnchorEl} open={openProfile} onClose={handleProfileClose}>
+                        //     <MenuItem component={Link} to={`/profile/${getPayload().sub}/`}>Profile</MenuItem>
+                        //     <MenuItem onClick={handleProfileClose}>My Cards</MenuItem>
+                        //     <MenuItem onClick={handleLogOut}>Log Out</MenuItem>
+                        //   </Menu>
+                        // </> */}
