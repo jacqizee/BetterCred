@@ -151,11 +151,7 @@ const Navigation = ({ mode, setMode }) => {
             {/* Drawer Menu on XS screens */}
             <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
 
-              {/* Login/Join Buttons */}
-              { !window.localStorage.getItem('bettercred') && <>
-                <Login loginOpen={loginOpen} setLoginOpen={setLoginOpen} joinOpen={joinOpen} setJoinOpen={setJoinOpen} />
-                <Join loginOpen={loginOpen} setLoginOpen={setLoginOpen} joinOpen={joinOpen} setJoinOpen={setJoinOpen} />
-              </> }
+              
 
               {/* Hamburger Icon */}
               <Button onClick={toggleDrawer(true)}>
@@ -170,10 +166,12 @@ const Navigation = ({ mode, setMode }) => {
               >
                 <Box sx={{ width: 350 }}>
                   <List color='primary' sx={{ textDecoration: 'none' }}>
+
+                    {/* Menu Items */}
                     {menu.map(item => {
                       return (
                         <ListItem key={item}>
-                          <Typography component={Link} to={`#${item}`} color='primary' sx={{ textDecoration: 'none' }}>
+                          <Typography component={Link} to={`/${item}`} color='primary' sx={{ textDecoration: 'none' }}>
                             <ListItemButton onClick={toggleDrawer(false)}>
                               <ListItemText primary={item} />
                             </ListItemButton>
@@ -181,6 +179,29 @@ const Navigation = ({ mode, setMode }) => {
                         </ListItem>
                       )
                     })}
+
+                    {/* Profile Menu */}
+                    <ListItem>
+                      { window.localStorage.getItem('bettercred') &&
+                        <>
+                          <Button color='secondary' onClick={handleProfileClick} sx={{ textTransform: 'none' }}>profile</Button>
+                          <Menu anchorEl={profileAnchorEl} open={openProfile} onClose={handleProfileClose}>
+                            <MenuItem component={Link} to={`/profile/${getPayload().sub}/`}>Profile</MenuItem>
+                            <MenuItem onClick={handleProfileClose}>My Cards</MenuItem>
+                            <MenuItem onClick={handleLogOut}>Log Out</MenuItem>
+                          </Menu>
+                        </>
+                      }
+                    </ListItem>
+                    {/* Login/Join Buttons */}
+                    { !window.localStorage.getItem('bettercred') &&
+                      <ListItem sx={{ display: 'flex', justifyContent: 'center' }} fullWidth>
+                        <Login loginOpen={loginOpen} setLoginOpen={setLoginOpen} joinOpen={joinOpen} setJoinOpen={setJoinOpen} />
+                        <Join loginOpen={loginOpen} setLoginOpen={setLoginOpen} joinOpen={joinOpen} setJoinOpen={setJoinOpen} />
+                      </ListItem>
+                    }
+
+                    {/* Light/Dark Mode Switch */}
                     <ListItem>
                       <Switch 
                         checked={switchStatus}
@@ -192,20 +213,7 @@ const Navigation = ({ mode, setMode }) => {
                         sx={{ ml: 2.5, mt: .85 }}
                       />
                     </ListItem>
-                    {/* Profile Menu */}
-                    <ListItem>
-                      { window.localStorage.getItem('bettercred') &&
-                        <>
-                          {/* <Button color='secondary' component={Link} to={`/profile/${getPayload().sub}/`} sx={{ textTransform: 'none' }}>profile</Button> */}
-                          <Button color='secondary' onClick={handleProfileClick} sx={{ textTransform: 'none' }}>profile</Button>
-                          <Menu anchorEl={profileAnchorEl} open={openProfile} onClose={handleProfileClose}>
-                            <MenuItem component={Link} to={`/profile/${getPayload().sub}/`}>Profile</MenuItem>
-                            <MenuItem onClick={handleProfileClose}>My Cards</MenuItem>
-                            <MenuItem onClick={handleLogOut}>Log Out</MenuItem>
-                          </Menu>
-                        </>
-                      }
-                    </ListItem>
+                    
                   </List>
                 </Box>
               </Drawer>
