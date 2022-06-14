@@ -122,7 +122,6 @@ const Navigation = ({ mode, setMode }) => {
                 </Box>}
 
                 {/* Profile Button */}
-                {/* Logout Button */}
                 { window.localStorage.getItem('bettercred') &&
                   <>
                     {/* <Button color='secondary' component={Link} to={`/profile/${getPayload().sub}/`} sx={{ textTransform: 'none' }}>profile</Button> */}
@@ -182,15 +181,31 @@ const Navigation = ({ mode, setMode }) => {
                         </ListItem>
                       )
                     })}
-                    <Switch 
-                      checked={switchStatus}
-                      onChange={handleModeChange}
-                      value={mode}
-                      color='secondary'
-                      icon={<LightModeRoundedIcon sx={{ bgcolor: '#000', borderRadius: 5, p: .5 }} />}
-                      checkedIcon={<DarkModeRoundedIcon sx={{ bgcolor: '#fff', borderRadius: 5, p: .5 }} />}
-                      sx={{ ml: 2.5, mt: .85 }}
-                    />
+                    <ListItem>
+                      <Switch 
+                        checked={switchStatus}
+                        onChange={handleModeChange}
+                        value={mode}
+                        color='secondary'
+                        icon={<LightModeRoundedIcon sx={{ bgcolor: '#000', borderRadius: 5, p: .5 }} />}
+                        checkedIcon={<DarkModeRoundedIcon sx={{ bgcolor: '#fff', borderRadius: 5, p: .5 }} />}
+                        sx={{ ml: 2.5, mt: .85 }}
+                      />
+                    </ListItem>
+                    {/* Profile Menu */}
+                    <ListItem>
+                      { window.localStorage.getItem('bettercred') &&
+                        <>
+                          {/* <Button color='secondary' component={Link} to={`/profile/${getPayload().sub}/`} sx={{ textTransform: 'none' }}>profile</Button> */}
+                          <Button color='secondary' onClick={handleProfileClick} sx={{ textTransform: 'none' }}>profile</Button>
+                          <Menu anchorEl={profileAnchorEl} open={openProfile} onClose={handleProfileClose}>
+                            <MenuItem component={Link} to={`/profile/${getPayload().sub}/`}>Profile</MenuItem>
+                            <MenuItem onClick={handleProfileClose}>My Cards</MenuItem>
+                            <MenuItem onClick={handleLogOut}>Log Out</MenuItem>
+                          </Menu>
+                        </>
+                      }
+                    </ListItem>
                   </List>
                 </Box>
               </Drawer>

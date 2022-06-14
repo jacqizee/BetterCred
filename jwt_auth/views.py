@@ -38,7 +38,7 @@ class RegisterView(APIView):
             return Response({ 'message': user_to_register.errors }, status.HTTP_422_UNPROCESSABLE_ENTITY)
         except Exception as e:
             print("error", e)
-            return Response({ 'message': str(e) }, status.HTTP_422_UNPROCESSABLE_ENTITY)
+            return Response(e.args[0], status.HTTP_422_UNPROCESSABLE_ENTITY)
 
 # Endpoint: /login/
 # Methods: POST
@@ -131,7 +131,7 @@ class ProfileView(APIView):
             deserialized_user.save()
             return Response(deserialized_user.data, status.HTTP_202_ACCEPTED)
         except Exception as e:
-            return Response( e.args[0] , status.HTTP_422_UNPROCESSABLE_ENTITY)
+            return Response(e.args[0], status.HTTP_422_UNPROCESSABLE_ENTITY)
 
     # DELETE - Delete user profile
     def delete(self, request, pk):

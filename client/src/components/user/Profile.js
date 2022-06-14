@@ -99,41 +99,54 @@ const Profile = () => {
         <Box id='profile-settings' component='form' onSubmit={handleSubmit}
           sx={{ width: '75%', display: 'flex', flexDirection: 'column', mx: { sm: 5, md: 10 }, bgcolor: 'background.paper', p: 5 }}>
           <Typography variant='h5' sx={{ color: 'primary.contrastText' }}>Edit Profile</Typography>
-          <Typography variant='body1' sx={{ color: 'primary.contrastText', mb: 2 }}>Update your profile settings</Typography>
+          <Typography variant='body1' sx={{ color: 'primary.contrastText', mb: 1 }}>Update your profile settings</Typography>
+          
           <TextField className='username'
             name='username'
             value={profileDetails.username} label='Username'
             variant='standard'
-            onChange={handleChange} />
+            onChange={handleChange}
+            sx={{ mt: 1 }} />
+
           <TextField className='firstName'
             name='first_name'
             value={profileDetails.first_name} label='First Name'
             variant='standard'
-            onChange={handleChange} />
+            onChange={handleChange}
+            sx={{ mt: 1 }} />
+
           <TextField className='lastName'
             name='last_name'
             value={profileDetails.last_name} label='Last Name'
             variant='standard'
-            onChange={handleChange} />
+            onChange={handleChange}
+            sx={{ mt: 1 }} />
+
           <TextField className='email'
             type='email'
             name='email'
             value={profileDetails.email} label='Email'
             variant='standard'
-            onChange={handleChange} />
+            onChange={handleChange}
+            sx={{ mt: 1 }} />
+
           <TextField className='password'
             type='password'
             name='password'
             value={profileDetails.password} label='Password'
             variant='standard'
-            onChange={handleChange} />
+            onChange={handleChange}
+            sx={{ mt: 1 }} />
+
           <TextField className='passwordConfirmation'
             type='password'
             name='password_confirmation'
             value={profileDetails.password_confirmation}
             label='Password Confirmation'
             variant='standard'
-            onChange={handleChange} />
+            onChange={handleChange}
+            sx={{ mt: 1 }} />
+
           {/* Submit Button */}
           { !submitted ?
             <Button type='submit' color='primary' variant='outlined' sx={{ mt: 3 }}>Edit</Button> :

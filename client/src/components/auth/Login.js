@@ -20,6 +20,8 @@ import { loginModalStyle } from '../styles/Styling'
 
 const Login = ({ loginOpen, setLoginOpen, joinOpen, setJoinOpen }) => {
 
+  const [ formErrors, setFormErrors ] = useState(false)
+
   // Handle Modal Open and Close
   const handleOpen = () => setLoginOpen(true)
   const handleClose = () => setLoginOpen(false)
@@ -27,20 +29,24 @@ const Login = ({ loginOpen, setLoginOpen, joinOpen, setJoinOpen }) => {
   // State of Modal Submit Button
   const [ loggedIn, setLoggedIn ] = useState(false)
 
+  // Form Data State
   const [ formData, setFormData ] = useState({
     username: '',
     password: '',
   })
 
+  // Swap from Login Modal to Join Modal
   const handleSwap = (e) => {
     setLoginOpen(false)
     setJoinOpen(true)
   }
 
+  // Handle Form Change
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
+  // Handle Form Submit
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
@@ -53,7 +59,8 @@ const Login = ({ loginOpen, setLoginOpen, joinOpen, setJoinOpen }) => {
       })
       setLoginOpen(false)
     } catch (error) {
-      console.log(error.response.data.message.error)
+      console.log(error.response)
+      setFormErrors(error.response.data.detail)
     }
   }
 
@@ -76,11 +83,27 @@ const Login = ({ loginOpen, setLoginOpen, joinOpen, setJoinOpen }) => {
           </Typography>
           <Grid container spacing={2} component='form' onSubmit={handleSubmit} sx={{ width: '85%', pt: 3, pb: 2 }}>
             <Grid item xs={12}>
-              <TextField className='username' name='username' label='Username' variant='filled' value={formData.username} onChange={handleChange} fullWidth />
+              <TextField className='username'
+                name='username'
+                label='Username'
+                variant='filled'
+                error={formErrors}
+                value={formData.username} onChange={handleChange} fullWidth />
             </Grid>
             <Grid item xs={12}>
-              <TextField type='password' className='password' name='password' label='Password' variant='filled' value={formData.password} onChange={handleChange} fullWidth />
+              <TextField className='password'
+                type='password'
+                name='password'
+                label='Password'
+                variant='filled'
+                error={formErrors}
+                value={formData.password} onChange={handleChange} fullWidth />
             </Grid>
+            { formErrors && 
+              <Grid item xs={12} sx={{ textAlign: 'center' }}>
+                <Typography variant='body2' sx={{ color: 'red' }}>The username or password you entered is incorrect.</Typography>
+              </Grid>
+            }
             <Grid item xs={12} sx={{ textAlign: 'center' }}>
               { !loggedIn ?
                 <Button type='submit' variant='contained' sx={{ mt: 2 }}>Submit</Button> : 
