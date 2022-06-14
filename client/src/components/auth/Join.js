@@ -67,6 +67,7 @@ const Join = ({ loginOpen, setLoginOpen, joinOpen, setJoinOpen }) => {
         profile_picture: '',
       })
       setJoinOpen(false)
+      setLoginOpen(true)
     } catch (error) {
       console.log(error.response.data.message)
       setFormErrors(error.response.data.message)
@@ -90,7 +91,7 @@ const Join = ({ loginOpen, setLoginOpen, joinOpen, setJoinOpen }) => {
           </IconButton>
 
           {/* Lock Icon */}
-          <LockRoundedIcon sx={{ boxShadow: 1, p: 1, borderRadius: 10, height: '2rem', width: '2rem', mb: 2 }} />
+          <LockRoundedIcon sx={{ color: 'primary.contrastText', bgcolor: 'background.default', p: 1, height: '2.5rem', width: '2.5rem', borderRadius: 10 }} />
 
           {/* Heading */}
           <Typography id="modal-modal-title" variant="h6" component="h2" sx={{ color: 'primary.contrastText' }}>

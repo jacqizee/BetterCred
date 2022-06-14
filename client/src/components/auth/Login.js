@@ -81,7 +81,7 @@ const Login = ({ loginOpen, setLoginOpen, joinOpen, setJoinOpen }) => {
           </IconButton>
 
           {/* Lock Icon */}
-          <IconButton><LockRoundedIcon /></IconButton>
+          <LockRoundedIcon sx={{ color: 'primary.contrastText', bgcolor: 'background.default', p: 1, height: '2.5rem', width: '2.5rem', borderRadius: 10 }} />
 
           {/* Heading */}
           <Typography id="modal-modal-title" variant="h6" component="h2" sx={{ color: 'primary.contrastText' }}>
