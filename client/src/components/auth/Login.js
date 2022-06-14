@@ -66,6 +66,7 @@ const Login = ({ loginOpen, setLoginOpen, joinOpen, setJoinOpen }) => {
 
   return (
     <Box>
+      {/* Login Button */}
       <Button color='secondary' variant='outlined' onClick={handleOpen} sx={{ textTransform: 'none', mr: 1 }}>login</Button>
       <Modal
         open={loginOpen}
@@ -74,22 +75,34 @@ const Login = ({ loginOpen, setLoginOpen, joinOpen, setJoinOpen }) => {
         aria-describedby="modal with login form"
       >
         <Box sx={loginModalStyle}>
+          {/* Close Icon */}
           <IconButton onClick={handleClose} sx={{ position: 'fixed', right: '2.25rem', top: '1.25rem' }} >
             <CloseIcon />
           </IconButton>
+
+          {/* Lock Icon */}
           <IconButton><LockRoundedIcon /></IconButton>
+
+          {/* Heading */}
           <Typography id="modal-modal-title" variant="h6" component="h2" sx={{ color: 'primary.contrastText' }}>
             Login to BetterCred
           </Typography>
+
+          {/* Login Form */}
           <Grid container spacing={2} component='form' onSubmit={handleSubmit} sx={{ width: '85%', pt: 3, pb: 2 }}>
+            {/* Username */}
             <Grid item xs={12}>
               <TextField className='username'
                 name='username'
                 label='Username'
                 variant='filled'
                 error={formErrors}
-                value={formData.username} onChange={handleChange} fullWidth />
+                value={formData.username}
+                onChange={handleChange}
+                fullWidth />
             </Grid>
+
+            {/* Password */}
             <Grid item xs={12}>
               <TextField className='password'
                 type='password'
@@ -97,13 +110,19 @@ const Login = ({ loginOpen, setLoginOpen, joinOpen, setJoinOpen }) => {
                 label='Password'
                 variant='filled'
                 error={formErrors}
-                value={formData.password} onChange={handleChange} fullWidth />
+                value={formData.password}
+                onChange={handleChange}
+                fullWidth />
             </Grid>
+
+            {/* Form Errors - if errors are returned */}
             { formErrors && 
               <Grid item xs={12} sx={{ textAlign: 'center' }}>
                 <Typography variant='body2' sx={{ color: 'red' }}>The username or password you entered is incorrect.</Typography>
               </Grid>
             }
+
+            {/* Submit Buttons */}
             <Grid item xs={12} sx={{ textAlign: 'center' }}>
               { !loggedIn ?
                 <Button type='submit' variant='contained' sx={{ mt: 2 }}>Submit</Button> : 
@@ -111,6 +130,8 @@ const Login = ({ loginOpen, setLoginOpen, joinOpen, setJoinOpen }) => {
               }
             </Grid>
           </Grid>
+
+          {/* Modal Swap */}
           <Typography>Need an account? <Link onClick={handleSwap} underline='hover' sx={{ '&:hover': { cursor: 'pointer' } }}>Join</Link></Typography>
         </Box>
       </Modal>
