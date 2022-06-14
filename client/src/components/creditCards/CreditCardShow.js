@@ -38,8 +38,9 @@ const CreditCardShow = () => {
   const [ loading, setLoading ] = useState(true)
   const [ errors, setErrors ] = useState(false)
 
-  // Get Token
+  // Auth Helpers
   const token = getLocalToken()
+  const payload = getPayload()
 
   // Get Card Data
   useEffect(() => {
@@ -51,9 +52,11 @@ const CreditCardShow = () => {
           },
         })
         setCardData(data)
+        if (data.users.length > 0) {
+          data.users.forEach(user => user.id === payload.sub && setAddButtonText('Remove from Wallet'))
+        }
         console.log(data)
       } catch (error) {
-        console.log(error)
         console.log(error.response.data.detail)
         setErrors(true)
       }
@@ -81,9 +84,9 @@ const CreditCardShow = () => {
   }
 
   // Add Card to User Wallet
-  const handleAddCard = async () => {
-    const payload = getPayload()
-    try {
+  const handleWalletButton = async () => {
+    
+    const addWalletCard = async () => {
       await axios.post(`/api/auth/profile/${payload.sub}/wallet/`, {
         cardId: cardId,
       }, {
@@ -91,8 +94,26 @@ const CreditCardShow = () => {
           'Authorization': `Bearer ${token}`,
         },
       })
+      setAddButtonText('Remove from Wallet')
+    }
+
+    const deleteWalletCard = async () => {
+      await axios.delete(`/api/auth/profile/${payload.sub}/wallet/`, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+        data: {
+          cardId: cardId,
+        },
+      })
+      setAddButtonText('Add to Wallet')
+    }
+
+    try {
+      addButtonText === 'Add to Wallet' ? addWalletCard() : deleteWalletCard()
     } catch (error) {
       console.log(error)
+      console.log(error.response)
     }
   }
   
@@ -108,7 +129,7 @@ const CreditCardShow = () => {
             <Box component='img' src={cardData.image} alt={`image of ${cardData.name} card`} sx={{ my: 3, height: '12rem', objectFit: 'contain', maxWidth: '100%' }} />
             
             {/* Add to Wallet Button */}
-            <Button color='secondary' variant='contained' onClick={handleAddCard}>{addButtonText}</Button>
+            <Button color='secondary' variant='contained' onClick={handleWalletButton}>{addButtonText}</Button>
             
             {/* Link to Issuer Site */}
             <Typography
