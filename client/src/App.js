@@ -4,7 +4,7 @@ import Home from './components/Home'
 import NavBar from './components/common/NavBar'
 import CreditCards from './components/CreditCards'
 import CreditCardShow from './components/CreditCardShow'
-import Profile from './components/Profile'
+import Profile from './components/user/Profile'
 import NotFound from './components/utilities/NotFound'
 
 import theme from './components/styles/Theme'

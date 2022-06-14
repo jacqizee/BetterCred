@@ -8,3 +8,8 @@ export const getPayload = () => {
   const payload = token.split('.')[1]
   return JSON.parse(atob(payload))
 }
+
+export const userIsOwner = () => {
+  const payload = getPayload()
+  console.log(payload)
+}

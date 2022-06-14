@@ -110,7 +110,7 @@ class ProfileView(APIView):
         user_to_get = self.get_user(pk, request.user.id)
 
         # Serialize User if returned
-        serialized_user = PopulatedUserSerializer(user_to_get)
+        serialized_user = UserSerializer(user_to_get)
 
         # Return User
         return Response(serialized_user.data)

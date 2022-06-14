@@ -6,6 +6,9 @@ import axios from 'axios'
 import Error from './utilities/Error.js'
 import Loading from './utilities/Loading.js'
 
+// Helper Functions
+import { getLocalToken } from './helpers/auth'
+
 // MUI Components
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
@@ -32,12 +35,15 @@ const CreditCardShow = () => {
   const [ loading, setLoading ] = useState(true)
   const [ errors, setErrors ] = useState(false)
 
+  const token = getLocalToken()
+
+  // Get Card Data
   useEffect(() => {
     const getCard = async () => {
       try {
         const { data } = await axios.get(`/api/credit/${cardId}/`, {
           headers: {
-            'Authorization': `Bearer ${window.localStorage.getItem('bettercred')}`,
+            'Authorization': `Bearer ${token}`,
           },
         })
         setCardData(data)

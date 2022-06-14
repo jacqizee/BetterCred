@@ -29,6 +29,7 @@ const CreditCards = () => {
   const [ error, setError ] = useState(false)
   const [ cards, setCards ] = useState(null)
 
+  // Get Card Data
   useEffect(() => {
     const getCards = async () => {
       try {
