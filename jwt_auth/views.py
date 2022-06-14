@@ -131,7 +131,7 @@ class ProfileView(APIView):
             deserialized_user.save()
             return Response(deserialized_user.data, status.HTTP_202_ACCEPTED)
         except Exception as e:
-            return Response({ 'error': str(e) }, status.HTTP_422_UNPROCESSABLE_ENTITY)
+            return Response( e.args[0] , status.HTTP_422_UNPROCESSABLE_ENTITY)
 
     # DELETE - Delete user profile
     def delete(self, request, pk):

@@ -9,7 +9,7 @@ export const getPayload = () => {
   return JSON.parse(atob(payload))
 }
 
-export const userIsOwner = () => {
+export const confirmUser = (userId) => {
   const payload = getPayload()
-  console.log(payload)
+  return payload.sub === parseInt(userId)
 }

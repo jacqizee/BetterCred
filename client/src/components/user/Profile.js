@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 
 // Helper Functions
-import { getPayload, getLocalToken, userIsOwner } from '../helpers/auth.js'
+import { getPayload, getLocalToken, confirmUser } from '../helpers/auth.js'
 
 // Components
 import Loading from '../utilities/Loading'
@@ -27,6 +27,7 @@ const Profile = () => {
 
   const [ loading, setLoading ] = useState(true)
   const [ error, setError ] = useState(false)
+  const [ submitted, setSubmitted ] = useState(false)
 
   const [ profileDetails, setProfileDetails ] = useState({
     password: '',
@@ -37,8 +38,10 @@ const Profile = () => {
   const token = getLocalToken()
  
   useEffect(() => {
-    // Confirm User is Owner
-    
+    // Confirm User is Logged In + Owner
+    if (!confirmUser(userId)) {
+      nav('/cards')
+    }
     
     // Get Profile Details
     const getProfileDetails = async () => {
@@ -65,14 +68,18 @@ const Profile = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    console.log(profileDetails)
+    console.log(token)
     try {
-      await axios.put(`/api/auth/profile/${userId}`, {
+      const { data } = await axios.put(`/api/auth/profile/${userId}`, profileDetails, {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
       })
+      setSubmitted(true)
     } catch (error) {
       console.log(error)
+      console.log(error.response)
     }
   }
 
@@ -128,7 +135,10 @@ const Profile = () => {
             variant='standard'
             onChange={handleChange} />
           {/* Submit Button */}
-          <Button type='submit' color='primary' variant='outlined' sx={{ mt: 3 }}>Edit</Button>
+          { !submitted ?
+            <Button type='submit' color='primary' variant='outlined' sx={{ mt: 3 }}>Edit</Button> :
+            <Button type='submit' color='success' variant='outlined' sx={{ mt: 3 }} disabled>Submitted!</Button>
+          }
         </Box>
       }
     </Box>
