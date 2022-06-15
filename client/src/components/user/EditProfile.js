@@ -118,7 +118,7 @@ const Profile = () => {
   }
 
   return (
-    <Box sx={{ display: 'flex', p: 5, bgcolor: 'background.default', justifyContent: 'center', height: '100vh' }}>
+    <Box sx={{ display: 'flex', p: { xs: 3, md: 5 }, bgcolor: 'background.default', justifyContent: 'center', height: '100vh' }}>
       {/* Profile Menu */}
       <Box id='profile-menu'
         sx={{ width: '25%', maxWidth: '350px' }}>
@@ -136,7 +136,7 @@ const Profile = () => {
         <Box id='profile-settings'
           component='form'
           onSubmit={handleSubmit}
-          sx={{ width: '75%', maxWidth: '850px', display: 'flex', flexDirection: 'column', mx: { sm: 5, md: 7 }, bgcolor: 'background.paper', p: 5, height: 'fit-content' }}>
+          sx={{ width: '75%', maxWidth: '850px', display: 'flex', flexDirection: 'column', ml: { xs: 3, md: 3.5 }, bgcolor: 'background.paper', p: 5, height: 'fit-content' }}>
           
           {/* Heading and Subheading */}
           <Typography variant='h5' sx={{ color: 'primary.contrastText' }}>Edit Profile</Typography>
@@ -192,6 +192,7 @@ const Profile = () => {
             onChange={handleChange}
             error={Boolean(formErrors.password)}
             helperText={formErrors.password}
+            required
             sx={{ mt: 1 }} />
 
           {/* Password Confirmation */}
@@ -204,6 +205,7 @@ const Profile = () => {
             onChange={handleChange}
             error={Boolean(formErrors.password_confirmation)}
             helperText={formErrors.password_confirmation}
+            required
             sx={{ mt: 1 }} />
 
           {/* Error Field - if error is returned */}
@@ -218,8 +220,8 @@ const Profile = () => {
           }
 
           {/* Delete Account Option */}
-          <Box sx={{ width: '100%', textAlign: 'center', mt: .5 }}>
-            <Typography variant='caption' onClick={confirmDelete} sx={{ color: 'red', '&:hover': { textDecoration: 'underline', cursor: 'pointer' } }}>{deleteText}</Typography>
+          <Box sx={{ width: '100%', textAlign: 'center', mt: .75 }}>
+            <Typography variant='caption' onClick={confirmDelete} sx={{ color: 'crimson', '&:hover': { textDecoration: 'underline', cursor: 'pointer' } }}>{deleteText}</Typography>
           </Box>
         </Box>
       }

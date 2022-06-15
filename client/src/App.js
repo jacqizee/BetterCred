@@ -4,7 +4,7 @@ import Home from './components/Home'
 import NavBar from './components/common/NavBar'
 import CreditCards from './components/creditCards/CreditCards'
 import CreditCardShow from './components/creditCards/CreditCardShow'
-import Profile from './components/user/Profile'
+import EditProfile from './components/user/EditProfile'
 import NotFound from './components/utilities/NotFound'
 
 import theme from './components/styles/Theme'
@@ -22,8 +22,8 @@ const App = () => {
           <Route path='/' element={<Home />} />
           <Route path='/cards' element={<CreditCards />} />
           <Route path='/cards/:cardId' element={<CreditCardShow />} />
-          <Route path='/profile/:userId' element={<Profile />} />
-          {/* <Route path='*' element={<NotFound />} /> */}
+          <Route path='/profile/:userId' element={<EditProfile />} />
+          <Route path='*' element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

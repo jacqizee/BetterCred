@@ -72,7 +72,7 @@ const CreditCards = () => {
                         <Typography variant='body1' sx={{ lineHeight: 1.25, mb: .5 }}>Credit Score</Typography>
                         { creditRangeIcon(card.credit_range) }
                       </Box>
-                      <Divider orientation="vertical" flexItem></Divider>
+                      <Divider orientation="vertical" flexItem />
 
                       {/* Annual Fee */}
                       <Box sx={{ textAlign: 'center' }}>
@@ -80,7 +80,7 @@ const CreditCards = () => {
                         <Typography variant='subtitle1'>${card.annual_fee}</Typography>
                       </Box>
                     </Box>
-                    <Divider orientation="horizontal" flexItem></Divider>
+                    <Divider orientation="horizontal" flexItem />
 
                     {/* Rewards On */}
                     <Box sx={{ textAlign: 'center', mt: 1 }}>

@@ -123,13 +123,21 @@ const CreditCardShow = () => {
   return (
     <>
       { loading ? <Loading /> : errors ? <Error /> :
-        <Box sx={{ height: 'fit-content', width: '100vw', bgcolor: 'background.default', py: 5, display: 'flex', flexDirection: { xs: 'column', md: 'row' }, alignItems: 'center' }}>
+        <Box sx={{ minHeight: '100vh',
+          height: 'fit-content',
+          width: '100vw',
+          bgcolor: 'background.default',
+          display: 'flex',
+          flexDirection: { xs: 'column', md: 'row' },
+          alignItems: { xs: 'center', md: 'flex-start' },
+          pt: 10,
+        }}>
           <Box id='card-tile'
             sx={{ ...flexCentered, bgcolor: 'background.paper', borderRadius: 15, width: { xs: '85vw', md: '28vw' }, mx: 3, height: 'fit-content' }}>
             {/* Card Name */}
             <Typography
               variant='h6'
-              sx={{ mt: 6, py: 1, width: '100%', textAlign: 'center', bgcolor: 'primary.main', color: 'primary.contrastText' }}>{cardData.name}</Typography>
+              sx={{ mt: 7, py: 1, width: '100%', textAlign: 'center', bgcolor: 'primary.main', color: 'primary.contrastText' }}>{cardData.name}</Typography>
 
             {/* Card Image */}
             <Box
@@ -167,13 +175,13 @@ const CreditCardShow = () => {
               {/* Credit Score */}
               <Box sx={{ textAlign: 'center', m: 1 }}>
                 <Typography variant='body1'>Credit Score</Typography>
-                <Typography variant='subtitle1'>{creditRangeIcon(cardData.credit_range)}</Typography>
+                <Typography variant='subtitle1' sx={{ mt: .35 }}>{creditRangeIcon(cardData.credit_range)}</Typography>
               </Box>
 
               <Divider orientation="vertical" variant="middle" flexItem />
-
+          
               {/* Rewards On */}
-              <Box sx={{ textAlign: 'center', m: 1 }}>
+              {/* <Box sx={{ textAlign: 'center', m: 1 }}>
                 <Typography variant='body1'>Reward Categories</Typography>
                 <Typography variant='subtitle1'>
                   <Box sx={{ display: 'flex' }}>
@@ -182,15 +190,20 @@ const CreditCardShow = () => {
                       <Box><Icon sx={ iconStyle }><HorizontalRuleRoundedIcon sx={{ p: .5 }} /></Icon></Box> }
                   </Box>
                 </Typography>
-              </Box>
-
-              <Divider orientation="vertical" variant="middle" sx={{ display: { xs: 'none', sm: 'block' } }} flexItem />
-              <Divider inset='li' sx={{ display: { xs: 'block', sm: 'none' } }} />
+              </Box> */}
 
               {/* Annual Fee */}
               <Box sx={{ textAlign: 'center', m: 1 }}>
                 <Typography variant='body1'>Annual Fee</Typography>
                 <Typography variant='subtitle1'>${cardData.annual_fee}</Typography>
+              </Box>
+
+              <Divider orientation="vertical" variant="middle" flexItem />
+
+              {/* Foreign Transaction Fee */}
+              <Box sx={{ textAlign: 'center', m: 1 }}>
+                <Typography variant='body1'>Foreign Transaction Fee</Typography>
+                <Typography variant='subtitle1'>{cardData.foreign_fee}%</Typography>
               </Box>
 
               <Divider orientation="vertical" variant="middle" flexItem />
@@ -212,7 +225,7 @@ const CreditCardShow = () => {
                   </List>
                 </Box>
 
-                <Box sx={{ width: { xs: '95%', md: '50%' }, mx: { xs: 1, md: 2 } }}>
+                <Box sx={{ width: { xs: '95%', md: '50%' }, mx: { xs: 1, md: 2 }, mt: { xs: 2, md: 0 } }}>
                   <Typography variant='h6'>Cons</Typography>
                   <List sx={{ bgcolor: 'background.paperContrast' }}>
                     { displayFeatures('con') }
