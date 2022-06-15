@@ -12,7 +12,11 @@ const theme = (mode) => ({
       },
       background: {
         default: '#f1f1f1',
+        defaultContrast: 'rgba(48, 48, 48, 0.50)',
+        defaultMoreContrast: 'rgba(48, 48, 48, 0.25)',
         paper: '#ffffff',
+        paperContrast: 'rgba(0, 0, 0, 0.10)',
+        paperMoreContrast: 'rgba(0, 0, 0, 0.15)',
       },
     } : {
       primary: {
@@ -25,7 +29,11 @@ const theme = (mode) => ({
       },
       background: {
         default: '#303030',
+        defaultContrast: 'rgba(48, 48, 48, 0.50)',
+        defaultMoreContrast: 'rgba(48, 48, 48, 0.25)',
         paper: '#424242',
+        paperContrast: 'rgba(256, 256, 256, 0.15)',
+        paperMoreContrast: 'rgba(256, 256, 256, 0.25)',
       },
     },
   },

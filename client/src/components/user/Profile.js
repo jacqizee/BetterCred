@@ -112,6 +112,7 @@ const Profile = () => {
       }
     }
 
+  
     // If user confirms, execute delete function
     deleteText === 'Delete Account' ? setDeleteText('Are you sure you want to delete?') : handleDelete()
   }

@@ -22,8 +22,10 @@ import Icon from '@mui/material/Icon'
 import Grid from '@mui/material/Grid'
 
 // Icons
+import { creditRangeIcon, rewardIcon, iconStyle } from '../styles/Icons'
 import ThumbUpRoundedIcon from '@mui/icons-material/ThumbUpRounded'
 import ThumbDownRoundedIcon from '@mui/icons-material/ThumbDownRounded'
+import HorizontalRuleRoundedIcon from '@mui/icons-material/HorizontalRuleRounded'
 
 // Styling
 import { flexCentered } from '../styles/Styling'
@@ -75,7 +77,7 @@ const CreditCardShow = () => {
             <ListItemIcon>
               { type === 'pro' ? <ThumbUpRoundedIcon sx={{ color: 'green' }} /> : <ThumbDownRoundedIcon sx={{ color: 'darkred' }} /> }
             </ListItemIcon>
-            <ListItemText primary={cardData[`${type}_${i}`]} />
+            <ListItemText primary={cardData[`${type}_${i}`]} primaryTypographyProps={{ variant: 'body2' }} />
           </ListItem>
         )
       }
@@ -112,54 +114,105 @@ const CreditCardShow = () => {
     try {
       addButtonText === 'Add to Wallet' ? addWalletCard() : deleteWalletCard()
     } catch (error) {
-      console.log(error)
       console.log(error.response)
     }
   }
   
   return (
-    <Box>
+    <>
       { loading ? <Loading /> : errors ? <Error /> :
-        <Grid container sx={{ mt: 5 }}>
-          <Grid item xs={12} md={4} sx={{ ...flexCentered, bgcolor: 'background.default', borderRadius: 15, my: 5 }}>
+        <Box sx={{ height: '100vh', width: '100vw', bgcolor: 'background.default', py: 5, display: 'flex', flexDirection: { xs: 'column', md: 'row' }, alignItems: 'center' }}>
+          <Box id='card-tile'
+            sx={{ ...flexCentered, bgcolor: 'background.paper', borderRadius: 15, width: { xs: '85vw', md: '28vw' }, mx: 3, height: 'fit-content' }}>
             {/* Card Name */}
-            <Typography variant='h6' sx={{ color: 'primary.contrastText', width: '100%', textAlign: 'center', mt: 3 }}>{cardData.name}</Typography>
-            
+            <Typography
+              variant='h6'
+              sx={{ mt: 6, py: 1, width: '100%', textAlign: 'center', bgcolor: 'primary.main', color: 'primary.contrastText' }}>{cardData.name}</Typography>
+
             {/* Card Image */}
-            <Box component='img' src={cardData.image} alt={`image of ${cardData.name} card`} sx={{ my: 3, height: '12rem', objectFit: 'contain', maxWidth: '100%' }} />
-            
+            <Box
+              component='img'
+              src={cardData.image}
+              alt={`image of ${cardData.name} card`}
+              sx={{ my: 3, height: '12rem', objectFit: 'contain', maxWidth: '90%' }} />
+                        
             {/* Add to Wallet Button */}
-            <Button color='secondary' variant='contained' onClick={handleWalletButton}>{addButtonText}</Button>
-            
+            <Button
+              color='secondary'
+              variant='contained'
+              onClick={handleWalletButton}>{addButtonText}</Button>
+                        
             {/* Link to Issuer Site */}
             <Typography
               component='a'
               variant='caption'
               href={cardData.link}
               target='__blank__'
-              sx={{ mt: 1, mb: 3 }}>Head to Issuer Site</Typography>
-          </Grid>
-          <Grid item xs={12} md={8} sx={{ ...flexCentered, bgcolor: 'blue', borderRadius: 15 }}>
-            
-            {/* Inner Box */}
-            <Box sx={{ height: '65%', width: '100%', bgcolor: 'primary.main', m: 0 }}>
-              <Grid container spacing={2} sx={{ width: '100%' }}>
-                <Grid item xs={6}>
+              sx={{ mt: 1, mb: 6, color: 'primary.contrastText' }}>Head to Issuer Site</Typography>
+          </Box>
+          <Box id='main-section' sx={{ borderRadius: 15, bgcolor: 'background.paper', width: { xs: '85vw', md: '72vw' }, p: 3, mt: { xs: 3, md: 0 }, mr: { xs: 0, md: 3 } }}>
+            {/* Card Details */}
+            <Box id='card-details' sx={{ display: 'flex', bgcolor: 'background.paperContrast', color: 'primary.contrastText', justifyContent: 'space-evenly' }}>
+              
+              {/* Credit Score */}
+              <Box sx={{ textAlign: 'center' }}>
+                <Typography variant='body1'>Credit Score</Typography>
+                <Typography variant='subtitle1'>{creditRangeIcon(cardData.credit_range)}</Typography>
+              </Box>
+
+              <Divider orientation="vertical" variant="middle" flexItem></Divider>
+
+              {/* Rewards On */}
+              <Box sx={{ textAlign: 'center' }}>
+                <Typography variant='body1'>Reward Categories</Typography>
+                <Typography variant='subtitle1'>
+                  { cardData.cash_back_category.length ?
+                    cardData.cash_back_category.map((index, category) => <Box key={index}>{rewardIcon(category)}</Box>) :
+                    <Box><Icon sx={ iconStyle }><HorizontalRuleRoundedIcon sx={{ p: .5 }} /></Icon></Box> }
+                </Typography>
+              </Box>
+
+              <Divider orientation="vertical" variant="middle" flexItem></Divider>
+
+              {/* Annual Fee */}
+              <Box sx={{ textAlign: 'center' }}>
+                <Typography variant='body1'>Annual Fee</Typography>
+                <Typography variant='subtitle1'>${cardData.annual_fee}</Typography>
+              </Box>
+
+              <Divider orientation="vertical" variant="middle" flexItem></Divider>
+
+              {/* Regular APR */}
+              <Box sx={{ textAlign: 'center' }}>
+                <Typography variant='body1'>Regular APY</Typography>
+                <Typography variant='subtitle1'>{cardData['regular_APR_min']} - {cardData['regular_APR_max']}%</Typography>
+              </Box>
+            </Box>
+
+            {/* Pros and Cons */}
+            <Box id='pros-cons' sx={{ p: 2 }}>
+              <Box sx={{ width: '100%', display: 'flex', justifyContent: 'space-evenly' }}>
+                <Box sx={{ width: '50%', mx: 3 }}>
                   <Typography variant='h6' >Pros</Typography>
                   <List>
                     { displayFeatures('pro') }
                   </List>
-                </Grid>
-                <Grid item xs={6}>
+                </Box>
+
+                <Divider orientation="vertical" variant="middle" flexItem></Divider>
+
+                <Box sx={{ width: '50%', mx: 3 }}>
                   <Typography variant='h6'>Cons</Typography>
-                  { displayFeatures('con') }
-                </Grid>
-              </Grid>
+                  <List>
+                    { displayFeatures('con') }
+                  </List>
+                </Box>
+              </Box>
             </Box>
-          </Grid>
-        </Grid>
+          </Box>
+        </Box>
       }
-    </Box>
+    </>
     
   )
 }
