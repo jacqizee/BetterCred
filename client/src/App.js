@@ -4,7 +4,7 @@ import Home from './components/Home'
 import NavBar from './components/common/NavBar'
 import CreditCards from './components/creditCards/CreditCards'
 import CreditCardShow from './components/creditCards/CreditCardShow'
-import EditProfile from './components/user/EditProfile'
+import Profile from './components/user/Profile'
 import NotFound from './components/utilities/NotFound'
 
 import theme from './components/styles/Theme'
@@ -19,10 +19,10 @@ const App = () => {
       <BrowserRouter>
         <NavBar mode={mode} setMode={setMode} />
         <Routes>
-          <Route path='/' element={<Home />} />
+          <Route path='/' element={<Home mode={mode} />} />
           <Route path='/cards' element={<CreditCards />} />
           <Route path='/cards/:cardId' element={<CreditCardShow />} />
-          <Route path='/profile/:userId' element={<EditProfile />} />
+          <Route path='/profile/:userId' element={<Profile />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
       </BrowserRouter>

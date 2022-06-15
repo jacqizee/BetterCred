@@ -4,10 +4,12 @@ const theme = (mode) => ({
     ...( mode === 'light') ? {
       primary: {
         main: '#1e88e5',
+        shadow: '#b8d7f2',
         contrastText: '#000',
       },
       secondary: {
         main: '#ffeb3b',
+        shadow: '#f7efa6',
         contrastText: '#000',
       },
       background: {
@@ -21,10 +23,12 @@ const theme = (mode) => ({
     } : {
       primary: {
         main: '#1a237e',
+        shadow: '#000',
         contrastText: '#fff',
       },
       secondary: {
         main: '#fdd835',
+        shadow: '#ffd000',
         contrastText: '#000',
       },
       background: {
