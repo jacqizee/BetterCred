@@ -15,11 +15,11 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
-import ListItemIcon from '@mui/material/ListItemIcon'
+import ListItemAvatar from '@mui/material/ListItemAvatar'
+import Avatar from '@mui/material/Avatar'
 import ListItemText from '@mui/material/ListItemText'
 import Divider from '@mui/material/Divider'
 import Icon from '@mui/material/Icon'
-import Grid from '@mui/material/Grid'
 
 // Icons
 import { creditRangeIcon, rewardIcon, iconStyle } from '../styles/Icons'
@@ -74,9 +74,11 @@ const CreditCardShow = () => {
       if (cardData[`${type}_${i}`]){
         elements.push(
           <ListItem key={i}>
-            <ListItemIcon>
-              { type === 'pro' ? <ThumbUpRoundedIcon sx={{ color: 'green' }} /> : <ThumbDownRoundedIcon sx={{ color: 'darkred' }} /> }
-            </ListItemIcon>
+            <ListItemAvatar>
+              <Avatar sx={{ boxShadow: 2, bgcolor: 'background.paperContrast', width: { xs: '1.5rem', md: '3rem' }, height: { xs: '1.5rem', md: '3rem' } }}>
+                { type === 'pro' ? <ThumbUpRoundedIcon sx={{ color: 'limegreen', width: '65%' }} /> : <ThumbDownRoundedIcon sx={{ color: 'tomato', width: '65%' }} /> }
+              </Avatar>
+            </ListItemAvatar>
             <ListItemText primary={cardData[`${type}_${i}`]} primaryTypographyProps={{ variant: 'body2' }} />
           </ListItem>
         )
@@ -121,7 +123,7 @@ const CreditCardShow = () => {
   return (
     <>
       { loading ? <Loading /> : errors ? <Error /> :
-        <Box sx={{ height: '100vh', width: '100vw', bgcolor: 'background.default', py: 5, display: 'flex', flexDirection: { xs: 'column', md: 'row' }, alignItems: 'center' }}>
+        <Box sx={{ height: 'fit-content', width: '100vw', bgcolor: 'background.default', py: 5, display: 'flex', flexDirection: { xs: 'column', md: 'row' }, alignItems: 'center' }}>
           <Box id='card-tile'
             sx={{ ...flexCentered, bgcolor: 'background.paper', borderRadius: 15, width: { xs: '85vw', md: '28vw' }, mx: 3, height: 'fit-content' }}>
             {/* Card Name */}
@@ -152,58 +154,67 @@ const CreditCardShow = () => {
           </Box>
           <Box id='main-section' sx={{ borderRadius: 15, bgcolor: 'background.paper', width: { xs: '85vw', md: '72vw' }, p: 3, mt: { xs: 3, md: 0 }, mr: { xs: 0, md: 3 } }}>
             {/* Card Details */}
-            <Box id='card-details' sx={{ display: 'flex', bgcolor: 'background.paperContrast', color: 'primary.contrastText', justifyContent: 'space-evenly' }}>
+            <Box id='card-details'
+              sx={{ display: 'flex',
+                flexWrap: 'wrap',
+                bgcolor: 'background.paperContrast',
+                color: 'primary.contrastText',
+                justifyContent: 'space-evenly',
+                p: 1,
+                borderRadius: 5,
+              }}>
               
               {/* Credit Score */}
-              <Box sx={{ textAlign: 'center' }}>
+              <Box sx={{ textAlign: 'center', m: 1 }}>
                 <Typography variant='body1'>Credit Score</Typography>
                 <Typography variant='subtitle1'>{creditRangeIcon(cardData.credit_range)}</Typography>
               </Box>
 
-              <Divider orientation="vertical" variant="middle" flexItem></Divider>
+              <Divider orientation="vertical" variant="middle" flexItem />
 
               {/* Rewards On */}
-              <Box sx={{ textAlign: 'center' }}>
+              <Box sx={{ textAlign: 'center', m: 1 }}>
                 <Typography variant='body1'>Reward Categories</Typography>
                 <Typography variant='subtitle1'>
-                  { cardData.cash_back_category.length ?
-                    cardData.cash_back_category.map((index, category) => <Box key={index}>{rewardIcon(category)}</Box>) :
-                    <Box><Icon sx={ iconStyle }><HorizontalRuleRoundedIcon sx={{ p: .5 }} /></Icon></Box> }
+                  <Box sx={{ display: 'flex' }}>
+                    { cardData.cash_back_category.length ?
+                      cardData.cash_back_category.map((index, category) => <Box key={index}>{rewardIcon(category)}</Box>) :
+                      <Box><Icon sx={ iconStyle }><HorizontalRuleRoundedIcon sx={{ p: .5 }} /></Icon></Box> }
+                  </Box>
                 </Typography>
               </Box>
 
-              <Divider orientation="vertical" variant="middle" flexItem></Divider>
+              <Divider orientation="vertical" variant="middle" sx={{ display: { xs: 'none', sm: 'block' } }} flexItem />
+              <Divider inset='li' sx={{ display: { xs: 'block', sm: 'none' } }} />
 
               {/* Annual Fee */}
-              <Box sx={{ textAlign: 'center' }}>
+              <Box sx={{ textAlign: 'center', m: 1 }}>
                 <Typography variant='body1'>Annual Fee</Typography>
                 <Typography variant='subtitle1'>${cardData.annual_fee}</Typography>
               </Box>
 
-              <Divider orientation="vertical" variant="middle" flexItem></Divider>
+              <Divider orientation="vertical" variant="middle" flexItem />
 
               {/* Regular APR */}
-              <Box sx={{ textAlign: 'center' }}>
+              <Box sx={{ textAlign: 'center', m: 1 }}>
                 <Typography variant='body1'>Regular APY</Typography>
                 <Typography variant='subtitle1'>{cardData['regular_APR_min']} - {cardData['regular_APR_max']}%</Typography>
               </Box>
             </Box>
 
             {/* Pros and Cons */}
-            <Box id='pros-cons' sx={{ p: 2 }}>
-              <Box sx={{ width: '100%', display: 'flex', justifyContent: 'space-evenly' }}>
-                <Box sx={{ width: '50%', mx: 3 }}>
+            <Box id='pros-cons' sx={{ py: 2, color: 'primary.contrastText' }}>
+              <Box sx={{ width: '100%', display: 'flex', flexDirection: { xs: 'column', md: 'row' }, justifyContent: 'space-evenly' }}>
+                <Box sx={{ width: { xs: '95%', md: '50%' }, mx: { xs: 1, md: 2 } }}>
                   <Typography variant='h6' >Pros</Typography>
-                  <List>
+                  <List sx={{ bgcolor: 'background.paperContrast' }}>
                     { displayFeatures('pro') }
                   </List>
                 </Box>
 
-                <Divider orientation="vertical" variant="middle" flexItem></Divider>
-
-                <Box sx={{ width: '50%', mx: 3 }}>
+                <Box sx={{ width: { xs: '95%', md: '50%' }, mx: { xs: 1, md: 2 } }}>
                   <Typography variant='h6'>Cons</Typography>
-                  <List>
+                  <List sx={{ bgcolor: 'background.paperContrast' }}>
                     { displayFeatures('con') }
                   </List>
                 </Box>
