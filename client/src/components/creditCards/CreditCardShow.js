@@ -130,7 +130,7 @@ const CreditCardShow = () => {
           display: 'flex',
           flexDirection: { xs: 'column', md: 'row' },
           alignItems: { xs: 'center', md: 'flex-start' },
-          pt: 10,
+          py: { xs: 5, md: 10 },
         }}>
           <Box id='card-tile'
             sx={{ ...flexCentered, bgcolor: 'background.paper', borderRadius: 15, width: { xs: '85vw', md: '28vw' }, mx: 3, height: 'fit-content' }}>

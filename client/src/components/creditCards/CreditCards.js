@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 
+// Helpers
+import { getLocalToken } from '../helpers/auth'
+
 // MUI Components
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid'
@@ -11,6 +14,7 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import Divider from '@mui/material/Divider'
 import Icon from '@mui/material/Icon'
+import Tooltip from '@mui/material/Tooltip'
 
 // Error Handling
 import Error from '../utilities/Error.js'
@@ -28,6 +32,9 @@ const CreditCards = () => {
   // Error Handling
   const [ loading, setLoading ] = useState(true)
   const [ error, setError ] = useState(false)
+
+  // Token
+  const token = getLocalToken()
 
   // Cards State
   const [ cards, setCards ] = useState(null)
@@ -61,7 +68,15 @@ const CreditCards = () => {
                   <Typography variant='h6' sx={{ my: 1, py: 1, width: '100%', textAlign: 'center', bgcolor: 'primary.main' }}>{card.name}</Typography>
 
                   {/* Card Image */}
-                  <Box component={Link} to={`/cards/${card.id}`}><Box component='img' src={card.image} alt={`image of ${card.name} card`} sx={{ my: 2, height: '12rem', maxWidth: '95%', objectFit: 'contain' }} /></Box>
+                  { token ?
+                    <Box component={Link} to={`/cards/${card.id}`}>
+                      <Box component='img' src={card.image} alt={`image of ${card.name} card`} sx={{ my: 2, height: '12rem', maxWidth: '95%', objectFit: 'contain' }} />
+                    </Box> :
+                    <Tooltip title='Login to View' placement='bottom' arrow>
+                      <Box component='img' src={card.image} alt={`image of ${card.name} card`} sx={{ my: 2, height: '12rem', maxWidth: '95%', objectFit: 'contain' }} />
+                    </Tooltip>
+                  }
+                  
                   
                   {/* Card Feature Overview */}
                   <Box sx={{ display: 'flex', flexDirection: 'column', mb: 2, width: '100%', py: 1, alignItems: 'center', bgcolor: 'primary.main', px: 2 }}>
@@ -94,7 +109,12 @@ const CreditCards = () => {
                   </Box>
 
                   {/* Learn More */}
-                  <Button component={Link} to={`/cards/${card.id}`} variant='contained' color='secondary' sx={{ textTransform: 'none' }}>Learn More</Button>
+                  { token ?
+                    <Button component={Link} to={`/cards/${card.id}`} variant='contained' color='secondary' sx={{ textTransform: 'none' }}>Learn More</Button> :
+                    <Tooltip title='Login to View' placement='bottom' arrow>
+                      <Button variant='contained' color='secondary' sx={{ textTransform: 'none' }}>Learn More</Button>
+                    </Tooltip>
+                  }
                 </CardContent>
               </Card>
               
