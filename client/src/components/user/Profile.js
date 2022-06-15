@@ -9,7 +9,7 @@ import Loading from '../utilities/Loading'
 import Error from '../utilities/Error'
 
 // Helper Functions
-import { getPayload, getLocalToken, confirmUser, handleLogOut } from '../helpers/auth.js'
+import { getLocalToken, confirmUser } from '../helpers/auth.js'
 
 // MUI Components
 import Box from '@mui/material/Box'
@@ -34,6 +34,8 @@ const Profile = () => {
 
   // Menu States
   const [ currentPage, setCurrentPage ] = useState('My Profile')
+  const [ editProfileDeco, setEditProfileDeco ] = useState('none')
+  const [ myCardsDeco, setMyCardsDeco ] = useState('none')
 
   // Edit Form Details
   const [ profileDetails, setProfileDetails ] = useState({
@@ -68,10 +70,14 @@ const Profile = () => {
   const handleMenu = (e) => {
     if (e.target.innerHTML === 'My Profile') {
       setCurrentPage('My Profile')
+      setEditProfileDeco('underline')
+      setMyCardsDeco('none')
     }
 
     if (e.target.innerHTML === 'My Cards') {
       setCurrentPage('My Cards')
+      setMyCardsDeco('underline')
+      setEditProfileDeco('none')
     }
   }
 
@@ -84,15 +90,16 @@ const Profile = () => {
             sx={{ width: '25%', maxWidth: '350px' }}>
             <List sx={{ bgcolor: 'primary.main', color: 'white' }}>
               <ListItem>
-                <ListItemText onClick={handleMenu}>My Profile</ListItemText>
+                <ListItemText onClick={handleMenu} sx={{ textDecoration: editProfileDeco, '&:hover': { cursor: 'pointer' } }}>My Profile</ListItemText>
               </ListItem>
               <ListItem>
-                <ListItemText onClick={handleMenu}>My Cards</ListItemText>
+                <ListItemText onClick={handleMenu} sx={{ textDecoration: myCardsDeco, '&:hover': { cursor: 'pointer' } }}>My Cards</ListItemText>
               </ListItem>
             </List>
           </Box>
           { currentPage === 'My Profile' ? 
-            <EditProfile profileDetails={profileDetails} setProfileDetails={setProfileDetails} userId={userId} token={token} /> :
+            <EditProfile profileDetails={profileDetails} setProfileDetails={setProfileDetails} userId={userId} token={token} />
+            :
             <MyCards />
           }
         </Box>

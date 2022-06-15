@@ -41,6 +41,7 @@ const EditProfile = ({ profileDetails, setProfileDetails, userId, token }) => {
     }
   }
 
+  // Delete Account
   const [ deleteText, setDeleteText ] = useState('Delete Account') 
   const confirmDelete = () => {
 
