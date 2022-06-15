@@ -8,9 +8,9 @@ import { flexCentered } from '../styles/Styling'
 
 const NotFound = () => {
   return (
-    <Box sx={{ ...flexCentered, width: '100vw', height: '65vh' }}>
-      <Typography variant='h4' sx={{ mt: '25vh' }}>Page Not Found</Typography>
-      <Typography component={Link} to='/'>Back to Home</Typography>
+    <Box sx={{ ...flexCentered, width: '100vw', height: 'calc(100vh - 60px)', bgcolor: 'background.default', color: 'primary.contrastText' }}>
+      <Typography variant='h4'>Page Not Found</Typography>
+      <Typography component={Link} to='/' sx={{ color: 'primary.contrastText' }}>Back to Home</Typography>
       <Box component='img' src={AngryCard} sx={{ width: '25rem' }}  />
     </Box>
   )

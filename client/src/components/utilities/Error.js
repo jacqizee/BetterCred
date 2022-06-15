@@ -9,9 +9,9 @@ import { flexCentered } from '../styles/Styling'
 
 const Error = () => {
   return (
-    <Box sx={{ ...flexCentered, width: '100vw', height: '65vh' }}>
-      <Typography variant='h4' sx={{ mt: '25vh' }}>Error</Typography>
-      <Typography component={Link} to='/'>Back to Home</Typography>
+    <Box sx={{ ...flexCentered, width: '100vw', height: 'calc(100vh - 60px)', bgcolor: 'background.default', color: 'primary.contrastText' }}>
+      <Typography variant='h4'>Error</Typography>
+      <Typography component={Link} to='/' sx={{ color: 'primary.contrastText' }}>Back to Home</Typography>
       <Box component='img' src={WorriedCard} sx={{ width: '25rem' }}  />
     </Box>
   )
