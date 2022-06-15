@@ -32,6 +32,9 @@ const Profile = () => {
   const [ loading, setLoading ] = useState(true)
   const [ error, setError ] = useState(false)
 
+  // Menu States
+  const [ currentPage, setCurrentPage ] = useState('My Profile')
+
   // Edit Form Details
   const [ profileDetails, setProfileDetails ] = useState({
     password: '',
@@ -64,11 +67,11 @@ const Profile = () => {
 
   const handleMenu = (e) => {
     if (e.target.innerHTML === 'My Profile') {
-      console.log('my profile')
+      setCurrentPage('My Profile')
     }
 
     if (e.target.innerHTML === 'My Cards') {
-      console.log('my cards')
+      setCurrentPage('My Cards')
     }
   }
 
@@ -88,8 +91,10 @@ const Profile = () => {
               </ListItem>
             </List>
           </Box>
-          <EditProfile profileDetails={profileDetails} setProfileDetails={setProfileDetails} userId={userId} token={token} />
-          {/* <MyCards /> */}
+          { currentPage === 'My Profile' ? 
+            <EditProfile profileDetails={profileDetails} setProfileDetails={setProfileDetails} userId={userId} token={token} /> :
+            <MyCards />
+          }
         </Box>
       }
     </>

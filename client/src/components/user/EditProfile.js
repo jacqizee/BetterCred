@@ -1,21 +1,15 @@
-import { useState, useEffect } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useState } from 'react'
 import axios from 'axios'
 
 // Helpers
-import { getPayload, getLocalToken, confirmUser, handleLogOut } from '../helpers/auth.js'
+import { handleLogOut } from '../helpers/auth.js'
 
 // MUI Components
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
-import List from '@mui/material/List'
-import ListItem from '@mui/material/ListItem'
-import ListItemIcon from '@mui/material/ListItemIcon'
-import ListItemText from '@mui/material/ListItemText'
 import Divider from '@mui/material/Divider'
-import Icon from '@mui/material/Icon'
 
 const EditProfile = ({ profileDetails, setProfileDetails, userId, token }) => {
 
