@@ -15,13 +15,14 @@ const MyCards = ({ profileDetails, setProfileDetails }) => {
   return (
     <Slide in={true} direction='up' timeout={{ enter: 1000 }}>
       <Box id='my-cards'
-        sx={{ width: '75%',
+        sx={{
+          width: { xs: '100%', sm: '75%' },
           maxWidth: '850px',
           display: 'flex',
           flexDirection: 'column',
-          ml: { xs: 3, md: 3.5 },
+          ml: { xs: 0, sm: 3.5 },
           bgcolor: 'background.paper',
-          p: 5,
+          py: 5,
           height: 'fit-content' }}>
       
         {/* Heading and Subheading */}
@@ -43,7 +44,7 @@ const MyCards = ({ profileDetails, setProfileDetails }) => {
                     <Box component='img'
                       src={card.image}
                       alt={`Picture of ${card.name}`}
-                      sx={{ width: '30%', display: { xs: 'none', md: 'inline' }, mr: { xs: 0, md: 1.5 } }} />
+                      sx={{ width: '35%', display: { xs: 'none', md: 'inline' }, mr: { xs: 0, md: 1.5 }, objectFit: 'contain' }} />
                       
                     {/* Card Details */}
                     <Box sx={{ display: 'flex',
@@ -52,21 +53,25 @@ const MyCards = ({ profileDetails, setProfileDetails }) => {
                       bgcolor: 'background.paperContrast',
                       width: '100%',
                       px: 1,
-                      borderRadius: 2 }}>
+                      borderRadius: 2,
+                      textAlign: 'center' }}>
 
                       {/* Card Name */}
                       <Typography variant='subtitle2'>{card.name}</Typography>
 
-                      {/* Annual Fee */}
-                      <Box sx={{ textAlign: 'center', m: 1 }}>
-                        <Typography variant='body1'>Annual Fee</Typography>
-                        <Typography variant='body2'>${card.annual_fee}</Typography>
-                      </Box>
+                      {/* Key Details */}
+                      <Box sx={{ display: 'flex' }}>
+                        {/* Annual Fee */}
+                        <Box sx={{ textAlign: 'center', m: 1 }}>
+                          <Typography variant='body1'>Annual Fee</Typography>
+                          <Typography variant='body2'>${card.annual_fee}</Typography>
+                        </Box>
 
-                      {/* Foreign Transaction Fee */}
-                      <Box sx={{ textAlign: 'center', m: 1 }}>
-                        <Typography variant='body1'>Foreign Transaction Fee</Typography>
-                        <Typography variant='subtitle1'>{card.foreign_fee}%</Typography>
+                        {/* Foreign Transaction Fee */}
+                        <Box sx={{ textAlign: 'center', m: 1 }}>
+                          <Typography variant='body1'>Foreign Transaction Fee</Typography>
+                          <Typography variant='body2'>{card.foreign_fee}%</Typography>
+                        </Box>
                       </Box>
                     </Box>
                   </Box>

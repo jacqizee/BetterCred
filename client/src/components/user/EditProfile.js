@@ -70,7 +70,16 @@ const EditProfile = ({ profileDetails, setProfileDetails, userId, token }) => {
       <Box id='profile-settings'
         component='form'
         onSubmit={handleSubmit}
-        sx={{ width: '75%', maxWidth: '850px', display: 'flex', flexDirection: 'column', ml: { xs: 3, md: 3.5 }, bgcolor: 'background.paper', p: 5, height: 'fit-content' }}>
+        sx={{ 
+          width: { xs: '100%', sm: '75%' },
+          maxWidth: '850px',
+          display: 'flex',
+          flexDirection: 'column',
+          ml: { xs: 0, sm: 3.5 },
+          bgcolor: 'background.paper',
+          py: 5,
+          px: { xs: 2.5, sm: 5 },
+          height: 'fit-content' }}>
         
         {/* Heading and Subheading */}
         <Typography variant='h5' sx={{ color: 'primary.contrastText' }}>Edit Profile</Typography>

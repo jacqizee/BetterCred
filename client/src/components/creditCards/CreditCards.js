@@ -15,7 +15,15 @@ import Button from '@mui/material/Button'
 import Divider from '@mui/material/Divider'
 import Icon from '@mui/material/Icon'
 import Tooltip from '@mui/material/Tooltip'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import Checkbox from '@mui/material/Checkbox'
 import Zoom from '@mui/material/Zoom'
+import InputLabel from '@mui/material/InputLabel'
+import MenuItem from '@mui/material/MenuItem'
+import FormControl from '@mui/material/FormControl'
+import Select from '@mui/material/Select'
+import Chip from '@mui/material/Chip'
+import OutlinedInput from '@mui/material/OutlinedInput'
 
 // Error Handling
 import Error from '../utilities/Error.js'
@@ -39,6 +47,15 @@ const CreditCards = () => {
 
   // Cards State
   const [ cards, setCards ] = useState(null)
+  const [ filteredCards, setFilteredCards ] = useState(null)
+  const [ selectedCreditRange, setSelectedCreditRange ] = useState([ 1 ])
+
+  const creditRanges = [
+    { name: 'Poor', value: 1 },
+    { name: 'Fair', value: 2 },
+    { name: 'Good', value: 3 },
+    { name: 'Excellent', value: 3 }
+  ]
 
   // Get Card Data
   useEffect(() => {
@@ -46,6 +63,7 @@ const CreditCards = () => {
       try {
         const { data } = await axios.get('/api/credit/')
         setCards(data)
+        console.log(data)
       } catch (error) {
         console.log(error)
         setError(true)
@@ -55,10 +73,51 @@ const CreditCards = () => {
     getCards()
   }, [])
 
+  const handleFilterChange = (e) => {
+    // const { name, value } = e.target
+    console.log(e)
+    // const index = selectedCreditRange.indexOf(parseInt(value))
+    console.log(selectedCreditRange)
+  }
+
+
+
   return (
     <Box sx={{ flexCentered, textAlign: 'center', bgcolor: 'background.default', px: 5, pb: 10 }}>
       {/* Heading */}
       <Typography variant='h4' component='h2' sx={{ pt: 3, pb: 2, color: 'primary.contrastText' }}>Explore Credit Cards</Typography>
+      {/* Filters */}
+      <Box>
+        <FormControl sx={{ m: 1, width: 300 }}>
+          <InputLabel id="credit-range-label">Credit Range</InputLabel>
+          <Select
+            labelId="credit-range-label"
+            id="credit-range"
+            name='creditRange'
+            multiple
+            value={selectedCreditRange}
+            onChange={handleFilterChange}
+            input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
+            renderValue={(selected) => (
+              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                {selectedCreditRange.map((value) => (
+                  <Chip key={value} label={value} />
+                ))}
+              </Box>
+            )}
+          >
+            {creditRanges.map((range) => (
+              <MenuItem
+                value={range.name}
+                key={range.value}
+              >
+                {range.name}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+        
+      </Box>
       <Grid container columnSpacing={3} rowSpacing={2}>
         { loading ? <Loading /> : error ? <Error /> : cards.map(card => {
           return (
@@ -78,7 +137,6 @@ const CreditCards = () => {
                         <Box component='img' src={card.image} alt={`image of ${card.name} card`} sx={{ my: 2, height: '12rem', maxWidth: '95%', objectFit: 'contain' }} />
                       </Tooltip>
                     }
-                    
                     
                     {/* Card Feature Overview */}
                     <Box sx={{ display: 'flex', flexDirection: 'column', mb: 2, width: '100%', py: 1, alignItems: 'center', bgcolor: 'primary.main', px: 2 }}>
@@ -130,3 +188,8 @@ const CreditCards = () => {
 }
 
 export default CreditCards
+
+// FILTERS
+// Store filter values from select
+// Filter through cards
+// Display filtered cards

@@ -89,7 +89,7 @@ const Profile = () => {
           {/* Profile Menu */}
           <Slide direction='right' in={true} timeout={{ enter: 1000 }}>
             <Box id='profile-menu'
-              sx={{ width: '25%', maxWidth: '350px' }}>
+              sx={{ width: '25%', maxWidth: '350px', display: { xs: 'none', sm: 'inline' } }}>
               <List sx={{ bgcolor: 'primary.main', color: 'white' }}>
                 <ListItem>
                   <ListItemText onClick={handleMenu} sx={{ textDecoration: editProfileDeco, '&:hover': { cursor: 'pointer' } }}>My Profile</ListItemText>
