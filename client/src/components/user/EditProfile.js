@@ -10,6 +10,7 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
 import Divider from '@mui/material/Divider'
+import Alert from '@mui/material/Alert'
 
 const EditProfile = ({ profileDetails, setProfileDetails, userId, token }) => {
 
@@ -72,7 +73,12 @@ const EditProfile = ({ profileDetails, setProfileDetails, userId, token }) => {
       {/* Heading and Subheading */}
       <Typography variant='h5' sx={{ color: 'primary.contrastText' }}>Edit Profile</Typography>
       <Typography variant='body1' sx={{ color: 'primary.contrastText', mb: 1 }}>Update your profile settings</Typography>
+      
       <Divider sx={{ my: 1 }} />
+      
+      {/* Edit Success */}
+      { submitted && <Alert onClose={() => setSubmitted(false)}>Edit successful!</Alert>}
+
       {/* Username */}
       <TextField className='username'
         name='username'
@@ -145,10 +151,7 @@ const EditProfile = ({ profileDetails, setProfileDetails, userId, token }) => {
       }
 
       {/* Submit Button */}
-      { !submitted ?
-        <Button type='submit' color='secondary' variant='contained' sx={{ mt: 3 }}>Edit</Button> :
-        <Button type='submit' color='success' variant='outlined' sx={{ mt: 3 }} disabled>Edited!</Button>
-      }
+      <Button type='submit' color='secondary' variant='contained' sx={{ mt: 3 }}>Edit</Button>
 
       {/* Delete Account Option */}
       <Box sx={{ width: '100%', textAlign: 'center', mt: .75 }}>

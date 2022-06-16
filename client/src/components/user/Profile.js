@@ -84,7 +84,7 @@ const Profile = () => {
   return (
     <>
       { loading ? <Loading /> : error ? <Error /> :
-        <Box sx={{ display: 'flex', p: { xs: 3, md: 5 }, bgcolor: 'background.default', justifyContent: 'center', height: '100vh' }}>
+        <Box sx={{ display: 'flex', p: { xs: 3, md: 5 }, bgcolor: 'background.default', justifyContent: 'center', height: 'fit-content', minHeight: '100vh' }}>
           {/* Profile Menu */}
           <Box id='profile-menu'
             sx={{ width: '25%', maxWidth: '350px' }}>
@@ -99,8 +99,8 @@ const Profile = () => {
           </Box>
           { currentPage === 'My Profile' ? 
             <EditProfile profileDetails={profileDetails} setProfileDetails={setProfileDetails} userId={userId} token={token} />
-            :
-            <MyCards />
+            : currentPage === 'My Cards' ?
+              <MyCards /> : ''
           }
         </Box>
       }
