@@ -17,6 +17,8 @@ import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import ListItemText from '@mui/material/ListItemText'
 import Slide from '@mui/material/Slide'
+import BottomNavigation from '@mui/material/BottomNavigation'
+import BottomNavigationAction from '@mui/material/BottomNavigationAction'
 
 const Profile = () => {
 
@@ -69,6 +71,8 @@ const Profile = () => {
   }, [])
 
   const handleMenu = (e) => {
+    console.log('fired')
+
     if (e.target.innerHTML === 'My Profile') {
       setCurrentPage('My Profile')
       setEditProfileDeco('underline')
@@ -86,7 +90,7 @@ const Profile = () => {
     <>
       { loading ? <Loading /> : error ? <Error /> :
         <Box sx={{ display: 'flex', p: { xs: 3, md: 5 }, bgcolor: 'background.default', justifyContent: 'center', height: 'fit-content', minHeight: '100vh' }}>
-          {/* Profile Menu */}
+          {/* Side Profile Menu - small screens or larger */}
           <Slide direction='right' in={true} timeout={{ enter: 1000 }}>
             <Box id='profile-menu'
               sx={{ width: '25%', maxWidth: '350px', display: { xs: 'none', sm: 'inline' } }}>
@@ -100,6 +104,12 @@ const Profile = () => {
               </List>
             </Box>
           </Slide>
+
+          {/* Bottom Navigation - xs screens only */}
+          <BottomNavigation showLabels sx={{ position: 'fixed', width: '100%', bottom: 0 }}>
+            <BottomNavigationAction label='My Profile' onClick={handleMenu}/>
+            <BottomNavigationAction label='My Cards' onClick={handleMenu}/>
+          </BottomNavigation>
 
           {currentPage === 'My Profile' ? 
             <EditProfile profileDetails={profileDetails} setProfileDetails={setProfileDetails} userId={userId} token={token} />

@@ -13,7 +13,7 @@ const MyCards = ({ profileDetails, setProfileDetails }) => {
   })
 
   return (
-    <Slide in={true} direction='up' timeout={{ enter: 1000 }}>
+    <Slide in={true} direction='up'>
       <Box id='my-cards'
         sx={{
           width: { xs: '100%', sm: '75%' },
@@ -23,6 +23,7 @@ const MyCards = ({ profileDetails, setProfileDetails }) => {
           ml: { xs: 0, sm: 3.5 },
           bgcolor: 'background.paper',
           py: 5,
+          px: { xs: 2.5, sm: 5 },
           height: 'fit-content' }}>
       
         {/* Heading and Subheading */}

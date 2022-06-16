@@ -66,7 +66,7 @@ const EditProfile = ({ profileDetails, setProfileDetails, userId, token }) => {
   }
 
   return (
-    <Slide direction='up' in={true} timeout={{ enter: 800 }}>
+    <Slide direction='up' in={true}>
       <Box id='profile-settings'
         component='form'
         onSubmit={handleSubmit}
