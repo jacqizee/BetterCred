@@ -50,12 +50,12 @@ const CreditCards = () => {
     setSearchTerm(e.target.value)
   }
 
+  // When search term is changed, filter credit cards
   useEffect(() => {
     const filterCards = searchTerm.length ? cards.filter(card => card.name.toLowerCase().includes(searchTerm.toLowerCase())) : cards
     setFilteredCards(filterCards)
   }, [searchTerm])
 
-  
   // const creditRanges = [
   //   { name: 'Poor', value: 1 },
   //   { name: 'Fair', value: 2 },
@@ -86,16 +86,20 @@ const CreditCards = () => {
       <Typography variant='subtitle2' sx={{ mb: 2, color: 'primary.contrastText' }}>Find a credit card that meets your credit range and matches your reward preferences</Typography>
       
       {/* Filters */}
-      <Box sx={{ mb: 2 }}>
+      <Box sx={{ mb: 2, display: 'flex', justifyContent: 'center' }}>
         {/* Search Box */}
-        <TextField
-          name='search-field'
-          value={searchTerm}
-          label='Search'
-          variant='standard'
-          onChange={handleSearch}
-        />
+        <Box sx={{ display: 'flex', alignItems: 'flex-end', color: 'primary.contrastText' }}>
+          <SearchIcon sx={{ my: 0.5, mr: 1 }} />
+          <TextField
+            name='search-field'
+            value={searchTerm}
+            label='Search'
+            variant='standard'
+            onChange={handleSearch}
+          />
+        </Box>
       </Box>
+      
 
       <Grid container columnSpacing={3} rowSpacing={2}>
         { loading ? <Loading /> : error ? <Error /> : ( searchTerm.length ? filteredCards : cards).map(card => {
