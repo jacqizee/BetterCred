@@ -37,13 +37,13 @@ const Excellent = createSvgIcon(
 export const creditRangeIcon = (creditRange) => {
   switch (creditRange) {
     case 1:
-      return <Chip icon={<Poor />} label='Poor' />
+      return <Chip icon={<Poor />} label='Poor' color='primary' />
     case 2:
-      return <Chip icon={<Fair />} label='Fair' />
+      return <Chip icon={<Fair />} label='Fair' color='primary' />
     case 3:
-      return <Chip icon={<Good />} label='Good' />
+      return <Chip icon={<Good />} label='Good' color='primary' />
     case 4:
-      return <Chip icon={<Excellent />} label='Excellent' />
+      return <Chip icon={<Excellent />} label='Excellent' color='primary' />
   }
 }
 

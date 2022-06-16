@@ -19,6 +19,7 @@ import ListItemAvatar from '@mui/material/ListItemAvatar'
 import Avatar from '@mui/material/Avatar'
 import ListItemText from '@mui/material/ListItemText'
 import Divider from '@mui/material/Divider'
+import Icon from '@mui/material/Icon'
 
 // Icons
 import { creditRangeIcon, rewardIcon, iconStyle } from '../styles/Icons'
@@ -27,7 +28,7 @@ import ThumbDownRoundedIcon from '@mui/icons-material/ThumbDownRounded'
 import HorizontalRuleRoundedIcon from '@mui/icons-material/HorizontalRuleRounded'
 
 // Styling
-import { flexCentered } from '../styles/Styling'
+import { flexCentered, flexRowCentered } from '../styles/Styling'
 
 const CreditCardShow = () => {
 
@@ -143,7 +144,14 @@ const CreditCardShow = () => {
               component='img'
               src={cardData.image}
               alt={`image of ${cardData.name} card`}
-              sx={{ my: 3, height: '12rem', objectFit: 'contain', maxWidth: '90%' }} />
+              sx={{ mt: 3, height: '12rem', objectFit: 'contain', maxWidth: '90%' }} />
+
+            {/* Reward Icons */}
+            <Box sx={{ ...flexRowCentered, flexWrap: 'wrap', borderRadius: 10, minWidth: '50%', my: 1 }}>
+              { cardData.cash_back_category.length ?
+                cardData.cash_back_category.map((index, category) => <Box key={index} sx={{ color: 'secondary.contrastText' }}>{rewardIcon(category)}</Box>) :
+                <Box><Icon sx={ iconStyle }><HorizontalRuleRoundedIcon sx={{ p: .5 }} /></Icon></Box> }
+            </Box>
                         
             {/* Add to Wallet Button */}
             <Button
@@ -178,18 +186,6 @@ const CreditCardShow = () => {
               </Box>
 
               <Divider orientation="vertical" variant="middle" flexItem />
-          
-              {/* Rewards On */}
-              {/* <Box sx={{ textAlign: 'center', m: 1 }}>
-                <Typography variant='body1'>Reward Categories</Typography>
-                <Typography variant='subtitle1'>
-                  <Box sx={{ display: 'flex' }}>
-                    { cardData.cash_back_category.length ?
-                      cardData.cash_back_category.map((index, category) => <Box key={index}>{rewardIcon(category)}</Box>) :
-                      <Box><Icon sx={ iconStyle }><HorizontalRuleRoundedIcon sx={{ p: .5 }} /></Icon></Box> }
-                  </Box>
-                </Typography>
-              </Box> */}
 
               {/* Annual Fee */}
               <Box sx={{ textAlign: 'center', m: 1 }}>

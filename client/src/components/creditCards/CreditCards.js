@@ -17,6 +17,7 @@ import Icon from '@mui/material/Icon'
 import Tooltip from '@mui/material/Tooltip'
 import Zoom from '@mui/material/Zoom'
 import TextField from '@mui/material/TextField'
+import Chip from '@mui/material/Chip'
 
 // Error Handling
 import Error from '../utilities/Error.js'
@@ -28,7 +29,7 @@ import HorizontalRuleRoundedIcon from '@mui/icons-material/HorizontalRuleRounded
 import SearchIcon from '@mui/icons-material/Search'
 
 // Styling
-import { flexCentered } from '../styles/Styling'
+import { flexCentered, flexRowCentered } from '../styles/Styling'
 
 const CreditCards = () => {
 
@@ -109,21 +110,30 @@ const CreditCards = () => {
                 <Card sx={{ borderRadius: 5 }}>
                   <CardContent sx={{ ...flexCentered, px: 0 }}>
                     {/* Card Name */}
-                    <Typography variant='h6' sx={{ my: 1, py: 1, width: '100%', textAlign: 'center', bgcolor: 'primary.main', boxShadow: 2 }}>{card.name}</Typography>
+                    <Typography variant='h6' sx={{ my: 1, py: 1, width: '100%', textAlign: 'center', bgcolor: 'primary.main', boxShadow: 2 }}>
+                      {card.name}
+                    </Typography>
 
                     {/* Card Image */}
                     { token ?
                       <Box component={Link} to={`/cards/${card.id}`}>
-                        <Box component='img' src={card.image} alt={`image of ${card.name} card`} sx={{ my: { xs: 1, lg: 2 }, height: '12rem', maxWidth: '95%', objectFit: 'contain' }} />
+                        <Box component='img' src={card.image} alt={`image of ${card.name} card`} sx={{ mt: 1, height: '12rem', maxWidth: '95%', objectFit: 'contain' }} />
                       </Box> :
                       <Tooltip title='Login to View' placement='bottom' arrow>
-                        <Box component='img' src={card.image} alt={`image of ${card.name} card`} sx={{ my: 2, height: '12rem', maxWidth: '95%', objectFit: 'contain' }} />
+                        <Box component='img' src={card.image} alt={`image of ${card.name} card`} sx={{ mt: 1, height: '12rem', maxWidth: '95%', objectFit: 'contain' }} />
                       </Tooltip>
                     }
+
+                    {/* Reward Icons */}
+                    <Box sx={{ ...flexRowCentered, flexWrap: 'wrap', borderRadius: 10, minWidth: '50%', mb: 1 }}>
+                      { card.cash_back_category.length ?
+                        card.cash_back_category.map((index, category) => <Box key={index} sx={{ color: 'secondary.contrastText' }}>{rewardIcon(category)}</Box>) :
+                        <Box><Icon sx={ iconStyle }><HorizontalRuleRoundedIcon sx={{ p: .5 }} /></Icon></Box> }
+                    </Box>
                     
                     {/* Card Feature Overview */}
-                    <Box sx={{ display: 'flex', flexDirection: 'column', mb: 2, width: '100%', py: 1, alignItems: 'center', bgcolor: 'primary.main', px: 2 }}>
-                      <Box sx={{ display: 'flex', justifyContent: 'space-evenly', width: '100%', my: 1 }}>
+                    <Box sx={{ ...flexCentered, mb: 2, width: '100%', bgcolor: 'primary.light', px: 2 }}>
+                      <Box sx={{ display: 'flex', justifyContent: 'space-evenly', width: '100%', my: 1, color: 'secondary.contrastText' }}>
 
                         {/* Credit Score */}
                         <Box sx={{ textAlign: 'center' }}>
@@ -134,21 +144,11 @@ const CreditCards = () => {
 
                         {/* Annual Fee */}
                         <Box sx={{ textAlign: 'center' }}>
-                          <Typography variant='body1' sx={{ lineHeight: 1.25 }}>Annual Fee</Typography>
-                          <Typography variant='subtitle1'>${card.annual_fee}</Typography>
+                          <Typography variant='body1' sx={{ lineHeight: 1.25, mb: .5 }}>Annual Fee</Typography>
+                          <Chip label={`$${card.annual_fee}`} color='primary' />
                         </Box>
                       </Box>
-                      <Divider orientation="horizontal" flexItem />
 
-                      {/* Rewards On */}
-                      <Box sx={{ textAlign: 'center', mt: 1 }}>
-                        <Typography variant='body1' sx={{ lineHeight: 1.25, my: .25 }}>Rewards On</Typography>
-                        <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
-                          { card.cash_back_category.length ?
-                            card.cash_back_category.map((index, category) => <Box key={index}>{rewardIcon(category)}</Box>) :
-                            <Box><Icon sx={ iconStyle }><HorizontalRuleRoundedIcon sx={{ p: .5 }} /></Icon></Box> }
-                        </Box>
-                      </Box>
                     </Box>
 
                     {/* Learn More */}
