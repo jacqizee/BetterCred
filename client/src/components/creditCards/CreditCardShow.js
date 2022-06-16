@@ -8,6 +8,7 @@ import Loading from '../utilities/Loading.js'
 
 // Helper Functions
 import { getLocalToken, getPayload } from '../helpers/auth'
+import { handleWalletButton } from '../helpers/creditCards'
 
 // MUI Components
 import Box from '@mui/material/Box'
@@ -88,37 +89,7 @@ const CreditCardShow = () => {
   }
 
   // Add Card to User Wallet
-  const handleWalletButton = async () => {
-    
-    const addWalletCard = async () => {
-      await axios.post(`/api/auth/profile/${payload.sub}/wallet/`, {
-        cardId: cardId,
-      }, {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        },
-      })
-      setAddButtonText('Remove from Wallet')
-    }
-
-    const deleteWalletCard = async () => {
-      await axios.delete(`/api/auth/profile/${payload.sub}/wallet/`, {
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        },
-        data: {
-          cardId: cardId,
-        },
-      })
-      setAddButtonText('Add to Wallet')
-    }
-
-    try {
-      addButtonText === 'Add to Wallet' ? addWalletCard() : deleteWalletCard()
-    } catch (error) {
-      console.log(error.response)
-    }
-  }
+  
   
   return (
     <>
@@ -133,21 +104,21 @@ const CreditCardShow = () => {
           py: { xs: 5, md: 10 },
         }}>
           <Box id='card-tile'
-            sx={{ ...flexCentered, bgcolor: 'background.paper', borderRadius: 15, width: { xs: '85vw', md: '28vw' }, mx: 3, height: 'fit-content' }}>
+            sx={{ ...flexCentered, bgcolor: 'background.default', borderRadius: 15, width: { xs: '85vw', md: '28vw' }, mx: 3, height: 'fit-content' }}>
             {/* Card Name */}
             <Typography
               variant='h6'
-              sx={{ mt: 7, py: 1, width: '100%', textAlign: 'center', bgcolor: 'primary.main', color: 'primary.contrastText' }}>{cardData.name}</Typography>
+              sx={{ mt: 3, py: 1, width: '100%', textAlign: 'center', bgcolor: 'primary.main', color: 'primary.contrastText', borderRadius: 2 }}>{cardData.name}</Typography>
 
             {/* Card Image */}
             <Box
               component='img'
               src={cardData.image}
               alt={`image of ${cardData.name} card`}
-              sx={{ mt: 3, height: '12rem', objectFit: 'contain', maxWidth: '90%' }} />
+              sx={{ mt: 3, height: '12rem', objectFit: 'contain', maxWidth: '90%', borderRadius: 3.5, boxShadow: 3 }} />
 
             {/* Reward Icons */}
-            <Box sx={{ ...flexRowCentered, flexWrap: 'wrap', borderRadius: 10, minWidth: '50%', my: 1 }}>
+            <Box sx={{ ...flexRowCentered, flexWrap: 'wrap', my: 1 }}>
               { cardData.cash_back_category.length ?
                 cardData.cash_back_category.map((index, category) => <Box key={index} sx={{ color: 'secondary.contrastText' }}>{rewardIcon(category)}</Box>) :
                 <Box><Icon sx={ iconStyle }><HorizontalRuleRoundedIcon sx={{ p: .5 }} /></Icon></Box> }
@@ -157,7 +128,7 @@ const CreditCardShow = () => {
             <Button
               color='secondary'
               variant='contained'
-              onClick={handleWalletButton}>{addButtonText}</Button>
+              onClick={() => handleWalletButton(token, cardId, payload.sub, addButtonText, setAddButtonText)}>{addButtonText}</Button>
                         
             {/* Link to Issuer Site */}
             <Typography
@@ -167,7 +138,8 @@ const CreditCardShow = () => {
               target='__blank__'
               sx={{ mt: 1, mb: 6, color: 'primary.contrastText' }}>Head to Issuer Site</Typography>
           </Box>
-          <Box id='main-section' sx={{ borderRadius: 15, bgcolor: 'background.paper', width: { xs: '85vw', md: '72vw' }, p: 3, mt: { xs: 3, md: 0 }, mr: { xs: 0, md: 3 } }}>
+
+          <Box id='main-section' sx={{ width: { xs: '85vw', md: '72vw' }, px: 3, mr: { xs: 0, md: 3 } }}>
             {/* Card Details */}
             <Box id='card-details'
               sx={{ display: 'flex',
@@ -211,18 +183,18 @@ const CreditCardShow = () => {
             </Box>
 
             {/* Pros and Cons */}
-            <Box id='pros-cons' sx={{ py: 2, color: 'primary.contrastText' }}>
+            <Box id='pros-cons' sx={{ px: 1, py: 3, my: 4, color: 'primary.contrastText', bgcolor: 'background.paperContrast', borderRadius: 5 }}>
               <Box sx={{ width: '100%', display: 'flex', flexDirection: { xs: 'column', md: 'row' }, justifyContent: 'space-evenly' }}>
                 <Box sx={{ width: { xs: '95%', md: '50%' }, mx: { xs: 1, md: 2 } }}>
                   <Typography variant='h6' >Pros</Typography>
-                  <List sx={{ bgcolor: 'background.paperContrast' }}>
+                  <List sx={{ bgcolor: 'background.paperMoreContrast' }}>
                     { displayFeatures('pro') }
                   </List>
                 </Box>
 
                 <Box sx={{ width: { xs: '95%', md: '50%' }, mx: { xs: 1, md: 2 }, mt: { xs: 2, md: 0 } }}>
                   <Typography variant='h6'>Cons</Typography>
-                  <List sx={{ bgcolor: 'background.paperContrast' }}>
+                  <List sx={{ bgcolor: 'background.paperMoreContrast' }}>
                     { displayFeatures('con') }
                   </List>
                 </Box>
