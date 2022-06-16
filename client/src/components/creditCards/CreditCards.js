@@ -15,6 +15,7 @@ import Button from '@mui/material/Button'
 import Divider from '@mui/material/Divider'
 import Icon from '@mui/material/Icon'
 import Tooltip from '@mui/material/Tooltip'
+import Zoom from '@mui/material/Zoom'
 
 // Error Handling
 import Error from '../utilities/Error.js'
@@ -61,64 +62,66 @@ const CreditCards = () => {
       <Grid container columnSpacing={3} rowSpacing={2}>
         { loading ? <Loading /> : error ? <Error /> : cards.map(card => {
           return (
-            <Grid item key={card.id} xs={12} sm={6} md={4}>
-              <Card sx={{ borderRadius: 5 }}>
-                <CardContent sx={{ ...flexCentered, px: 0 }}>
-                  {/* Card Name */}
-                  <Typography variant='h6' sx={{ my: 1, py: 1, width: '100%', textAlign: 'center', bgcolor: 'primary.main' }}>{card.name}</Typography>
+            <Zoom key={card.id} in={true} timeout={{ enter: 1000 }}>
+              <Grid item xs={12} sm={6} md={4}>
+                <Card sx={{ borderRadius: 5 }}>
+                  <CardContent sx={{ ...flexCentered, px: 0 }}>
+                    {/* Card Name */}
+                    <Typography variant='h6' sx={{ my: 1, py: 1, width: '100%', textAlign: 'center', bgcolor: 'primary.main' }}>{card.name}</Typography>
 
-                  {/* Card Image */}
-                  { token ?
-                    <Box component={Link} to={`/cards/${card.id}`}>
-                      <Box component='img' src={card.image} alt={`image of ${card.name} card`} sx={{ my: { xs: 1, lg: 2 }, height: '12rem', maxWidth: '95%', objectFit: 'contain' }} />
-                    </Box> :
-                    <Tooltip title='Login to View' placement='bottom' arrow>
-                      <Box component='img' src={card.image} alt={`image of ${card.name} card`} sx={{ my: 2, height: '12rem', maxWidth: '95%', objectFit: 'contain' }} />
-                    </Tooltip>
-                  }
-                  
-                  
-                  {/* Card Feature Overview */}
-                  <Box sx={{ display: 'flex', flexDirection: 'column', mb: 2, width: '100%', py: 1, alignItems: 'center', bgcolor: 'primary.main', px: 2 }}>
-                    <Box sx={{ display: 'flex', justifyContent: 'space-evenly', width: '100%', my: 1 }}>
+                    {/* Card Image */}
+                    { token ?
+                      <Box component={Link} to={`/cards/${card.id}`}>
+                        <Box component='img' src={card.image} alt={`image of ${card.name} card`} sx={{ my: { xs: 1, lg: 2 }, height: '12rem', maxWidth: '95%', objectFit: 'contain' }} />
+                      </Box> :
+                      <Tooltip title='Login to View' placement='bottom' arrow>
+                        <Box component='img' src={card.image} alt={`image of ${card.name} card`} sx={{ my: 2, height: '12rem', maxWidth: '95%', objectFit: 'contain' }} />
+                      </Tooltip>
+                    }
+                    
+                    
+                    {/* Card Feature Overview */}
+                    <Box sx={{ display: 'flex', flexDirection: 'column', mb: 2, width: '100%', py: 1, alignItems: 'center', bgcolor: 'primary.main', px: 2 }}>
+                      <Box sx={{ display: 'flex', justifyContent: 'space-evenly', width: '100%', my: 1 }}>
 
-                      {/* Credit Score */}
-                      <Box sx={{ textAlign: 'center' }}>
-                        <Typography variant='body1' sx={{ lineHeight: 1.25, mb: .5 }}>Credit Score</Typography>
-                        { creditRangeIcon(card.credit_range) }
+                        {/* Credit Score */}
+                        <Box sx={{ textAlign: 'center' }}>
+                          <Typography variant='body1' sx={{ lineHeight: 1.25, mb: .5 }}>Credit Score</Typography>
+                          { creditRangeIcon(card.credit_range) }
+                        </Box>
+                        <Divider orientation="vertical" flexItem />
+
+                        {/* Annual Fee */}
+                        <Box sx={{ textAlign: 'center' }}>
+                          <Typography variant='body1' sx={{ lineHeight: 1.25 }}>Annual Fee</Typography>
+                          <Typography variant='subtitle1'>${card.annual_fee}</Typography>
+                        </Box>
                       </Box>
-                      <Divider orientation="vertical" flexItem />
+                      <Divider orientation="horizontal" flexItem />
 
-                      {/* Annual Fee */}
-                      <Box sx={{ textAlign: 'center' }}>
-                        <Typography variant='body1' sx={{ lineHeight: 1.25 }}>Annual Fee</Typography>
-                        <Typography variant='subtitle1'>${card.annual_fee}</Typography>
+                      {/* Rewards On */}
+                      <Box sx={{ textAlign: 'center', mt: 1 }}>
+                        <Typography variant='body1' sx={{ lineHeight: 1.25, my: .25 }}>Rewards On</Typography>
+                        <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+                          { card.cash_back_category.length ?
+                            card.cash_back_category.map((index, category) => <Box key={index}>{rewardIcon(category)}</Box>) :
+                            <Box><Icon sx={ iconStyle }><HorizontalRuleRoundedIcon sx={{ p: .5 }} /></Icon></Box> }
+                        </Box>
                       </Box>
                     </Box>
-                    <Divider orientation="horizontal" flexItem />
 
-                    {/* Rewards On */}
-                    <Box sx={{ textAlign: 'center', mt: 1 }}>
-                      <Typography variant='body1' sx={{ lineHeight: 1.25, my: .25 }}>Rewards On</Typography>
-                      <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
-                        { card.cash_back_category.length ?
-                          card.cash_back_category.map((index, category) => <Box key={index}>{rewardIcon(category)}</Box>) :
-                          <Box><Icon sx={ iconStyle }><HorizontalRuleRoundedIcon sx={{ p: .5 }} /></Icon></Box> }
-                      </Box>
-                    </Box>
-                  </Box>
-
-                  {/* Learn More */}
-                  { token ?
-                    <Button component={Link} to={`/cards/${card.id}`} variant='contained' color='secondary' sx={{ textTransform: 'none' }}>Learn More</Button> :
-                    <Tooltip title='Login to View' placement='bottom' arrow>
-                      <Button variant='contained' color='secondary' sx={{ textTransform: 'none' }}>Learn More</Button>
-                    </Tooltip>
-                  }
-                </CardContent>
-              </Card>
-              
-            </Grid>
+                    {/* Learn More */}
+                    { token ?
+                      <Button component={Link} to={`/cards/${card.id}`} variant='contained' color='secondary' sx={{ textTransform: 'none' }}>Learn More</Button> :
+                      <Tooltip title='Login to View' placement='bottom' arrow>
+                        <Button variant='contained' color='secondary' sx={{ textTransform: 'none' }}>Learn More</Button>
+                      </Tooltip>
+                    }
+                  </CardContent>
+                </Card>
+                
+              </Grid>
+            </Zoom>
           )
         })}
       </Grid>

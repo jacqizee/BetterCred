@@ -11,6 +11,7 @@ import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
 import Divider from '@mui/material/Divider'
 import Alert from '@mui/material/Alert'
+import Slide from '@mui/material/Slide'
 
 const EditProfile = ({ profileDetails, setProfileDetails, userId, token }) => {
 
@@ -65,99 +66,101 @@ const EditProfile = ({ profileDetails, setProfileDetails, userId, token }) => {
   }
 
   return (
-    <Box id='profile-settings'
-      component='form'
-      onSubmit={handleSubmit}
-      sx={{ width: '75%', maxWidth: '850px', display: 'flex', flexDirection: 'column', ml: { xs: 3, md: 3.5 }, bgcolor: 'background.paper', p: 5, height: 'fit-content' }}>
-      
-      {/* Heading and Subheading */}
-      <Typography variant='h5' sx={{ color: 'primary.contrastText' }}>Edit Profile</Typography>
-      <Typography variant='body1' sx={{ color: 'primary.contrastText', mb: 1 }}>Update your profile settings</Typography>
-      
-      <Divider sx={{ my: 1 }} />
-      
-      {/* Edit Success */}
-      { submitted && <Alert onClose={() => setSubmitted(false)}>Edit successful!</Alert>}
+    <Slide direction='up' in={true} timeout={{ enter: 800 }}>
+      <Box id='profile-settings'
+        component='form'
+        onSubmit={handleSubmit}
+        sx={{ width: '75%', maxWidth: '850px', display: 'flex', flexDirection: 'column', ml: { xs: 3, md: 3.5 }, bgcolor: 'background.paper', p: 5, height: 'fit-content' }}>
+        
+        {/* Heading and Subheading */}
+        <Typography variant='h5' sx={{ color: 'primary.contrastText' }}>Edit Profile</Typography>
+        <Typography variant='body1' sx={{ color: 'primary.contrastText', mb: 1 }}>Update your profile settings</Typography>
+        
+        <Divider sx={{ my: 1 }} />
+        
+        {/* Edit Success */}
+        { submitted && <Alert onClose={() => setSubmitted(false)}>Edit successful!</Alert>}
 
-      {/* Username */}
-      <TextField className='username'
-        name='username'
-        value={profileDetails.username} label='Username'
-        variant='standard'
-        onChange={handleChange}
-        error={Boolean(formErrors.username)}
-        helperText={formErrors.username}
-        sx={{ mt: 1 }} />
+        {/* Username */}
+        <TextField className='username'
+          name='username'
+          value={profileDetails.username} label='Username'
+          variant='standard'
+          onChange={handleChange}
+          error={Boolean(formErrors.username)}
+          helperText={formErrors.username}
+          sx={{ mt: 1 }} />
 
-      {/* First Name */}
-      <TextField className='firstName'
-        name='first_name'
-        value={profileDetails.first_name} label='First Name'
-        variant='standard'
-        onChange={handleChange}
-        error={Boolean(formErrors.first_name)}
-        helperText={formErrors.first_name}
-        sx={{ mt: 1 }} />
+        {/* First Name */}
+        <TextField className='firstName'
+          name='first_name'
+          value={profileDetails.first_name} label='First Name'
+          variant='standard'
+          onChange={handleChange}
+          error={Boolean(formErrors.first_name)}
+          helperText={formErrors.first_name}
+          sx={{ mt: 1 }} />
 
-      {/* Last Name */}
-      <TextField className='lastName'
-        name='last_name'
-        value={profileDetails.last_name} label='Last Name'
-        variant='standard'
-        onChange={handleChange}
-        error={Boolean(formErrors.last_name)}
-        helperText={formErrors.last_name}
-        sx={{ mt: 1 }} />
+        {/* Last Name */}
+        <TextField className='lastName'
+          name='last_name'
+          value={profileDetails.last_name} label='Last Name'
+          variant='standard'
+          onChange={handleChange}
+          error={Boolean(formErrors.last_name)}
+          helperText={formErrors.last_name}
+          sx={{ mt: 1 }} />
 
-      {/* Email */}
-      <TextField className='email'
-        type='email'
-        name='email'
-        value={profileDetails.email} label='Email'
-        variant='standard'
-        onChange={handleChange}
-        error={Boolean(formErrors.email)}
-        helperText={formErrors.email}
-        sx={{ mt: 1 }} />
+        {/* Email */}
+        <TextField className='email'
+          type='email'
+          name='email'
+          value={profileDetails.email} label='Email'
+          variant='standard'
+          onChange={handleChange}
+          error={Boolean(formErrors.email)}
+          helperText={formErrors.email}
+          sx={{ mt: 1 }} />
 
-      {/* Password */}
-      <TextField className='password'
-        type='password'
-        name='password'
-        value={profileDetails.password} label='Password'
-        variant='standard'
-        onChange={handleChange}
-        error={Boolean(formErrors.password)}
-        helperText={formErrors.password}
-        required
-        sx={{ mt: 1 }} />
+        {/* Password */}
+        <TextField className='password'
+          type='password'
+          name='password'
+          value={profileDetails.password} label='Password'
+          variant='standard'
+          onChange={handleChange}
+          error={Boolean(formErrors.password)}
+          helperText={formErrors.password}
+          required
+          sx={{ mt: 1 }} />
 
-      {/* Password Confirmation */}
-      <TextField className='passwordConfirmation'
-        type='password'
-        name='password_confirmation'
-        value={profileDetails.password_confirmation}
-        label='Password Confirmation'
-        variant='standard'
-        onChange={handleChange}
-        error={Boolean(formErrors.password_confirmation)}
-        helperText={formErrors.password_confirmation}
-        required
-        sx={{ mt: 1 }} />
+        {/* Password Confirmation */}
+        <TextField className='passwordConfirmation'
+          type='password'
+          name='password_confirmation'
+          value={profileDetails.password_confirmation}
+          label='Password Confirmation'
+          variant='standard'
+          onChange={handleChange}
+          error={Boolean(formErrors.password_confirmation)}
+          helperText={formErrors.password_confirmation}
+          required
+          sx={{ mt: 1 }} />
 
-      {/* Error Field - if error is returned */}
-      { formErrors.error && 
-        formErrors.error.map(err => <Typography variant='caption' key={err} sx={{ display: 'block', color: 'red' }}>{err}</Typography>)
-      }
+        {/* Error Field - if error is returned */}
+        { formErrors.error && 
+          formErrors.error.map(err => <Typography variant='caption' key={err} sx={{ display: 'block', color: 'red' }}>{err}</Typography>)
+        }
 
-      {/* Submit Button */}
-      <Button type='submit' color='secondary' variant='contained' sx={{ mt: 3 }}>Edit</Button>
+        {/* Submit Button */}
+        <Button type='submit' color='secondary' variant='contained' sx={{ mt: 3 }}>Edit</Button>
 
-      {/* Delete Account Option */}
-      <Box sx={{ width: '100%', textAlign: 'center', mt: .75 }}>
-        <Typography variant='caption' onClick={confirmDelete} sx={{ color: 'crimson', '&:hover': { textDecoration: 'underline', cursor: 'pointer' } }}>{deleteText}</Typography>
+        {/* Delete Account Option */}
+        <Box sx={{ width: '100%', textAlign: 'center', mt: .75 }}>
+          <Typography variant='caption' onClick={confirmDelete} sx={{ color: 'crimson', '&:hover': { textDecoration: 'underline', cursor: 'pointer' } }}>{deleteText}</Typography>
+        </Box>
       </Box>
-    </Box>
+    </Slide>
   )
 }
 

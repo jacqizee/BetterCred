@@ -16,6 +16,7 @@ import Box from '@mui/material/Box'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import ListItemText from '@mui/material/ListItemText'
+import Slide from '@mui/material/Slide'
 
 const Profile = () => {
 
@@ -86,18 +87,21 @@ const Profile = () => {
       { loading ? <Loading /> : error ? <Error /> :
         <Box sx={{ display: 'flex', p: { xs: 3, md: 5 }, bgcolor: 'background.default', justifyContent: 'center', height: 'fit-content', minHeight: '100vh' }}>
           {/* Profile Menu */}
-          <Box id='profile-menu'
-            sx={{ width: '25%', maxWidth: '350px' }}>
-            <List sx={{ bgcolor: 'primary.main', color: 'white' }}>
-              <ListItem>
-                <ListItemText onClick={handleMenu} sx={{ textDecoration: editProfileDeco, '&:hover': { cursor: 'pointer' } }}>My Profile</ListItemText>
-              </ListItem>
-              <ListItem>
-                <ListItemText onClick={handleMenu} sx={{ textDecoration: myCardsDeco, '&:hover': { cursor: 'pointer' } }}>My Cards</ListItemText>
-              </ListItem>
-            </List>
-          </Box>
-          { currentPage === 'My Profile' ? 
+          <Slide direction='right' in={true} timeout={{ enter: 1000 }}>
+            <Box id='profile-menu'
+              sx={{ width: '25%', maxWidth: '350px' }}>
+              <List sx={{ bgcolor: 'primary.main', color: 'white' }}>
+                <ListItem>
+                  <ListItemText onClick={handleMenu} sx={{ textDecoration: editProfileDeco, '&:hover': { cursor: 'pointer' } }}>My Profile</ListItemText>
+                </ListItem>
+                <ListItem>
+                  <ListItemText onClick={handleMenu} sx={{ textDecoration: myCardsDeco, '&:hover': { cursor: 'pointer' } }}>My Cards</ListItemText>
+                </ListItem>
+              </List>
+            </Box>
+          </Slide>
+
+          {currentPage === 'My Profile' ? 
             <EditProfile profileDetails={profileDetails} setProfileDetails={setProfileDetails} userId={userId} token={token} />
             : currentPage === 'My Cards' ?
               <MyCards profileDetails={profileDetails} setProfileDetails={setProfileDetails} userId={userId} token={token} /> : ''
