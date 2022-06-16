@@ -100,7 +100,7 @@ const Profile = () => {
           { currentPage === 'My Profile' ? 
             <EditProfile profileDetails={profileDetails} setProfileDetails={setProfileDetails} userId={userId} token={token} />
             : currentPage === 'My Cards' ?
-              <MyCards /> : ''
+              <MyCards profileDetails={profileDetails} setProfileDetails={setProfileDetails} userId={userId} token={token} /> : ''
           }
         </Box>
       }

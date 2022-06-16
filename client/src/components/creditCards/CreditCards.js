@@ -70,7 +70,7 @@ const CreditCards = () => {
                   {/* Card Image */}
                   { token ?
                     <Box component={Link} to={`/cards/${card.id}`}>
-                      <Box component='img' src={card.image} alt={`image of ${card.name} card`} sx={{ my: 2, height: '12rem', maxWidth: '95%', objectFit: 'contain' }} />
+                      <Box component='img' src={card.image} alt={`image of ${card.name} card`} sx={{ my: { xs: 1, lg: 2 }, height: '12rem', maxWidth: '95%', objectFit: 'contain' }} />
                     </Box> :
                     <Tooltip title='Login to View' placement='bottom' arrow>
                       <Box component='img' src={card.image} alt={`image of ${card.name} card`} sx={{ my: 2, height: '12rem', maxWidth: '95%', objectFit: 'contain' }} />
