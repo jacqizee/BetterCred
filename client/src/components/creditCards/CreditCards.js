@@ -15,15 +15,8 @@ import Button from '@mui/material/Button'
 import Divider from '@mui/material/Divider'
 import Icon from '@mui/material/Icon'
 import Tooltip from '@mui/material/Tooltip'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import Checkbox from '@mui/material/Checkbox'
 import Zoom from '@mui/material/Zoom'
-import InputLabel from '@mui/material/InputLabel'
-import MenuItem from '@mui/material/MenuItem'
-import FormControl from '@mui/material/FormControl'
-import Select from '@mui/material/Select'
-import Chip from '@mui/material/Chip'
-import OutlinedInput from '@mui/material/OutlinedInput'
+import TextField from '@mui/material/TextField'
 
 // Error Handling
 import Error from '../utilities/Error.js'
@@ -32,6 +25,7 @@ import Loading from '../utilities/Loading.js'
 // Icons
 import { creditRangeIcon, rewardIcon, iconStyle } from '../styles/Icons'
 import HorizontalRuleRoundedIcon from '@mui/icons-material/HorizontalRuleRounded'
+import SearchIcon from '@mui/icons-material/Search'
 
 // Styling
 import { flexCentered } from '../styles/Styling'
@@ -47,15 +41,27 @@ const CreditCards = () => {
 
   // Cards State
   const [ cards, setCards ] = useState(null)
-  const [ filteredCards, setFilteredCards ] = useState(null)
-  const [ selectedCreditRange, setSelectedCreditRange ] = useState([ 1 ])
 
-  const creditRanges = [
-    { name: 'Poor', value: 1 },
-    { name: 'Fair', value: 2 },
-    { name: 'Good', value: 3 },
-    { name: 'Excellent', value: 3 }
-  ]
+  // Search and Filter
+  const [ filteredCards, setFilteredCards ] = useState([])
+  const [ searchTerm, setSearchTerm ] = useState('')
+
+  const handleSearch = (e) => {
+    setSearchTerm(e.target.value)
+  }
+
+  useEffect(() => {
+    const filterCards = searchTerm.length ? cards.filter(card => card.name.toLowerCase().includes(searchTerm.toLowerCase())) : cards
+    setFilteredCards(filterCards)
+  }, [searchTerm])
+
+  
+  // const creditRanges = [
+  //   { name: 'Poor', value: 1 },
+  //   { name: 'Fair', value: 2 },
+  //   { name: 'Good', value: 3 },
+  //   { name: 'Excellent', value: 3 }
+  // ]
 
   // Get Card Data
   useEffect(() => {
@@ -73,60 +79,33 @@ const CreditCards = () => {
     getCards()
   }, [])
 
-  const handleFilterChange = (e) => {
-    // const { name, value } = e.target
-    console.log(e)
-    // const index = selectedCreditRange.indexOf(parseInt(value))
-    console.log(selectedCreditRange)
-  }
-
-
-
   return (
-    <Box sx={{ flexCentered, textAlign: 'center', bgcolor: 'background.default', px: 5, pb: 10 }}>
+    <Box sx={{ flexCentered, textAlign: 'center', bgcolor: 'background.default', px: 5, pb: 10, minHeight: 'calc(100vh - 60px)' }}>
       {/* Heading */}
-      <Typography variant='h4' component='h2' sx={{ pt: 3, pb: 2, color: 'primary.contrastText' }}>Explore Credit Cards</Typography>
+      <Typography variant='h4' component='h2' sx={{ pt: 3.5, color: 'primary.contrastText' }}>Explore Credit Cards</Typography>
+      <Typography variant='subtitle2' sx={{ mb: 2, color: 'primary.contrastText' }}>Find a credit card that meets your credit range and matches your reward preferences</Typography>
+      
       {/* Filters */}
-      <Box>
-        <FormControl sx={{ m: 1, width: 300 }}>
-          <InputLabel id="credit-range-label">Credit Range</InputLabel>
-          <Select
-            labelId="credit-range-label"
-            id="credit-range"
-            name='creditRange'
-            multiple
-            value={selectedCreditRange}
-            onChange={handleFilterChange}
-            input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
-            renderValue={(selected) => (
-              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-                {selectedCreditRange.map((value) => (
-                  <Chip key={value} label={value} />
-                ))}
-              </Box>
-            )}
-          >
-            {creditRanges.map((range) => (
-              <MenuItem
-                value={range.name}
-                key={range.value}
-              >
-                {range.name}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        
+      <Box sx={{ mb: 2 }}>
+        {/* Search Box */}
+        <TextField
+          name='search-field'
+          value={searchTerm}
+          label='Search'
+          variant='standard'
+          onChange={handleSearch}
+        />
       </Box>
+
       <Grid container columnSpacing={3} rowSpacing={2}>
-        { loading ? <Loading /> : error ? <Error /> : cards.map(card => {
+        { loading ? <Loading /> : error ? <Error /> : ( searchTerm.length ? filteredCards : cards).map(card => {
           return (
             <Zoom key={card.id} in={true} timeout={{ enter: 1000 }}>
               <Grid item xs={12} sm={6} md={4}>
                 <Card sx={{ borderRadius: 5 }}>
                   <CardContent sx={{ ...flexCentered, px: 0 }}>
                     {/* Card Name */}
-                    <Typography variant='h6' sx={{ my: 1, py: 1, width: '100%', textAlign: 'center', bgcolor: 'primary.main' }}>{card.name}</Typography>
+                    <Typography variant='h6' sx={{ my: 1, py: 1, width: '100%', textAlign: 'center', bgcolor: 'primary.main', boxShadow: 2 }}>{card.name}</Typography>
 
                     {/* Card Image */}
                     { token ?

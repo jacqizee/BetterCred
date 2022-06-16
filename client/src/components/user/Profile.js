@@ -71,8 +71,6 @@ const Profile = () => {
   }, [])
 
   const handleMenu = (e) => {
-    console.log('fired')
-
     if (e.target.innerHTML === 'My Profile') {
       setCurrentPage('My Profile')
       setEditProfileDeco('underline')
@@ -106,7 +104,7 @@ const Profile = () => {
           </Slide>
 
           {/* Bottom Navigation - xs screens only */}
-          <BottomNavigation showLabels sx={{ position: 'fixed', width: '100%', bottom: 0 }}>
+          <BottomNavigation showLabels sx={{ display: { xs: 'inline-flex', sm: 'none' }, position: 'fixed', width: '100%', bottom: 0 }}>
             <BottomNavigationAction label='My Profile' onClick={handleMenu}/>
             <BottomNavigationAction label='My Cards' onClick={handleMenu}/>
           </BottomNavigation>

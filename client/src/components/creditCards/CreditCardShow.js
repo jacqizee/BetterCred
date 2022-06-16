@@ -19,7 +19,6 @@ import ListItemAvatar from '@mui/material/ListItemAvatar'
 import Avatar from '@mui/material/Avatar'
 import ListItemText from '@mui/material/ListItemText'
 import Divider from '@mui/material/Divider'
-import Icon from '@mui/material/Icon'
 
 // Icons
 import { creditRangeIcon, rewardIcon, iconStyle } from '../styles/Icons'
