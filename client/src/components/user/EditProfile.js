@@ -30,7 +30,7 @@ const EditProfile = ({ profileDetails, setProfileDetails, userId, token }) => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const { data } = await axios.put(`/api/auth/profile/${userId}/`, profileDetails, {
+      await axios.put(`/api/auth/profile/${userId}/`, profileDetails, {
         headers: {
           'Authorization': `Bearer ${token}`,
         },

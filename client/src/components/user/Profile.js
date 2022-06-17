@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, useLocation } from 'react-router-dom'
 import axios from 'axios'
 
 // Components
@@ -24,6 +24,7 @@ const Profile = () => {
 
   // Navigate
   const nav = useNavigate()
+  const location = useLocation()
 
   // Params
   const { userId } = useParams()
@@ -36,7 +37,7 @@ const Profile = () => {
   const [ error, setError ] = useState(false)
 
   // Menu States
-  const [ currentPage, setCurrentPage ] = useState('My Profile')
+  const [ currentPage, setCurrentPage ] = useState('')
   const [ editProfileDeco, setEditProfileDeco ] = useState('none')
   const [ myCardsDeco, setMyCardsDeco ] = useState('none')
 
@@ -50,6 +51,13 @@ const Profile = () => {
     // Confirm User is Logged In + Owner
     if (!token || !confirmUser(userId)) {
       nav('/')
+    }
+
+    if (location.state) {
+      setCurrentPage(location.state.profileDest)
+      location.state.profileDest === 'My Profile' ? setEditProfileDeco('underline') : setMyCardsDeco('underline')
+    } else {
+      setCurrentPage('My Profile')
     }
 
     // Get Profile Details
@@ -93,12 +101,17 @@ const Profile = () => {
             <Box id='profile-menu'
               sx={{ width: '25%', maxWidth: '350px', display: { xs: 'none', sm: 'inline' } }}>
               <List sx={{ bgcolor: 'primary.main', color: 'white' }}>
+
+                {/* My Profile */}
                 <ListItem>
                   <ListItemText onClick={handleMenu} sx={{ textDecoration: editProfileDeco, '&:hover': { cursor: 'pointer' } }}>My Profile</ListItemText>
                 </ListItem>
+
+                {/* My Cards */}
                 <ListItem>
                   <ListItemText onClick={handleMenu} sx={{ textDecoration: myCardsDeco, '&:hover': { cursor: 'pointer' } }}>My Cards</ListItemText>
                 </ListItem>
+                
               </List>
             </Box>
           </Slide>

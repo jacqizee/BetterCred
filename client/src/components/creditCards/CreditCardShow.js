@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import axios from 'axios'
 
 // Error Handling
@@ -76,7 +76,7 @@ const CreditCardShow = () => {
         elements.push(
           <ListItem key={i}>
             <ListItemAvatar>
-              <Avatar sx={{ boxShadow: 2, bgcolor: 'background.paperContrast', width: { xs: '1.5rem', md: '3rem' }, height: { xs: '1.5rem', md: '3rem' } }}>
+              <Avatar sx={{ boxShadow: 2, bgcolor: 'secondary.main', width: { xs: '1.5rem', md: '3rem' }, height: { xs: '1.5rem', md: '3rem' } }}>
                 { type === 'pro' ? <ThumbUpRoundedIcon sx={{ color: 'limegreen', width: '65%' }} /> : <ThumbDownRoundedIcon sx={{ color: 'tomato', width: '65%' }} /> }
               </Avatar>
             </ListItemAvatar>
@@ -88,9 +88,6 @@ const CreditCardShow = () => {
     return elements
   }
 
-  // Add Card to User Wallet
-  
-  
   return (
     <>
       { loading ? <Loading /> : errors ? <Error /> :
@@ -108,7 +105,7 @@ const CreditCardShow = () => {
             {/* Card Name */}
             <Typography
               variant='h6'
-              sx={{ mt: 3, py: 1, width: '100%', textAlign: 'center', bgcolor: 'primary.main', color: 'primary.contrastText', borderRadius: 2 }}>{cardData.name}</Typography>
+              sx={{ mt: 3, py: 1, width: '100%', textAlign: 'center', bgcolor: 'secondary.dark', color: 'primary.contrastText', borderRadius: 2 }}>{cardData.name}</Typography>
 
             {/* Card Image */}
             <Box
@@ -144,8 +141,8 @@ const CreditCardShow = () => {
             <Box id='card-details'
               sx={{ display: 'flex',
                 flexWrap: 'wrap',
-                bgcolor: 'background.paperContrast',
-                color: 'primary.contrastText',
+                bgcolor: 'primary.dark',
+                color: 'white',
                 justifyContent: 'space-evenly',
                 p: 1,
                 borderRadius: 5,
@@ -185,6 +182,8 @@ const CreditCardShow = () => {
             {/* Pros and Cons */}
             <Box id='pros-cons' sx={{ px: 1, py: 3, my: 4, color: 'primary.contrastText', bgcolor: 'background.paperContrast', borderRadius: 5 }}>
               <Box sx={{ width: '100%', display: 'flex', flexDirection: { xs: 'column', md: 'row' }, justifyContent: 'space-evenly' }}>
+                
+                {/* Pros */}
                 <Box sx={{ width: { xs: '95%', md: '50%' }, mx: { xs: 1, md: 2 } }}>
                   <Typography variant='h6' >Pros</Typography>
                   <List sx={{ bgcolor: 'background.paperMoreContrast' }}>
@@ -192,12 +191,14 @@ const CreditCardShow = () => {
                   </List>
                 </Box>
 
+                {/* Cons */}
                 <Box sx={{ width: { xs: '95%', md: '50%' }, mx: { xs: 1, md: 2 }, mt: { xs: 2, md: 0 } }}>
                   <Typography variant='h6'>Cons</Typography>
                   <List sx={{ bgcolor: 'background.paperMoreContrast' }}>
                     { displayFeatures('con') }
                   </List>
                 </Box>
+
               </Box>
             </Box>
           </Box>

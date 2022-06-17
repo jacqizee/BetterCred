@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 // React components
 import Login from '../auth/Login'
 import Join from '../auth/Join'
+import { DarkModeSwitch } from '../styles/NavBar'
 
 // Helper Functions
 import { getPayload, handleLogOut } from '../helpers/auth'
@@ -21,7 +22,6 @@ import ListItemButton from '@mui/material/ListItemButton'
 import useScrollTrigger from '@mui/material/useScrollTrigger'
 import Slide from '@mui/material/Slide'
 import ListItemText from '@mui/material/ListItemText'
-import Switch from '@mui/material/Switch'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import Collapse from '@mui/material/Collapse'
@@ -31,13 +31,13 @@ import { flexRowCentered } from '../styles/Styling'
 
 // Icons
 import MenuIcon from '@mui/icons-material/Menu'
-import DarkModeRoundedIcon from '@mui/icons-material/DarkModeRounded'
-import LightModeRoundedIcon from '@mui/icons-material/LightModeRounded'
 import Logo from '../../assets/bettercred-logo.png'
 import ExpandLess from '@mui/icons-material/ExpandLess'
 import ExpandMore from '@mui/icons-material/ExpandMore'
 
 const Navigation = ({ mode, setMode }) => {
+
+  const nav = useNavigate()
 
   // Navbar Menu Items
   const menu = ['cards', 'bonuses', 'learn']
@@ -61,6 +61,11 @@ const Navigation = ({ mode, setMode }) => {
 
   const handleProfileClose = () => {
     setProfileAnchorEl(null)
+  }
+
+  const handleProfileNav = (e) => {
+    console.log(e.target.innerText)
+    nav(`/profile/${getPayload().sub}/`, { state: { profileDest: e.target.innerText } })
   }
 
   // Profile Burger Menu
@@ -97,7 +102,7 @@ const Navigation = ({ mode, setMode }) => {
 
   return (
     <Box sx={{ maxHeight: '10vh' }}>
-      <Slide appear={false} direction="down" in={!trigger}>
+      <Slide appear={true} direction="down" in={!trigger}>
         <AppBar position='sticky' enableColorOnDark color='primary' sx={{ boxShadow: 0 }} >
           <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
             {/* Logo */}
@@ -126,8 +131,8 @@ const Navigation = ({ mode, setMode }) => {
                     {/* <Button color='secondary' component={Link} to={`/profile/${getPayload().sub}/`} sx={{ textTransform: 'none' }}>profile</Button> */}
                     <Button color='secondary' onClick={handleProfileClick} sx={{ textTransform: 'none' }}>profile</Button>
                     <Menu anchorEl={profileAnchorEl} open={openProfile} onClose={handleProfileClose}>
-                      <MenuItem component={Link} to={`/profile/${getPayload().sub}/`}>Profile</MenuItem>
-                      <MenuItem onClick={handleProfileClose}>My Cards</MenuItem>
+                      <MenuItem onClick={handleProfileNav}>My Profile</MenuItem>
+                      <MenuItem onClick={handleProfileNav}>My Cards</MenuItem>
                       <MenuItem onClick={handleLogOut}>Logout</MenuItem>
                     </Menu>
                   </>
@@ -135,14 +140,7 @@ const Navigation = ({ mode, setMode }) => {
               
                 {/* Light/Dark Mode */}
                 <Box color='primary'>
-                  <Switch 
-                    color='secondary'
-                    checked={switchStatus}
-                    onChange={handleModeChange}
-                    value={mode}
-                    icon={<LightModeRoundedIcon sx={{ bgcolor: '#000', borderRadius: 5, p: .5 }} />}
-                    checkedIcon={<DarkModeRoundedIcon sx={{ bgcolor: '#fff', borderRadius: 5, p: .5 }} />}
-                  />
+                  <DarkModeSwitch mode={mode} switchStatus={switchStatus} handleModeChange={handleModeChange} />
                 </Box>
               </Box>
             </Box>  
@@ -216,13 +214,8 @@ const Navigation = ({ mode, setMode }) => {
 
                     {/* Light/Dark Mode Switch */}
                     <ListItem>
-                      <Switch 
-                        checked={switchStatus}
-                        onChange={handleModeChange}
-                        value={mode}
-                        color='secondary'
-                        icon={<LightModeRoundedIcon sx={{ bgcolor: '#000', borderRadius: 5, p: .5 }} />}
-                        checkedIcon={<DarkModeRoundedIcon sx={{ bgcolor: '#fff', borderRadius: 5, p: .5 }} />}
+                      <DarkModeSwitch 
+                        mode={mode} switchStatus={switchStatus} handleModeChange={handleModeChange}
                         sx={{ ml: 2.5, mt: .85 }}
                       />
                     </ListItem>
@@ -239,13 +232,3 @@ const Navigation = ({ mode, setMode }) => {
 }
 
 export default Navigation
-
-
-{/* // <>
-                        //   <Button color='secondary' onClick={handleProfileClick} sx={{ textTransform: 'none' }}>profile</Button>
-                        //   <Menu anchorEl={profileAnchorEl} open={openProfile} onClose={handleProfileClose}>
-                        //     <MenuItem component={Link} to={`/profile/${getPayload().sub}/`}>Profile</MenuItem>
-                        //     <MenuItem onClick={handleProfileClose}>My Cards</MenuItem>
-                        //     <MenuItem onClick={handleLogOut}>Log Out</MenuItem>
-                        //   </Menu>
-                        // </> */}
