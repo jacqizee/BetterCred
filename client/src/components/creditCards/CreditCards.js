@@ -53,16 +53,10 @@ const CreditCards = () => {
 
   // When search term is changed, filter credit cards
   useEffect(() => {
+    if (!cards) return
     const filterCards = searchTerm.length ? cards.filter(card => card.name.toLowerCase().includes(searchTerm.toLowerCase())) : cards
     setFilteredCards(filterCards)
   }, [searchTerm])
-
-  // const creditRanges = [
-  //   { name: 'Poor', value: 1 },
-  //   { name: 'Fair', value: 2 },
-  //   { name: 'Good', value: 3 },
-  //   { name: 'Excellent', value: 3 }
-  // ]
 
   // Get Card Data
   useEffect(() => {
@@ -100,12 +94,11 @@ const CreditCards = () => {
           />
         </Box>
       </Box>
-      
 
       <Grid container columnSpacing={3} rowSpacing={2}>
         { loading ? <Loading /> : error ? <Error /> : ( searchTerm.length ? filteredCards : cards).map(card => {
           return (
-            <Zoom key={card.id} in={true} timeout={{ enter: 1000 }}>
+            <Zoom key={card.id} in={true} timeout={{ enter: 500 }}>
               <Grid item xs={12} sm={6} md={4}>
                 <Card sx={{ borderRadius: 5 }}>
                   <CardContent sx={{ ...flexCentered, px: 0 }}>
@@ -126,7 +119,7 @@ const CreditCards = () => {
 
                     {/* Reward Icons */}
                     <Box sx={{ ...flexRowCentered, flexWrap: 'wrap', borderRadius: 10, minWidth: '50%', mb: 1 }}>
-                      { card.cash_back_category.length ?
+                      { card.cash_back_category.length > 0 ?
                         card.cash_back_category.map((index, category) => <Box key={index} sx={{ color: 'secondary.contrastText' }}>{rewardIcon(category)}</Box>) :
                         <Box><Icon sx={ iconStyle }><HorizontalRuleRoundedIcon sx={{ p: .5 }} /></Icon></Box> }
                     </Box>
@@ -171,8 +164,3 @@ const CreditCards = () => {
 }
 
 export default CreditCards
-
-// FILTERS
-// Store filter values from select
-// Filter through cards
-// Display filtered cards

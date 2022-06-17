@@ -120,7 +120,7 @@ const MyCards = ({ profileDetails, setProfileDetails, userId, token }) => {
                         <Button color='error' onClick={() => {
                           deleteWalletCard(token, card.id, userId)
                           window.location.reload(false)
-                        }} size='small' sx={{ width: 'fit-content' }}>Remove</Button>
+                        }} size='small'>Remove</Button>
                       </Box>
 
                     </Box>

@@ -101,11 +101,11 @@ const CreditCardShow = () => {
           py: { xs: 5, md: 10 },
         }}>
           <Box id='card-tile'
-            sx={{ ...flexCentered, bgcolor: 'background.default', borderRadius: 15, width: { xs: '85vw', md: '28vw' }, mx: 3, height: 'fit-content' }}>
+            sx={{ ...flexCentered, bgcolor: 'background.defaultContrast', borderRadius: 15, width: { xs: '85vw', md: '28vw' }, mx: 3, height: 'fit-content', mt: -3 }}>
             {/* Card Name */}
             <Typography
               variant='h6'
-              sx={{ mt: 3, py: 1, width: '100%', textAlign: 'center', bgcolor: 'secondary.dark', color: 'primary.contrastText', borderRadius: 2 }}>{cardData.name}</Typography>
+              sx={{ mt: 5, px: 2, py: 1, width: 'fit-content', textAlign: 'center', bgcolor: 'secondary.dark', color: 'primary.contrastText', borderRadius: 2 }}>{cardData.name}</Typography>
 
             {/* Card Image */}
             <Box
