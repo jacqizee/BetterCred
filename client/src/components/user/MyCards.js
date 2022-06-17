@@ -1,18 +1,26 @@
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+
+// Helpers
+import { deleteWalletCard } from '../helpers/creditCards'
+import { rewardIcon } from '../styles/Icons'
 
 // MUI Components
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Divider from '@mui/material/Divider'
 import Slide from '@mui/material/Slide'
+import Button from '@mui/material/Button'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
 import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
+import Icon from '@mui/material/Icon'
+import HorizontalRuleRoundedIcon from '@mui/icons-material/HorizontalRuleRounded'
 
-const MyCards = ({ profileDetails, setProfileDetails }) => {
+const MyCards = ({ profileDetails, setProfileDetails, userId, token }) => {
 
   useEffect(() => {
     console.log(profileDetails.wallet)
@@ -46,16 +54,29 @@ const MyCards = ({ profileDetails, setProfileDetails }) => {
             profileDetails.wallet.map(card => {
               return (
                 <>
-                  <Box key={card.id} sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, py: { xs: 1, sm: 2 }, px: 2, my: 2, bgcolor: 'background.paperContrast', borderRadius: 1 }}>
+                  <Box key={card.id}
+                    sx={{ display: 'flex',
+                      flexDirection: { xs: 'column', md: 'row' },
+                      py: { xs: 1, sm: 2 },
+                      px: 2,
+                      my: 2,
+                      bgcolor: 'background.paperContrast',
+                      borderRadius: 1 }}>
+                        
                     {/* Card Image */}
                     <Box component='img'
                       src={card.image}
                       alt={`Picture of ${card.name}`}
-                      sx={{ width: '35%', display: { xs: 'none', md: 'inline' }, mr: { xs: 0, md: 1.5 }, objectFit: 'contain' }} />
+                      sx={{ width: '35%',
+                        display: { xs: 'none', md: 'inline' },
+                        mr: { xs: 0, md: 1.5 },
+                        objectFit: 'contain',
+                        borderRadius: 3 }} />
                       
                     {/* Card Details */}
                     <Box sx={{ display: 'flex',
                       flexDirection: 'column',
+                      alignItems: 'center',
                       color: 'primary.contrastText',
                       bgcolor: 'background.paperContrast',
                       width: '100%',
@@ -64,12 +85,19 @@ const MyCards = ({ profileDetails, setProfileDetails }) => {
                       textAlign: 'center' }}>
 
                       {/* Card Name */}
-                      <Typography variant='subtitle2'>{card.name}</Typography>
+                      <Typography variant='subtitle2' sx={{ fontWeight: 'bold', mt: 1 }}>{card.issuer.name} {card.name}</Typography>
+
+                      {/* Reward Icons */}
+                      <Box sx={{ mb: 1, display: 'flex' }}>
+                        { card.cash_back_category.length ?
+                          card.cash_back_category.map((index, category) => <Box key={index} sx={{ color: 'secondary.contrastText' }}>{rewardIcon(category)}</Box>) :
+                          <Box><Icon><HorizontalRuleRoundedIcon sx={{ p: .5 }} /></Icon></Box> }
+                      </Box>
 
                       {/* Key Details */}
                       <Box sx={{ display: 'flex' }}>
 
-                        <TableContainer>
+                        <TableContainer sx={{ my: 1, bgcolor: 'background.paperContrast', borderRadius: 1 }}>
                           <Table sx={{ width: '100%' }} aria-label="simple table" size='small'>
                             <TableHead>
                               <TableRow>
@@ -85,20 +113,16 @@ const MyCards = ({ profileDetails, setProfileDetails }) => {
                             </TableBody>
                           </Table>
                         </TableContainer>
-
-                        {/* Annual Fee */}
-                        {/* <Box sx={{ textAlign: 'center', m: 1 }}>
-                          <Typography variant='body1'>Annual Fee</Typography>
-                          <Typography variant='body2'>${card.annual_fee}</Typography>
-                        </Box> */}
-
-                        {/* Foreign Transaction Fee */}
-                        {/* <Box sx={{ textAlign: 'center', m: 1 }}>
-                          <Typography variant='body1'>Foreign Transaction Fee</Typography>
-                          <Typography variant='body2'>{card.foreign_fee}%</Typography>
-                        </Box> */}
-
                       </Box>
+
+                      <Box>
+                        <Button component={Link} to={`/cards/${card.id}`} size='small' sx={{ width: 'fit-content' }}>To Card Page</Button>
+                        <Button color='error' onClick={() => {
+                          deleteWalletCard(token, card.id, userId)
+                          window.location.reload(false)
+                        }} size='small' sx={{ width: 'fit-content' }}>Remove</Button>
+                      </Box>
+
                     </Box>
                   </Box>
 

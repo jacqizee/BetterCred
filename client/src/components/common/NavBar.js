@@ -131,9 +131,9 @@ const Navigation = ({ mode, setMode }) => {
                     {/* <Button color='secondary' component={Link} to={`/profile/${getPayload().sub}/`} sx={{ textTransform: 'none' }}>profile</Button> */}
                     <Button color='secondary' onClick={handleProfileClick} sx={{ textTransform: 'none' }}>profile</Button>
                     <Menu anchorEl={profileAnchorEl} open={openProfile} onClose={handleProfileClose}>
-                      <MenuItem onClick={handleProfileNav}>My Profile</MenuItem>
-                      <MenuItem onClick={handleProfileNav}>My Cards</MenuItem>
-                      <MenuItem onClick={handleLogOut}>Logout</MenuItem>
+                      <MenuItem onClick={handleProfileNav}>my profile</MenuItem>
+                      <MenuItem onClick={handleProfileNav}>my cards</MenuItem>
+                      <MenuItem onClick={handleLogOut}>logout</MenuItem>
                     </Menu>
                   </>
                 }
@@ -185,17 +185,17 @@ const Navigation = ({ mode, setMode }) => {
                         <Collapse in={openBurgerProfile} timeout='auto' unmountOnExit>
                           <List component='div' disablePadding>
                             <ListItem sx={{ py: 0 }} >
-                              <ListItemButton sx={{ pl: 4 }}>
-                                <ListItemText primary='my cards' />
-                              </ListItemButton>
-                            </ListItem>
-                            <ListItem sx={{ py: 0 }} >
-                              <ListItemButton as={Link} to={`/profile/${getPayload().sub}/`} sx={{ pl: 4 }}>
+                              <ListItemButton onClick={handleProfileNav} sx={{ pl: 4 }}>
                                 <ListItemText primary='my profile' />
                               </ListItemButton>
                             </ListItem>
                             <ListItem sx={{ py: 0 }} >
-                              <ListItemButton sx={{ pl: 4 }} onClick={handleLogOut}>
+                              <ListItemButton onClick={handleProfileNav} sx={{ pl: 4 }}>
+                                <ListItemText primary='my cards' />
+                              </ListItemButton>
+                            </ListItem>
+                            <ListItem sx={{ py: 0 }} >
+                              <ListItemButton onClick={handleLogOut} sx={{ pl: 4 }}>
                                 <ListItemText primary='logout' />
                               </ListItemButton>
                             </ListItem>

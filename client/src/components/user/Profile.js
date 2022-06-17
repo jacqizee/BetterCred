@@ -55,9 +55,9 @@ const Profile = () => {
 
     if (location.state) {
       setCurrentPage(location.state.profileDest)
-      location.state.profileDest === 'My Profile' ? setEditProfileDeco('underline') : setMyCardsDeco('underline')
+      location.state.profileDest === 'my profile' ? setEditProfileDeco('underline') : setMyCardsDeco('underline')
     } else {
-      setCurrentPage('My Profile')
+      setCurrentPage('my profile')
     }
 
     // Get Profile Details
@@ -79,14 +79,14 @@ const Profile = () => {
   }, [])
 
   const handleMenu = (e) => {
-    if (e.target.innerHTML === 'My Profile') {
-      setCurrentPage('My Profile')
+    if (e.target.innerHTML === 'my profile') {
+      setCurrentPage('my profile')
       setEditProfileDeco('underline')
       setMyCardsDeco('none')
     }
 
-    if (e.target.innerHTML === 'My Cards') {
-      setCurrentPage('My Cards')
+    if (e.target.innerHTML === 'my cards') {
+      setCurrentPage('my cards')
       setMyCardsDeco('underline')
       setEditProfileDeco('none')
     }
@@ -104,12 +104,12 @@ const Profile = () => {
 
                 {/* My Profile */}
                 <ListItem>
-                  <ListItemText onClick={handleMenu} sx={{ textDecoration: editProfileDeco, '&:hover': { cursor: 'pointer' } }}>My Profile</ListItemText>
+                  <ListItemText onClick={handleMenu} sx={{ textDecoration: editProfileDeco, '&:hover': { cursor: 'pointer' } }}>my profile</ListItemText>
                 </ListItem>
 
                 {/* My Cards */}
                 <ListItem>
-                  <ListItemText onClick={handleMenu} sx={{ textDecoration: myCardsDeco, '&:hover': { cursor: 'pointer' } }}>My Cards</ListItemText>
+                  <ListItemText onClick={handleMenu} sx={{ textDecoration: myCardsDeco, '&:hover': { cursor: 'pointer' } }}>my cards</ListItemText>
                 </ListItem>
                 
               </List>
@@ -118,13 +118,13 @@ const Profile = () => {
 
           {/* Bottom Navigation - xs screens only */}
           <BottomNavigation showLabels sx={{ display: { xs: 'inline-flex', sm: 'none' }, position: 'fixed', width: '100%', bottom: 0 }}>
-            <BottomNavigationAction label='My Profile' onClick={handleMenu}/>
-            <BottomNavigationAction label='My Cards' onClick={handleMenu}/>
+            <BottomNavigationAction label='my profile' onClick={handleMenu}/>
+            <BottomNavigationAction label='my cards' onClick={handleMenu}/>
           </BottomNavigation>
 
-          {currentPage === 'My Profile' ? 
+          {currentPage === 'my profile' ? 
             <EditProfile profileDetails={profileDetails} setProfileDetails={setProfileDetails} userId={userId} token={token} />
-            : currentPage === 'My Cards' ?
+            : currentPage === 'my cards' ?
               <MyCards profileDetails={profileDetails} setProfileDetails={setProfileDetails} userId={userId} token={token} /> : ''
           }
         </Box>
