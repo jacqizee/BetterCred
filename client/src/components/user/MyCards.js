@@ -5,6 +5,12 @@ import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Divider from '@mui/material/Divider'
 import Slide from '@mui/material/Slide'
+import Table from '@mui/material/Table'
+import TableBody from '@mui/material/TableBody'
+import TableCell from '@mui/material/TableCell'
+import TableContainer from '@mui/material/TableContainer'
+import TableHead from '@mui/material/TableHead'
+import TableRow from '@mui/material/TableRow'
 
 const MyCards = ({ profileDetails, setProfileDetails }) => {
 
@@ -62,17 +68,36 @@ const MyCards = ({ profileDetails, setProfileDetails }) => {
 
                       {/* Key Details */}
                       <Box sx={{ display: 'flex' }}>
+
+                        <TableContainer>
+                          <Table sx={{ width: '100%' }} aria-label="simple table" size='small'>
+                            <TableHead>
+                              <TableRow>
+                                <TableCell align="center" sx={{ fontSize: '.75rem', lineHeight: 1.2, p: .5 }}>Annual Fee</TableCell>
+                                <TableCell align="center" sx={{ fontSize: '.75rem', lineHeight: 1.2, p: .5 }}>Base Rewards Rate</TableCell>
+                                <TableCell align="center" sx={{ fontSize: '.75rem', lineHeight: 1.2, p: .5 }}>Foreign Transaction Fee</TableCell>
+                              </TableRow>
+                            </TableHead>
+                            <TableBody>
+                              <TableCell align="center" sx={{ fontSize: '.75rem', lineHeight: 1.2, p: .5 }}>${card.annual_fee}</TableCell>
+                              <TableCell align="center" sx={{ fontSize: '.75rem', lineHeight: 1.2, p: .5 }}>{card.base_reward_rate}%</TableCell>
+                              <TableCell align="center" sx={{ fontSize: '.75rem', lineHeight: 1.2, p: .5 }}>{card.foreign_fee}%</TableCell>
+                            </TableBody>
+                          </Table>
+                        </TableContainer>
+
                         {/* Annual Fee */}
-                        <Box sx={{ textAlign: 'center', m: 1 }}>
+                        {/* <Box sx={{ textAlign: 'center', m: 1 }}>
                           <Typography variant='body1'>Annual Fee</Typography>
                           <Typography variant='body2'>${card.annual_fee}</Typography>
-                        </Box>
+                        </Box> */}
 
                         {/* Foreign Transaction Fee */}
-                        <Box sx={{ textAlign: 'center', m: 1 }}>
+                        {/* <Box sx={{ textAlign: 'center', m: 1 }}>
                           <Typography variant='body1'>Foreign Transaction Fee</Typography>
                           <Typography variant='body2'>{card.foreign_fee}%</Typography>
-                        </Box>
+                        </Box> */}
+
                       </Box>
                     </Box>
                   </Box>
