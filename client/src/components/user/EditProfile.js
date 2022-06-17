@@ -29,8 +29,10 @@ const EditProfile = ({ profileDetails, setProfileDetails, userId, token }) => {
   // Handle Form Submit
   const handleSubmit = async (e) => {
     e.preventDefault()
+    const updateDetails = { ...profileDetails }
+    delete updateDetails.wallet
     try {
-      await axios.put(`/api/auth/profile/${userId}/`, profileDetails, {
+      await axios.put(`/api/auth/profile/${userId}/`, updateDetails, {
         headers: {
           'Authorization': `Bearer ${token}`,
         },

@@ -117,7 +117,7 @@ const Profile = () => {
           </Slide>
 
           {/* Bottom Navigation - xs screens only */}
-          <BottomNavigation showLabels sx={{ display: { xs: 'inline-flex', sm: 'none' }, position: 'fixed', width: '100%', bottom: 0 }}>
+          <BottomNavigation showLabels sx={{ display: { xs: 'inline-flex', sm: 'none' }, position: 'fixed', width: '100%', bottom: 0, zIndex: 10 }}>
             <BottomNavigationAction label='my profile' onClick={handleMenu}/>
             <BottomNavigationAction label='my cards' onClick={handleMenu}/>
           </BottomNavigation>

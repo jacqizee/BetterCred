@@ -88,17 +88,18 @@ const MyCards = ({ profileDetails, setProfileDetails, userId, token }) => {
                       <Typography variant='subtitle2' sx={{ fontWeight: 'bold', mt: 1 }}>{card.issuer.name} {card.name}</Typography>
 
                       {/* Reward Icons */}
-                      <Box sx={{ mb: 1, display: 'flex' }}>
+                      <Box sx={{ display: 'flex', mb: -.5 }}>
                         { card.cash_back_category.length ?
                           card.cash_back_category.map((index, category) => <Box key={index} sx={{ color: 'secondary.contrastText' }}>{rewardIcon(category)}</Box>) :
                           <Box><Icon><HorizontalRuleRoundedIcon sx={{ p: .5 }} /></Icon></Box> }
                       </Box>
 
                       {/* Key Details */}
-                      <Box sx={{ display: 'flex' }}>
+                      <Box sx={{ display: 'flex', width: '100%' }}>
 
                         <TableContainer sx={{ my: 1, bgcolor: 'background.paperContrast', borderRadius: 1 }}>
-                          <Table sx={{ width: '100%' }} aria-label="simple table" size='small'>
+                          <Table aria-label="simple table" size='small'>
+
                             <TableHead>
                               <TableRow>
                                 <TableCell align="center" sx={{ fontSize: '.75rem', lineHeight: 1.2, p: .5 }}>Annual Fee</TableCell>
@@ -106,11 +107,13 @@ const MyCards = ({ profileDetails, setProfileDetails, userId, token }) => {
                                 <TableCell align="center" sx={{ fontSize: '.75rem', lineHeight: 1.2, p: .5 }}>Foreign Transaction Fee</TableCell>
                               </TableRow>
                             </TableHead>
+                            
                             <TableBody>
                               <TableCell align="center" sx={{ fontSize: '.75rem', lineHeight: 1.2, p: .5 }}>${card.annual_fee}</TableCell>
                               <TableCell align="center" sx={{ fontSize: '.75rem', lineHeight: 1.2, p: .5 }}>{card.base_reward_rate}%</TableCell>
                               <TableCell align="center" sx={{ fontSize: '.75rem', lineHeight: 1.2, p: .5 }}>{card.foreign_fee}%</TableCell>
                             </TableBody>
+
                           </Table>
                         </TableContainer>
                       </Box>
