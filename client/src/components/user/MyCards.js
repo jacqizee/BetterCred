@@ -90,7 +90,7 @@ const MyCards = ({ profileDetails, setProfileDetails, userId, token }) => {
                       {/* Reward Icons */}
                       <Box sx={{ display: 'flex', mb: -.5 }}>
                         { card.cash_back_category.length ?
-                          card.cash_back_category.map((index, category) => <Box key={index} sx={{ color: 'secondary.contrastText' }}>{rewardIcon(category)}</Box>) :
+                          card.cash_back_category.map((category, index) => <Box key={index} sx={{ color: 'secondary.contrastText' }}>{rewardIcon(category)}</Box>) :
                           <Box><Icon><HorizontalRuleRoundedIcon sx={{ p: .5 }} /></Icon></Box> }
                       </Box>
 

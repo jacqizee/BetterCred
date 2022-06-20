@@ -6,7 +6,7 @@ import { flexCentered } from '../styles/Styling'
 
 const Loading = () => {
   return (
-    <Box sx={{ ...flexCentered, width: '100vw', height: 'calc(100vh - 60px)' }}>
+    <Box sx={{ ...flexCentered, width: '100vw', height: 'calc(100vh - 60px)', bgcolor: 'background.default' }}>
       <Box component='img' src={BouncingCards} sx={{ width: '35rem' }}  />
     </Box>
   )

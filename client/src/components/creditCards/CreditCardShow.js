@@ -117,7 +117,7 @@ const CreditCardShow = () => {
             {/* Reward Icons */}
             <Box sx={{ ...flexRowCentered, flexWrap: 'wrap', my: 1 }}>
               { cardData.cash_back_category.length ?
-                cardData.cash_back_category.map((index, category) => <Box key={index} sx={{ color: 'secondary.contrastText' }}>{rewardIcon(category)}</Box>) :
+                cardData.cash_back_category.map((category, index) => <Box key={index} sx={{ color: 'secondary.contrastText' }}>{rewardIcon(category)}</Box>) :
                 <Box><Icon sx={ iconStyle }><HorizontalRuleRoundedIcon sx={{ p: .5 }} /></Icon></Box> }
             </Box>
                         

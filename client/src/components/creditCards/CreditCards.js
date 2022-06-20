@@ -53,7 +53,7 @@ const CreditCards = () => {
 
   // When search term is changed, filter credit cards
   useEffect(() => {
-    if (!cards) return
+    if (!cards) return  
     const filterCards = searchTerm.length ? cards.filter(card => card.name.toLowerCase().includes(searchTerm.toLowerCase())) : cards
     setFilteredCards(filterCards)
   }, [searchTerm])
@@ -120,7 +120,7 @@ const CreditCards = () => {
                     {/* Reward Icons */}
                     <Box sx={{ ...flexRowCentered, flexWrap: 'wrap', borderRadius: 10, minWidth: '50%', mb: 1 }}>
                       { card.cash_back_category.length > 0 ?
-                        card.cash_back_category.map((index, category) => <Box key={index} sx={{ color: 'secondary.contrastText' }}>{rewardIcon(category)}</Box>) :
+                        card.cash_back_category.map((category, index) => <Box key={index} sx={{ color: 'secondary.contrastText' }}>{rewardIcon(category)}</Box>) :
                         <Box><Icon sx={ iconStyle }><HorizontalRuleRoundedIcon sx={{ p: .5 }} /></Icon></Box> }
                     </Box>
                     
