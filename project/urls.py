@@ -25,5 +25,5 @@ urlpatterns = [
     path('api/network/', include('networks.urls')),
     path('api/cash-back/', include('cash_back_categories.urls')),
     path('api/credit-ranges/', include('credit_ranges.urls')),
-    re_path(r'^.*$', index),
+    re_path(r'^.*$', index)
 ]
