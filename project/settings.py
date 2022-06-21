@@ -15,22 +15,22 @@ import django_on_heroku
 from pathlib import Path
 import os
 
-# Environment Variables
-import environ
-env = environ.Env()
-environ.Env.read_env()
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
+# Environment Variables
+import environ
+env = environ.Env()
+environ.Env.read_env()
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = []
 
@@ -78,10 +78,6 @@ TEMPLATES = [
         },
     },
 ]
-
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'client', "build", "static"),
-)
 
 WSGI_APPLICATION = 'project.wsgi.application'
 
@@ -150,5 +146,9 @@ REST_FRAMEWORK = {
         'jwt_auth.authentication.JWTAuthentication'
     ]
 }
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'client', "build", "static"),
+)
 
 django_on_heroku.settings(locals())
