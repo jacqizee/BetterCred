@@ -1,6 +1,11 @@
 from rest_framework.authentication import BasicAuthentication
 from rest_framework.exceptions import PermissionDenied
 
+# Environment Variables
+import environ
+env = environ.Env()
+environ.Env.read_env()
+
 from django.conf import settings
 
 import jwt
@@ -28,7 +33,7 @@ class JWTAuthentication(BasicAuthentication):
 
         #  Decode the token and save the user to a variable
         try:
-            payload = jwt.decode(token, settings.SECRET_KEY, ['HS256'])
+            payload = jwt.decode(token, env('SECRET_KEY'), ['HS256'])
             user = User.objects.get(pk = payload.get('sub'))
         except jwt.InvalidTokenError:
             raise PermissionDenied('Token is invalid.')

@@ -1,4 +1,3 @@
-from ast import ExceptHandler
 from rest_framework import serializers
 from django.core.exceptions import ValidationError
 from django.contrib.auth import get_user_model, password_validation

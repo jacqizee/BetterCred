@@ -10,7 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+import django_on_heroku
+
 from pathlib import Path
+import os
 
 # Environment Variables
 import environ
@@ -32,7 +35,6 @@ SECRET_KEY = env('SECRET_KEY')
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -66,7 +68,7 @@ ROOT_URLCONF = 'project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'client')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -78,6 +80,10 @@ TEMPLATES = [
         },
     },
 ]
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'client', "build", "static"),
+)
 
 WSGI_APPLICATION = 'project.wsgi.application'
 
@@ -148,5 +154,4 @@ REST_FRAMEWORK = {
     ]
 }
 
-
-
+django_on_heroku.settings(locals())
