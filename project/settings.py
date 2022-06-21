@@ -148,7 +148,9 @@ REST_FRAMEWORK = {
 }
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'client', "build", "static"),
+    os.path.join(BASE_DIR, 'client', 'build', 'static'),
 )
 
 django_on_heroku.settings(locals())
+
+print(os.environ.get('SECRET_KEY'))
