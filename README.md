@@ -80,23 +80,29 @@ Planning out the back-end of the project allowed me to plan and prioritize which
 
 ![BetterCred ERD](./client/src/assets/readme/ERD.png)
 
+### Project Management
+
+I used Asana to help myself stay organized and to keep track of pending tasks I had planned. Whenever I would catch a bug or discover something I needed to add to my agenda, I would enter each task into the board. Using this tool helped me visualize outstanding items I needed to tackle, as well as reflect on what I had finished and how I was progressing.
+
+I also attended daily standups with my cohort in the program, where we could share with a larger group any problems or discoveries we wanted to discuss.
+
 ## Coding
 
 ### Back-End
+
+Once the ERD using QuickDBD was drafted out, I worked to build out the different models, views, and serializers using Django and Python.
 
 #### Models
 
 I had several models planned out:
 * Networks
-* Cash back categories
-* Credit ranges
+* Cash Back Categories
+* Credit Ranges
 * Credit Cards
 * Users
 * Bonuses (if I had remaining time)
 
-The reason I chose to split out networks, cash back ranges, and credit ranges from Credit Cards was for filtering purposes, so if the database of credit cards ever grows to a very large size, it would make it easier to get data back filted for certain features, rather than filtering through credit card data on the front-end.
-
-Once the ERD using QuickDBD was drafted out, I worked to build out the different models using Django and Python. The credit card model was the most complex model, with several many-to-one and many-to-many relationships.
+The Credit Card model was the most complex model, with several many-to-one and many-to-many relationships. The reason I chose to split out networks, cash back ranges, and credit ranges from Credit Cards was for filtering purposes, so it would make it easier to return back filtered for certain features, rather than potentially returning the full credit card array and then filtering it on the front-end.
 
 ```
 class CreditCard(models.Model):
@@ -123,7 +129,7 @@ class CreditCard(models.Model):
 
 #### User Authentication
 
-I had to create several different views to handle user login and registration requests, most of which was relatively straightforward. For the login request, I defined a view that would return a jwt token encoding the userID and token expiration date in the payload if the request data was valid.
+I had to create several different views to handle user login and registration requests, most of which was relatively straightforward. For the login request, I defined a view that would return a jwt token encoding the userID and token expiration date to the payload if the request data was valid.
 
 ```
 class LoginView(APIView):
@@ -168,9 +174,10 @@ class LoginView(APIView):
             status.HTTP_202_ACCEPTED
         )
 ```
+
 #### Adding Card to Wallet
 
-Users can add or delete cards from their wallets. I handled this by creating a view for requests to a unique endpoint `/profile/<int:pk>/wallet`, which handled both POST and DELETE requests.
+Users can add or delete cards from their wallets. To handle this on the back-end, I created a view for requests to a unique endpoint `/profile/<int:pk>/wallet` that passed in the unique id of the specific credit card, then handled either POST and DELETE requests.
 
 ```
 # POST - add card to user wallet
@@ -212,13 +219,49 @@ Users can add or delete cards from their wallets. I handled this by creating a v
 
 ### Front-End
 
+The front-end took up a majority of the time spent on the project. I built the front-end using React and Material UI.
+
 #### Login/Register Modals
 
+Rather than building out specific pages for user login and register, I opted for modals that would display over the current page the user was on, keeping the login/register experience more seamless. At first, one issue I ran into was trying to figure out how to switch between the two modals (ex. opening up the login modal from the register modal). To solve this, I defined the state of the Login/Register modal from the Navbar, then passed them down to both the Login/Register components as props, so I could set both states out of either component.
+
+```
+  // swapping from Join modal to Login modal
+  const handleSwap = () => {
+    setJoinOpen(false)
+    setLoginOpen(true)
+  }
+```
+
+#### User Profile
+
+For the user profile, I created a sidebar that would allow users to switch between two menu options, "My Profile" or "My Wallet", without the need of reloading the page. I achieved this by toggling between two different components, handling the swap with a handleMenu function that would underline the active component and update the current component shown.
+
+```
+  const handleMenu = (e) => {
+    if (e.target.innerHTML === 'my profile') {
+      setCurrentPage('my profile')
+      setEditProfileDeco('underline')
+      setMyCardsDeco('none')
+    }
+
+    if (e.target.innerHTML === 'my cards') {
+      setCurrentPage('my cards')
+      setMyCardsDeco('underline')
+      setEditProfileDeco('none')
+    }
+  }
+```
+
 #### Search Feature
+
+
 
 ## Reflection
 
 ### Challenges
+
+I think a major challenge for this project was managing expectations and prioritization. I was a bit ambitious at the beginning of the week, with several features I was hoping to build into my project. As the deadline for the project approached, I found myself wishing I had prioritized certain features of others. For example, in retrospect I would have rather worked to roll out more robust filtering/sorting of credit cards on the Explore page in place of more aesthetic features like dark mode.
 
 ### Key Learnings
 
