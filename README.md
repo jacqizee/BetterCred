@@ -3,7 +3,7 @@
 ## Overview
 This was the fourth project for the Software Engineering Immersive course with GA, which consisted of a one week solo full-stack project.
 
-You can find the deployed version of the project [here]().
+You can find the deployed version of the project [here](https://bettercred.herokuapp.com/).
 
 ## Navigation
 
@@ -37,6 +37,8 @@ You can find the deployed version of the project [here]().
 ## Technologies 
 
 * JavaScript (ES6+)
+* Python
+* Django
 * React & React Router
 * Material UI (MUI)
 * HTML5, CSS3, and SASS
@@ -45,15 +47,25 @@ You can find the deployed version of the project [here]().
 * Pylint
 * Git & GitHub
 * TablePlus
+* Insomnia
 
 ## Planning
 
-
 ### Features
+
+* Homepage
+* Login/Register forms in the form of modals
+* Card Explore Page - topline information on different credit cards
+* Card Show Page - more detailed information on a specific credit card
+* Add to Wallet - users can add cards to their digital "wallet" by clicking a button on the card show page
+* User Wallet Page - where a user can view cards they have saved to their wallet
+* Edit Profile Page - change name, password, email, or username
+* Responsive Design
+* Dark Mode
 
 ### Wireframing
 
-![BetterCred Wireframe]()
+![BetterCred Wireframe](~/client/src/assets/readme/wireframe.png)
 
 ## Coding
 
