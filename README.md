@@ -5,6 +5,8 @@ This was the fourth project for the Software Engineering Immersive course with G
 
 You can find the deployed version of the project [here](https://bettercred.herokuapp.com/).
 
+![Preview of BetterCred](./client/src/assets/readme/BetterCred-Preview.gif)
+
 ## Navigation
 
 * [Brief](#the-brief)
@@ -14,7 +16,7 @@ You can find the deployed version of the project [here](https://bettercred.herok
   * [Wireframing](#wireframing)
 * [Coding](#coding)
   * [Search Feature](#search-feature)
-  * [Favorites Feature](#favorites-feature)
+  * [Favorites Feature](#add-to-wallet-feature)
 * [Reflection](#reflection)
   * [Challenges](#challenges)
   * [Key Learnings](#key-learnings)
@@ -51,6 +53,8 @@ You can find the deployed version of the project [here](https://bettercred.herok
 
 ## Planning
 
+My initial plan for this project was to create an app that made it easy for users to browse many different credit cards, allowing them to find cards with the features that would be most useful based on their own lifestyle preferences. If a user decides they like a certain card, they'd be able to save them to their user profile in a virtual 'wallet' of sorts, which helps them organize the cards they may have already applied for or would like to apply for in the future.
+
 ### Features
 
 * Homepage
@@ -65,13 +69,23 @@ You can find the deployed version of the project [here](https://bettercred.herok
 
 ### Wireframing
 
-![BetterCred Wireframe](~/client/src/assets/readme/wireframe.png)
+![BetterCred Wireframe](./client/src/assets/readme/wireframe.png)
+
+### Entity Relationship Diagram (ERD)
+
+![BetterCred ERD](./client/src/assets/readme/ERD.png)
 
 ## Coding
 
-### Search Feature
+### Back-End
 
-### Favorites Feature
+### Front-End
+
+#### Login/Register Modals
+
+#### Add to Wallet Feature
+
+#### Search Feature
 
 ## Reflection
 
@@ -84,7 +98,7 @@ You can find the deployed version of the project [here](https://bettercred.herok
 ## Credits:
 
 * Images
-  * 
+  * [NerdWallet](https://www.nerdwallet.com/)
 
 * Fonts
-  * 
+  * [Raleway](https://fonts.google.com/specimen/Raleway)
