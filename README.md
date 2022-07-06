@@ -50,17 +50,6 @@ You can find the deployed version of the project [here]().
 
 
 ### Features
-We used MoSCoW (Must-Have, Should-Have, Could-Have, and Won't-Have) as a base for planning the features for our project, and decided these were the main features we hoped to implement:
-* Must-Have
-  * Detailed recipe page
-  * Cuisine and Category pages
-  * Navbar
-* Should-Have
-  * Homepage
-* Could-Have
-  * Search bar
-  * Random recipe button
-  * Saving recipe favorites on local memory
 
 ### Wireframing
 
