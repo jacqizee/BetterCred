@@ -254,10 +254,6 @@ For the user profile, I created a sidebar that would allow users to switch betwe
   }
 ```
 
-#### Search Feature
-
-
-
 ## Reflection
 
 ### Challenges
