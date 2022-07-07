@@ -279,6 +279,7 @@ I think the biggest wins for this project include:
 
 There was a lot more I wish I could have built out for this project, some of which I may continue to work on to further develop this app. Some of the ideas missed included:
 * More robust filtering and sorting for the credit card explore page
+* Expanding credit card search to allow users to search beyond just credit card name, but also through other fields
 * Looking into web scraping to more easily pull credit card information out of websites to populate the database
 * A "Bonus" section to the site that contains active credit card bonus offers that users can filter through
 * Adding a "Learn" section to the site containing articles for further reading for users who want to learn about credit, credit cards, etc.
