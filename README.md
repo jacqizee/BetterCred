@@ -260,14 +260,11 @@ For the user profile, I created a sidebar that would allow users to switch betwe
 
 I think a major challenge for this project was managing expectations and prioritization. I was a bit ambitious at the beginning of the week, with several features I was hoping to build into my project. As the deadline for the project approached, I found myself wishing I had prioritized certain features of others. For example, in retrospect I would have rather worked to roll out more robust filtering/sorting of credit cards on the Explore page in place of more aesthetic features like dark mode.
 
-### Key Learnings
-
-I
-
 ### Wins
 
 I think the biggest wins for this project include:
 * Building a full-stack application solo under a tight deadline
+* Continuing to improve my skills with React and Python/Django
 * Incorporating animations and MUI components for a visually appealing design
 * Creating a REST API and creating serializiers, populated serializers, and capability for user authentication
 
@@ -280,7 +277,7 @@ There was a lot more I wish I could have built out for this project, some of whi
 * A "Bonus" section to the site that contains active credit card bonus offers that users can filter through
 * Adding a "Learn" section to the site containing articles for further reading for users who want to learn about credit, credit cards, etc.
 * Down the line, maybe even a forum for users to discuss amongst themselves
- * In which case, adding capability for users to set their profile picture, and incorportating cloud storage for uploaded images
+  * In which case, adding capability for users to set their profile picture, and incorportating cloud storage for uploaded images
 
 ## Credits:
 
