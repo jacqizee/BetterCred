@@ -20,6 +20,7 @@ You can find the deployed version of the project [here](https://bettercred.herok
 * [Reflection](#reflection)
   * [Challenges](#challenges)
   * [Key Learnings](#key-learnings)
+  * [Wins](#wins)
 * [Future Features](#future-features)
 * [Credits](#credits)
 
@@ -265,7 +266,24 @@ I think a major challenge for this project was managing expectations and priorit
 
 ### Key Learnings
 
+I
+
+### Wins
+
+I think the biggest wins for this project include:
+* Building a full-stack application solo under a tight deadline
+* Incorporating animations and MUI components for a visually appealing design
+* Creating a REST API and creating serializiers, populated serializers, and capability for user authentication
+
 ## Future Features
+
+There was a lot more I wish I could have built out for this project, some of which I may continue to work on to further develop this app. Some of the ideas missed included:
+* More robust filtering and sorting for the credit card explore page
+* Looking into web scraping to more easily pull credit card information out of websites to populate the database
+* A "Bonus" section to the site that contains active credit card bonus offers that users can filter through
+* Adding a "Learn" section to the site containing articles for further reading for users who want to learn about credit, credit cards, etc.
+* Down the line, maybe even a forum for users to discuss amongst themselves
+ * In which case, adding capability for users to set their profile picture, and incorportating cloud storage for uploaded images
 
 ## Credits:
 
