@@ -71,7 +71,7 @@ My initial plan for this project was to create an app that made it easy for user
 
 ### Wireframing
 
-I spent a fair amount of time thinking through how I wanted the front-end to look like, having learned the importance of strong planning from previous projects, especially as I only had one week to work through the features I wanted to implement.
+I spent a fair amount of time thinking through how I wanted the front-end to look, having learned the importance of strong planning from previous projects, especially as I only had one week to work through the features I wanted to implement.
 
 ![BetterCred Wireframe](./client/src/assets/readme/wireframe.png)
 
@@ -260,13 +260,20 @@ For the user profile, I created a sidebar that would allow users to switch betwe
 
 I think a major challenge for this project was managing expectations and prioritization. I was a bit ambitious at the beginning of the week, with several features I was hoping to build into my project. As the deadline for the project approached, I found myself wishing I had prioritized certain features of others. For example, in retrospect I would have rather worked to roll out more robust filtering/sorting of credit cards on the Explore page in place of more aesthetic features like dark mode.
 
+### Key Learnings
+
+Apart from getting more comfortable with Python, Django, and React through this project, these are some of the key learnings I took away:
+* Creating re-usable React components - for several features, like the reward categories, I created re-useable React components for icons and formatting, which eased styling and functionality of things on the front-end
+* Passing variables/states between components - I was able to gain a better understanding of use cases for why this makes sense to do. For example, I used this with the NavBar and the Login/Register modals, allowing the user to seamlessly swap between the two modals
+* Designing a SQL/relational database with the help of entity relationship diagrams and advanced planning and research
+
 ### Wins
 
 I think the biggest wins for this project include:
 * Building a full-stack application solo under a tight deadline
 * Continuing to improve my skills with React and Python/Django
 * Incorporating animations and MUI components for a visually appealing design
-* Creating a REST API and creating serializiers, populated serializers, and capability for user authentication
+* Creating a REST API and creating serializers, populated serializers, and capability for user authentication
 
 ## Future Features
 
@@ -277,7 +284,7 @@ There was a lot more I wish I could have built out for this project, some of whi
 * A "Bonus" section to the site that contains active credit card bonus offers that users can filter through
 * Adding a "Learn" section to the site containing articles for further reading for users who want to learn about credit, credit cards, etc.
 * Down the line, maybe even a forum for users to discuss amongst themselves
-  * In which case, adding capability for users to set their profile picture, and incorportating cloud storage for uploaded images
+  * In which case, adding capability for users to set their profile picture, and incorporating cloud storage for uploaded images
 
 ## Credits:
 
