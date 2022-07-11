@@ -130,7 +130,7 @@ class CreditCard(models.Model):
 
 #### User Authentication
 
-I had to create several different views to handle user login and registration requests, most of which was relatively straightforward. For the login request, I defined a view that would return a jwt token encoding the userID and token expiration date to the payload if the request data was valid.
+I had to create several different views to handle user login and registration requests, most of which were relatively straightforward. For the login request, I defined a view that would return a jwt token encoding the userID and token expiration date to the payload if the request data was valid.
 
 ```
 class LoginView(APIView):
