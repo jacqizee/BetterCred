@@ -198,7 +198,7 @@ class WalletView(APIView):
         # Delete card from wallet
         user.wallet.remove(card)
 
-        # Return User and 202 status
+        # Return User and 204 status
         return Response(status = status.HTTP_204_NO_CONTENT)
         
 

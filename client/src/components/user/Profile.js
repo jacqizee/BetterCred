@@ -79,14 +79,13 @@ const Profile = () => {
   }, [])
 
   const handleMenu = (e) => {
+    setCurrentPage(e.target.innerHTML)
     if (e.target.innerHTML === 'my profile') {
-      setCurrentPage('my profile')
       setEditProfileDeco('underline')
       setMyCardsDeco('none')
     }
 
     if (e.target.innerHTML === 'my cards') {
-      setCurrentPage('my cards')
       setMyCardsDeco('underline')
       setEditProfileDeco('none')
     }

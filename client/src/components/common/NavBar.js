@@ -128,7 +128,6 @@ const Navigation = ({ mode, setMode }) => {
                 {/* Profile Button */}
                 { window.localStorage.getItem('bettercred') &&
                   <>
-                    {/* <Button color='secondary' component={Link} to={`/profile/${getPayload().sub}/`} sx={{ textTransform: 'none' }}>profile</Button> */}
                     <Button color='secondary' onClick={handleProfileClick} sx={{ textTransform: 'none' }}>profile</Button>
                     <Menu anchorEl={profileAnchorEl} open={openProfile} onClose={handleProfileClose}>
                       <MenuItem onClick={handleProfileNav}>my profile</MenuItem>

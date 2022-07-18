@@ -54,7 +54,12 @@ const CreditCards = () => {
   // When search term is changed, filter credit cards
   useEffect(() => {
     if (!cards) return  
-    const filterCards = searchTerm.length ? cards.filter(card => card.name.toLowerCase().includes(searchTerm.toLowerCase())) : cards
+    const filterCards = searchTerm.length ? cards.filter(card => {
+      return (
+        card.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        card.issuer.name.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    }) : cards
     setFilteredCards(filterCards)
   }, [searchTerm])
 
