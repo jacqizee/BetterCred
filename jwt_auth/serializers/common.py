@@ -1,4 +1,3 @@
-from ast import ExceptHandler
 from rest_framework import serializers
 from django.core.exceptions import ValidationError
 from django.contrib.auth import get_user_model, password_validation
@@ -29,7 +28,7 @@ class UserSerializer(serializers.ModelSerializer):
             raise ValidationError({ 'error': e.messages })
         except Exception as e:
             print('message', e)
-            raise Exception({ 'error': e.messages })
+            raise Exception({ 'error': e })
 
         # Save hashed password to data
         data['password'] = make_password(password)
