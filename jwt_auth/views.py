@@ -22,8 +22,6 @@ from credit_cards.models import CreditCard
 from django.contrib.auth import get_user_model
 User = get_user_model()
 
-
-
 # Create your views here.
 
 # Endpoint: /register/
