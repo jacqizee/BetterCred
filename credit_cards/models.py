@@ -25,5 +25,5 @@ class CreditCard(models.Model):
     credit_range = models.ForeignKey('credit_ranges.CreditRange', related_name = 'credit_cards', on_delete = models.PROTECT, default = None)
     # bonus_offers = models.ManyToOneRel
 
-    def __str__(self):
+    def __str__(self): # pragma: no cover
         return f'{self.name}'

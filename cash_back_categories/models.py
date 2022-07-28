@@ -5,5 +5,5 @@ from django.db import models
 class CashBackCategory(models.Model):
     type = models.CharField(max_length=50)
 
-    def __str__(self):
+    def __str__(self): # pragma: no cover
         return f'{self.type}'

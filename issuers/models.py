@@ -7,5 +7,5 @@ class Issuer(models.Model):
     logo = models.CharField(max_length=500)
     link = models.CharField(max_length=500)
 
-    def __str__(self):
+    def __str__(self): # pragma: no cover
         return f'{self.name}'

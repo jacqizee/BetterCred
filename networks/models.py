@@ -6,5 +6,5 @@ class Network(models.Model):
     name = models.CharField(max_length=25)
     logo = models.CharField(max_length=500)
 
-    def __str__(self):
+    def __str__(self): # pragma: no cover
         return f'{self.name}'
