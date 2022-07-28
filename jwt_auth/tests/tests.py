@@ -1,6 +1,6 @@
 from django.test import TestCase, Client
 from django.urls import reverse
-from .models import User
+from ..models import User
 
 # Create your tests here.
 
@@ -57,5 +57,17 @@ class TestUsers(TestCase):
             'password': 'pass123!'
         }
 
-        response = self.client.post(req_url, login_details, content_type = 'application/json', follow=True)
+        response = self.client.post(req_url, login_details)
         self.assertEqual(response.status_code, 202)
+        self.assertTrue(response.data['token'])
+
+    def test_user_login_wrong_details_POST(self):
+        req_url = reverse('user-login')
+        login_details = {
+            'username': 'JohnnyBoy',
+            'password': 'passs123!'
+        }
+
+        response = self.client.post(req_url, login_details)
+        self.assertEqual(response.status_code, 403)
+        self.assertEqual(response.data.get('detail'), 'Invalid credentials.')
