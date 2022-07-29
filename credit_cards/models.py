@@ -5,7 +5,7 @@ from django.contrib.auth import get_user_model
 # Create your models here.
 
 class CreditCard(models.Model):
-    name = models.CharField(max_length = 50)
+    name = models.CharField(max_length = 50, unique=True)
     image = models.CharField(max_length = 500)
     link = models.CharField(max_length = 500)
     annual_fee = models.IntegerField(default = None)

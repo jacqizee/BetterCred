@@ -1,5 +1,5 @@
 from django.test import TestCase
-from .models import CreditCard
+from ..views import CreditCard
 from issuers.models import Issuer
 from networks.models import Network
 from credit_ranges.models import CreditRange
@@ -29,7 +29,6 @@ class TestCreditCards(TestCase):
             ),
             network = Network.objects.create(name="New Network", logo="https://logo-url.com"),
             credit_range = CreditRange.objects.create(range="Excellent"),
-            # cash_back_category = [3, 5]
         )
         CreditCard.objects.create(
             name = "Testing 2",
@@ -53,10 +52,24 @@ class TestCreditCards(TestCase):
             ),
             network = Network.objects.create(name="New Network", logo="https://logo-url.com"),
             credit_range = CreditRange.objects.create(range="Excellent"),
-            # cash_back_category = [3, 5]
         )
     
     def test_model(self):
         test_card_1 = CreditCard.objects.get(name="Testing 1")
         self.assertEqual(test_card_1.name, "Testing 1")
         self.assertEqual(CreditCard.objects.count(), 2)
+
+    def test_no_duplicate_names(self):
+        self.assertFalse(CreditCard.objects.create(
+            name = 'Testing 1',
+            image = 'image',
+            link = 'link',
+            annual_fee = 50,
+            foreign_fee = 2.5,
+            base_reward_rate = 2.5,
+            regular_APR_min = 24.6,
+            regular_APR_max = 50.6,
+            credit_range = CreditRange.objects.get(range='Excellent'),
+            network = Network.objects.get(name='New Network'),
+            issuer = Issuer.objects.get(name='Discover Express')
+        ))
