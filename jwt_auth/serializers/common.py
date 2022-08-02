@@ -17,7 +17,6 @@ class UserSerializer(serializers.ModelSerializer):
         
         # Check if passwords match, if not raise a ValidationError
         if password != password_confirmation:
-            print('passwords do not match')
             raise ValidationError({ 'error': 'Passwords do not match' })
 
         # Once we confirm passwords match, validate password strength

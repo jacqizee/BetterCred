@@ -1,5 +1,6 @@
 from django.test import TestCase
 from django.urls import reverse
+from rest_framework.test import APIClient
 from ..models import User
 
 # Create your tests here.
@@ -59,7 +60,7 @@ class TestRegister(TestCase):
     def test_user_register_mismatched_passwords_POST(self):
         # Test that Register Passwords Must Match
         response = self.client.post(self.req_url, {
-            'username': 'user123',
+            **self.user_details,
             'password': 'hellooo'
         })
         self.assertEqual(response.status_code, 422)
@@ -86,4 +87,41 @@ class TestRegister(TestCase):
         self.assertEqual(response.status_code, 422)
 
 class TestProfile(TestCase):
-    pass
+    
+    def setUp(self):
+        self.client = APIClient()
+        user = User.objects.create(
+            username = 'JohnnyBoy',
+            email = "email@gmail.com",
+            first_name = "John",
+            last_name = "Smith",
+        )
+        other_user = User.objects.create(
+            username = 'PicklePete',
+            email = "pickleguy@gmail.com",
+            first_name = "Pete",
+            last_name = "Pickles",
+        )
+        self.req_url = reverse('user-profile', args=[user.id])
+    
+    def test_user_profile_not_authenticated_GET(self):
+        # Tests that GET will return error if user is not authenticated
+        response = self.client.get(self.req_url)
+        self.assertEqual(response.status_code, 401)
+
+    def test_user_profile_authenticated_GET(self):
+        # Tests that GET will return 200 and populated user profile is user is correct and authenticated
+        self.client.force_authenticate(User.objects.get(username='JohnnyBoy'))
+        response = self.client.get(self.req_url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue('wallet' in response.data.keys())
+
+    def test_other_user_profile_authenticated_GET(self):
+        # Tests that GET will return 403 if is user is incorrect but authenticated
+        self.client.force_authenticate(User.objects.get(username='PicklePete'))
+        response = self.client.get(self.req_url)
+        self.assertEqual(response.status_code, 403)
+
+class TestWallet(TestCase):
+    def setUp(self):
+        self.req_url = reverse('user-wallet')
