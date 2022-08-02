@@ -56,8 +56,7 @@ jobs:
         PORT: 5432
         POSTGRES_USER: postgres
         POSTGRES_PASSWORD: postgres
-        SECRET_KEY: {{secrets.SECRET}}
-        DEBUG: True
+        DEBUG: False
 
     - name: Run Tests
       run: |
