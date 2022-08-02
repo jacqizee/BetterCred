@@ -13,7 +13,8 @@ jobs:
       postgres:
         image: postgres:latest
         env:
-          POSTGRES_PASSWORD: postgres
+          POSTGRES_USERNAME: postgresusername
+          POSTGRES_PASSWORD: postgrespassword
         ports:
           - 5432:5432
         options: >-
