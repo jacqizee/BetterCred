@@ -11,11 +11,8 @@ psycopg2-binary = "*"
 djangorestframework = "*"
 pyjwt = "*"
 django-environ = "*"
-<<<<<<< HEAD
 coverage = "*"
-=======
 django-on-heroku = "*"
->>>>>>> main
 
 [dev-packages]
 
