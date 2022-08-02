@@ -52,6 +52,8 @@ jobs:
       env: 
         POSTGRES_HOST: localhost
         POSTGRES_PORT: 5432
+        POSTGRES_USERNAME: ${{secrets.USERNAME}}
+        POSTGRES_PASSWORD: ${{secrets.PASSWORD}}
         SECRET_KEY: ${{secrets.SECRET}}
         DEBUG: True
 
