@@ -1,19 +1,32 @@
-name: Django CI
+name:
+  Django CI
 
 on:
   push
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
     strategy:
       max-parallel: 4
       matrix:
         python-version: [3.7, 3.8, 3.9]
+        include:
+          - db: postgres
+            db_port: 5432
 
     steps:
-    - uses: actions/checkout@v3
+    - name: Check out repo code
+      uses: actions/checkout@v3
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v3
       with:
