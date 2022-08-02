@@ -13,14 +13,16 @@ jobs:
       postgres:
         image: postgres:latest
         env:
+          POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
-        ports:
-          - 5432:5432
+          POSTGRES_DB: postgres
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
+        ports:
+          - 5432:5432
 
     strategy:
       max-parallel: 4
@@ -47,6 +49,7 @@ jobs:
 
     - name: Connect to PostgreSQL
       run: |
+        pipenv run python manage.py migrate
         pipenv run python manage.py runserver
       env: 
         POSTGRES_HOST: localhost
