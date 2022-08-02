@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+from logging import debug
 import django_on_heroku
 
 from pathlib import Path
@@ -88,13 +89,12 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'bettercred',
-        'USER': env('USER'),
+        'USER': env('USERNAME'),
         'PASSWORD': env('PASSWORD'),
         'HOST': 'localhost',
         'PORT': 5432
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
