@@ -49,7 +49,7 @@ jobs:
 
     - name: Connect to PostgreSQL
       run: |
-        python manage.py runserver
+        pipenv run python manage.py runserver
       env: 
         POSTGRES_HOST: postgres
         POSTGRES_PORT: 5432
