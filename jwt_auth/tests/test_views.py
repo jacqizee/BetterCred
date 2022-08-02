@@ -89,7 +89,6 @@ class TestRegister(TestCase):
         self.assertEqual(response.status_code, 422)
 
 class TestProfile(TestCase):
-    
     def setUp(self):
         self.client = APIClient()
         self.user = User.objects.create(
