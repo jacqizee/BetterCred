@@ -1,5 +1,7 @@
+from multiprocessing import AuthenticationError
 from django.test import TestCase
 from django.urls import reverse
+from rest_framework.exceptions import PermissionDenied
 from rest_framework.test import APIClient
 from ..models import User
 
@@ -90,36 +92,65 @@ class TestProfile(TestCase):
     
     def setUp(self):
         self.client = APIClient()
-        user = User.objects.create(
+        self.user = User.objects.create(
             username = 'JohnnyBoy',
             email = "email@gmail.com",
             first_name = "John",
             last_name = "Smith",
         )
-        other_user = User.objects.create(
+        self.other_user = User.objects.create(
             username = 'PicklePete',
             email = "pickleguy@gmail.com",
             first_name = "Pete",
             last_name = "Pickles",
         )
-        self.req_url = reverse('user-profile', args=[user.id])
-    
+        self.req_url = reverse('user-profile', args=[self.user.id])
+
     def test_user_profile_not_authenticated_GET(self):
-        # Tests that GET will return error if user is not authenticated
+        # Tests that GET will return 401 error if user is not authenticated
         response = self.client.get(self.req_url)
         self.assertEqual(response.status_code, 401)
 
     def test_user_profile_authenticated_GET(self):
         # Tests that GET will return 200 and populated user profile is user is correct and authenticated
-        self.client.force_authenticate(User.objects.get(username='JohnnyBoy'))
+        self.client.force_authenticate(User.objects.get(username=self.user.username))
         response = self.client.get(self.req_url)
         self.assertEqual(response.status_code, 200)
         self.assertTrue('wallet' in response.data.keys())
 
     def test_other_user_profile_authenticated_GET(self):
-        # Tests that GET will return 403 if is user is incorrect but authenticated
-        self.client.force_authenticate(User.objects.get(username='PicklePete'))
+        # Tests that GET will return 403 if is user is authenticated but id does not match profile id
+        self.client.force_authenticate(User.objects.get(username=self.other_user.username))
         response = self.client.get(self.req_url)
+        self.assertEqual(response.status_code, 403)
+
+    def test_false_user_profile_authenticated_GET(self):
+        # Tests that GET will return 404 if is user is authenticated but profile does not exist
+        self.client.force_authenticate(User.objects.get(username=self.user.username))
+        response = self.client.get(reverse('user-profile', args=[999]))
+        self.assertEqual(response.status_code, 404)
+
+    def test_user_profile_edit_PUT(self):
+        pass
+
+    def test_user_profile_edit_PUT(self):
+        pass
+
+    def test_user_profile_unauthenticated_DELETE(self):
+        # Test that delete request will return 401 if user is not authenticated
+        response = self.client.delete(self.req_url)
+        self.assertEqual(response.status_code, 401)
+
+    def test_user_profile_authenticated_DELETE(self):
+        # Tests that delete request for correct user will return 204
+        self.client.force_authenticate(User.objects.get(username=self.user.username))
+        response = self.client.delete(self.req_url)
+        self.assertEqual(response.status_code, 204)
+
+    def test_user_profile_authenticated_DELETE(self):
+        # Tests that delete request for incorrect user will return 403
+        self.client.force_authenticate(User.objects.get(username=self.other_user.username))
+        response = self.client.delete(self.req_url)
         self.assertEqual(response.status_code, 403)
 
 class TestWallet(TestCase):
