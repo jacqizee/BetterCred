@@ -88,6 +88,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'bettercred',
+        'USERNAME': env('USERNAME'),
+        'PASSWORD': env('PASSWORD'),
         'HOST': 'localhost',
         'PORT': 5432
     }
