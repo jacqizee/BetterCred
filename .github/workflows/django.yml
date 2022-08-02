@@ -13,8 +13,7 @@ jobs:
       postgres:
         image: postgres:latest
         env:
-          POSTGRES_USERNAME: ${{secrets.USERNAME}}
-          POSTGRES_PASSWORD: ${{secrets.PASSWORD}}
+          POSTGRES_PASSWORD: postgres
         ports:
           - 5432:5432
         options: >-
@@ -52,8 +51,8 @@ jobs:
       env: 
         POSTGRES_HOST: localhost
         POSTGRES_PORT: 5432
-        POSTGRES_USERNAME: ${{secrets.USERNAME}}
-        POSTGRES_PASSWORD: ${{secrets.PASSWORD}}
+        POSTGRES_USERNAME: postgres
+        POSTGRES_PASSWORD: postgres
         SECRET_KEY: ${{secrets.SECRET}}
         DEBUG: True
 
