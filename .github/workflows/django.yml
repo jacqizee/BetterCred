@@ -30,3 +30,4 @@ jobs:
         pipenv run ./manage.py test
       env:
         SECRET_KEY: ${{secrets.SECRET}}
+        DEBUG: True
