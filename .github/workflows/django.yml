@@ -54,8 +54,8 @@ jobs:
       env: 
         HOST: localhost
         PORT: 5432
-        USER: postgres
-        PASSWORD: postgres
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: postgres
         SECRET_KEY: {{secrets.SECRET}}
         DEBUG: True
 
