@@ -53,10 +53,9 @@ jobs:
       env: 
         POSTGRES_HOST: postgres
         POSTGRES_PORT: 5432
+        SECRET_KEY: ${{secrets.SECRET}}
+        DEBUG: True
 
     - name: Run Tests
       run: |
         pipenv run ./manage.py test
-      env:
-        SECRET_KEY: ${{secrets.SECRET}}
-        DEBUG: True
