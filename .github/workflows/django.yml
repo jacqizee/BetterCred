@@ -47,21 +47,10 @@ jobs:
       run: |
         pipenv install
 
-    # - name: Connect to PostgreSQL
-    #   run: |
-    #     pipenv run python manage.py migrate
-    #     pipenv run python manage.py runserver
-    #   env: 
-    #     HOST: localhost
-    #     PORT: 5432
-    #     USER: postgres
-    #     PASSWORD: postgres
-    #     SECRET_KEY: {{secrets.SECRET}}
-    #     DEBUG: True
-
-    - name: Run Tests
+    - name: Connect to PostgreSQL
       run: |
-        pipenv run ./manage.py test
+        pipenv run python manage.py migrate
+        pipenv run python manage.py runserver
       env: 
         HOST: localhost
         PORT: 5432
@@ -69,3 +58,7 @@ jobs:
         PASSWORD: postgres
         SECRET_KEY: {{secrets.SECRET}}
         DEBUG: True
+
+    - name: Run Tests
+      run: |
+        pipenv run ./manage.py test
