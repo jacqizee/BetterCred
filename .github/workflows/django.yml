@@ -21,6 +21,9 @@ jobs:
     - name: Install pipenv
       run: |
         python -m pip install --upgrade pipenv wheel
+    - name: Install django
+      run: |
+        pipenv install django
     - name: Run Tests
       run: |
         pipenv run ./manage.py test
