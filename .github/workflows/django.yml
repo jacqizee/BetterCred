@@ -52,11 +52,12 @@ jobs:
         pipenv run python manage.py migrate
         pipenv run python manage.py runserver
       env: 
-        HOST: localhost
-        PORT: 5432
+        SECRET_KEY: ${{secrets.SECRET}}
+        DEBUG: ${{secrets.DEBUG}}
+        POSTGRES_HOST: localhost
+        POSTGRES_PORT: 5432
         POSTGRES_USER: postgres
         POSTGRES_PASSWORD: postgres
-        DEBUG: False
 
     - name: Run Tests
       run: |
