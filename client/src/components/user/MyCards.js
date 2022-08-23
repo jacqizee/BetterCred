@@ -5,18 +5,7 @@ import { deleteWalletCard } from '../helpers/creditCards'
 import { rewardIcon } from '../styles/Icons'
 
 // MUI Components
-import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
-import Divider from '@mui/material/Divider'
-import Slide from '@mui/material/Slide'
-import Button from '@mui/material/Button'
-import Table from '@mui/material/Table'
-import TableBody from '@mui/material/TableBody'
-import TableCell from '@mui/material/TableCell'
-import TableContainer from '@mui/material/TableContainer'
-import TableHead from '@mui/material/TableHead'
-import TableRow from '@mui/material/TableRow'
-import Icon from '@mui/material/Icon'
+import { Box, Typography, Button, TextField, Divider, Alert, Slide, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Icon } from '../styles/MaterialUI'
 import HorizontalRuleRoundedIcon from '@mui/icons-material/HorizontalRuleRounded'
 
 const MyCards = ({ profileDetails, setProfileDetails, userId, token }) => {

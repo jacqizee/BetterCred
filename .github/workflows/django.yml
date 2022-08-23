@@ -13,10 +13,9 @@ jobs:
       postgres:
         image: postgres:latest
         env:
-          SECRET_KEY: django-insecure-@o-)qrym-cn6_*mx8dnmy#m4*$j%8wyy+l=)va&pe)9e7@o4i)
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: postgres
+          POSTGRES_DB: github_actions
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -53,8 +52,7 @@ jobs:
         DB_NAME: postgres
         DB_USER: postgres
         DB_PASSWORD: postgres
-        DJANGO_ALLOWED_HOSTS: localhost 127.0.0.1 [::1]
-        DEBUG_MODE: False
+        DEBUG: False
       run: |
         pipenv run python manage.py migrate
 

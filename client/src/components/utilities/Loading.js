@@ -1,5 +1,4 @@
-import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
+import { Box, Typography } from '../styles/MaterialUI'
 
 import BouncingCards from '../../assets/bouncing-cards.gif'
 import { flexCentered } from '../styles/Styling'

@@ -1,8 +1,6 @@
 import { Link } from 'react-router-dom'
 
-import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
-import Zoom from '@mui/material/Zoom'
+import { Box, Typography, Zoom } from '../styles/MaterialUI'
 
 import Construction from '../../assets/under-construction.gif'
 import { flexCentered } from '../styles/Styling'

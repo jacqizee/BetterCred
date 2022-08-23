@@ -6,13 +6,7 @@ import { handleLogOut } from '../helpers/auth.js'
 import { handleFormChange } from '../helpers/forms'
 
 // MUI Components
-import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
-import Button from '@mui/material/Button'
-import TextField from '@mui/material/TextField'
-import Divider from '@mui/material/Divider'
-import Alert from '@mui/material/Alert'
-import Slide from '@mui/material/Slide'
+import { Box, Typography, Button, TextField, Divider, Alert, Slide } from '../styles/MaterialUI'
 
 const EditProfile = ({ profileDetails, setProfileDetails, userId, token }) => {
 

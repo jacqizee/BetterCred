@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 
-import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
+import { Box, Typography } from '../styles/MaterialUI'
 
 import AngryCard from '../../assets/angry-card.gif'
 import { flexCentered } from '../styles/Styling'

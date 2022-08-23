@@ -71,6 +71,7 @@ const Profile = () => {
     }
   }, [location.state])
 
+  // Update styling of profile menu based on current state
   useEffect(() => {
     if (currentPage === 'my profile') {
       setEditProfileDeco('underline')
