@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 // Error Handling
@@ -11,12 +11,7 @@ import { getLocalToken, getPayload, handleLogOut } from '../helpers/auth'
 import { handleWalletButton, displayFeatures } from '../helpers/creditCards'
 
 // MUI Components
-import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
-import Button from '@mui/material/Button'
-import List from '@mui/material/List'
-import Divider from '@mui/material/Divider'
-import Icon from '@mui/material/Icon'
+import { Box, Typography, Divider, Icon, Button, List } from '../styles/MaterialUI'
 
 // Icons
 import { creditRangeIcon, rewardIcon, iconStyle } from '../styles/Icons'
