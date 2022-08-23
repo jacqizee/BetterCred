@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 // Helpers
@@ -21,10 +20,6 @@ import Icon from '@mui/material/Icon'
 import HorizontalRuleRoundedIcon from '@mui/icons-material/HorizontalRuleRounded'
 
 const MyCards = ({ profileDetails, setProfileDetails, userId, token }) => {
-
-  useEffect(() => {
-    console.log(profileDetails.wallet)
-  })
 
   return (
     <Slide in={true} direction='up'>
@@ -53,8 +48,8 @@ const MyCards = ({ profileDetails, setProfileDetails, userId, token }) => {
             :
             profileDetails.wallet.map(card => {
               return (
-                <>
-                  <Box key={card.id}
+                <Box key={card.id}>
+                  <Box
                     sx={{ display: 'flex',
                       flexDirection: { xs: 'column', md: 'row' },
                       py: { xs: 1, sm: 2 },
@@ -109,9 +104,11 @@ const MyCards = ({ profileDetails, setProfileDetails, userId, token }) => {
                             </TableHead>
                             
                             <TableBody>
-                              <TableCell align="center" sx={{ fontSize: '.75rem', lineHeight: 1.2, p: .5 }}>${card.annual_fee}</TableCell>
-                              <TableCell align="center" sx={{ fontSize: '.75rem', lineHeight: 1.2, p: .5 }}>{card.base_reward_rate}%</TableCell>
-                              <TableCell align="center" sx={{ fontSize: '.75rem', lineHeight: 1.2, p: .5 }}>{card.foreign_fee}%</TableCell>
+                              <TableRow>
+                                <TableCell align="center" sx={{ fontSize: '.75rem', lineHeight: 1.2, p: .5 }}>${card.annual_fee}</TableCell>
+                                <TableCell align="center" sx={{ fontSize: '.75rem', lineHeight: 1.2, p: .5 }}>{card.base_reward_rate}%</TableCell>
+                                <TableCell align="center" sx={{ fontSize: '.75rem', lineHeight: 1.2, p: .5 }}>{card.foreign_fee}%</TableCell>
+                              </TableRow>
                             </TableBody>
 
                           </Table>
@@ -131,7 +128,7 @@ const MyCards = ({ profileDetails, setProfileDetails, userId, token }) => {
 
                   {/* Divider */}
                   <Divider flexItem sx={{ mx: 2 }} />
-                </>
+                </Box>
               )
             })
         }

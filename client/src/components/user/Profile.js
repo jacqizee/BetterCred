@@ -76,7 +76,7 @@ const Profile = () => {
       setLoading(false)
     }
     getProfileDetails()
-  }, [])
+  }, [location.state])
 
   const handleMenu = (e) => {
     setCurrentPage(e.target.innerHTML)

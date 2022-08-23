@@ -8,24 +8,18 @@ import Loading from '../utilities/Loading.js'
 
 // Helper Functions
 import { getLocalToken, getPayload, handleLogOut } from '../helpers/auth'
-import { handleWalletButton } from '../helpers/creditCards'
+import { handleWalletButton, displayFeatures } from '../helpers/creditCards'
 
 // MUI Components
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import List from '@mui/material/List'
-import ListItem from '@mui/material/ListItem'
-import ListItemAvatar from '@mui/material/ListItemAvatar'
-import Avatar from '@mui/material/Avatar'
-import ListItemText from '@mui/material/ListItemText'
 import Divider from '@mui/material/Divider'
 import Icon from '@mui/material/Icon'
 
 // Icons
 import { creditRangeIcon, rewardIcon, iconStyle } from '../styles/Icons'
-import ThumbUpRoundedIcon from '@mui/icons-material/ThumbUpRounded'
-import ThumbDownRoundedIcon from '@mui/icons-material/ThumbDownRounded'
 import HorizontalRuleRoundedIcon from '@mui/icons-material/HorizontalRuleRounded'
 
 // Styling
@@ -67,26 +61,6 @@ const CreditCardShow = () => {
     }
     getCard()
   }, [])
-
-  // Map Pros and Cons with Icons
-  const displayFeatures = (type) => {
-    const elements = []
-    for (let i = 1; i < 4; i++) {
-      if (cardData[`${type}_${i}`]){
-        elements.push(
-          <ListItem key={i}>
-            <ListItemAvatar>
-              <Avatar sx={{ boxShadow: 2, bgcolor: 'secondary.main', width: { xs: '1.5rem', md: '3rem' }, height: { xs: '1.5rem', md: '3rem' } }}>
-                { type === 'pro' ? <ThumbUpRoundedIcon sx={{ color: 'limegreen', width: '65%' }} /> : <ThumbDownRoundedIcon sx={{ color: 'tomato', width: '65%' }} /> }
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary={cardData[`${type}_${i}`]} primaryTypographyProps={{ variant: 'body2' }} />
-          </ListItem>
-        )
-      }
-    }
-    return elements
-  }
 
   return (
     <>
@@ -187,7 +161,7 @@ const CreditCardShow = () => {
                 <Box sx={{ width: { xs: '95%', md: '50%' }, mx: { xs: 1, md: 2 } }}>
                   <Typography variant='h6' >Pros</Typography>
                   <List sx={{ bgcolor: 'background.paperMoreContrast' }}>
-                    { displayFeatures('pro') }
+                    { displayFeatures('pro', cardData) }
                   </List>
                 </Box>
 
@@ -195,7 +169,7 @@ const CreditCardShow = () => {
                 <Box sx={{ width: { xs: '95%', md: '50%' }, mx: { xs: 1, md: 2 }, mt: { xs: 2, md: 0 } }}>
                   <Typography variant='h6'>Cons</Typography>
                   <List sx={{ bgcolor: 'background.paperMoreContrast' }}>
-                    { displayFeatures('con') }
+                    { displayFeatures('con', cardData) }
                   </List>
                 </Box>
 
