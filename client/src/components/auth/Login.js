@@ -15,6 +15,9 @@ import Link from '@mui/material/Link'
 import LockRoundedIcon from '@mui/icons-material/LockRounded'
 import CloseIcon from '@mui/icons-material/Close'
 
+// Helpers
+import { loginForm, handleFormChange } from '../helpers/auth'
+
 // Styling
 import { loginModalStyle } from '../styles/Styling'
 
@@ -31,21 +34,13 @@ const Login = ({ loginOpen, setLoginOpen, joinOpen, setJoinOpen }) => {
   const [ loggedIn, setLoggedIn ] = useState(false)
 
   // Form Data State
-  const clearedForm = {
-    username: '',
-    password: '',
-  }
-  const [ formData, setFormData ] = useState(clearedForm)
+
+  const [ formData, setFormData ] = useState(loginForm)
 
   // Swap from Login Modal to Join Modal
   const handleSwap = (e) => {
     setLoginOpen(false)
     setJoinOpen(true)
-  }
-
-  // Handle Form Change
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
   // Handle Form Submit
@@ -55,12 +50,12 @@ const Login = ({ loginOpen, setLoginOpen, joinOpen, setJoinOpen }) => {
       const { data } = await axios.post('/api/auth/login/', formData)
       window.localStorage.setItem('bettercred', data.token)
       setLoggedIn(true)
-      setFormData(clearedForm)
+      setFormData(loginForm)
       setLoginOpen(false)
       window.location.reload()
     } catch (error) {
       setFormErrors(error.response.data.detail)
-      setFormData(clearedForm)
+      setFormData(loginForm)
     }
   }
 
@@ -98,7 +93,7 @@ const Login = ({ loginOpen, setLoginOpen, joinOpen, setJoinOpen }) => {
                 variant='filled'
                 error={formErrors}
                 value={formData.username}
-                onChange={handleChange}
+                onChange={(e) => handleFormChange(e, setFormData, formData)}
                 fullWidth />
             </Grid>
 
@@ -111,7 +106,7 @@ const Login = ({ loginOpen, setLoginOpen, joinOpen, setJoinOpen }) => {
                 variant='filled'
                 error={formErrors}
                 value={formData.password}
-                onChange={handleChange}
+                onChange={(e) => handleFormChange(e, setFormData, formData)}
                 fullWidth />
             </Grid>
 

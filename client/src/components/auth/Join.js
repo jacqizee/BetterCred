@@ -15,6 +15,9 @@ import Link from '@mui/material/Link'
 import LockRoundedIcon from '@mui/icons-material/LockRounded'
 import CloseIcon from '@mui/icons-material/Close'
 
+// Helpers
+import { registerForm, handleFormChange } from '../helpers/auth'
+
 // Styling
 import { loginModalStyle } from '../styles/Styling'
 
@@ -30,25 +33,12 @@ const Join = ({ loginOpen, setLoginOpen, joinOpen, setJoinOpen }) => {
   // State of Modal Submit Button
   const [ registered, setRegistered ] = useState(false)
 
-  const [ formData, setFormData ] = useState({
-    username: '',
-    email: '',
-    first_name: '',
-    last_name: '',
-    password: '',
-    password_confirmation: '',
-    profile_picture: '',
-  })
+  const [ formData, setFormData ] = useState(registerForm)
 
   // Handle Modal Swap Join -> Login
   const handleSwap = (e) => {
     setJoinOpen(false)
     setLoginOpen(true)
-  }
-
-  // Handle Form Change
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
   // Handle Form Submit
@@ -108,7 +98,7 @@ const Join = ({ loginOpen, setLoginOpen, joinOpen, setJoinOpen }) => {
                 label='Email'
                 variant='filled'
                 value={formData.email}
-                onChange={handleChange}
+                onChange={() => handleFormChange(setFormData, formData)}
                 error={Boolean(formErrors.email)}
                 helperText={formErrors.email}
                 fullWidth />
@@ -121,7 +111,7 @@ const Join = ({ loginOpen, setLoginOpen, joinOpen, setJoinOpen }) => {
                 label='First Name'
                 variant='filled'
                 value={formData.first_name}
-                onChange={handleChange}
+                onChange={() => handleFormChange(setFormData, formData)}
                 error={Boolean(formErrors.first_name)}
                 helperText={formErrors.first_name}
                 fullWidth />
@@ -134,7 +124,7 @@ const Join = ({ loginOpen, setLoginOpen, joinOpen, setJoinOpen }) => {
                 label='Last Name'
                 variant='filled'
                 value={formData.last_name}
-                onChange={handleChange}
+                onChange={() => handleFormChange(setFormData, formData)}
                 error={Boolean(formErrors.last_name)}
                 helperText={formErrors.last_name}
                 fullWidth />
@@ -147,7 +137,7 @@ const Join = ({ loginOpen, setLoginOpen, joinOpen, setJoinOpen }) => {
                 label='Username'
                 variant='filled'
                 value={formData.username}
-                onChange={handleChange}
+                onChange={() => handleFormChange(setFormData, formData)}
                 error={Boolean(formErrors.username)}
                 helperText={formErrors.username}
                 fullWidth />
@@ -161,7 +151,7 @@ const Join = ({ loginOpen, setLoginOpen, joinOpen, setJoinOpen }) => {
                 label='Password'
                 variant='filled'
                 value={formData.password}
-                onChange={handleChange}
+                onChange={() => handleFormChange(setFormData, formData)}
                 error={Boolean(formErrors.password)}
                 helperText={formErrors.password}
                 fullWidth />
@@ -177,7 +167,7 @@ const Join = ({ loginOpen, setLoginOpen, joinOpen, setJoinOpen }) => {
                 value={formData.password_confirmation}
                 error={Boolean(formErrors.password_confirmation)}
                 helperText={formErrors.password_confirmation}
-                onChange={handleChange}
+                onChange={() => handleFormChange(setFormData, formData)}
                 fullWidth />
             </Grid>
 
