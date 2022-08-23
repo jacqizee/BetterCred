@@ -4,7 +4,7 @@
   "pk": 1,
   "fields": {
     "name": "Freedom Unlimited",
-    "image": "https://cdn.wallethub.com/common/product/images/creditcards/500/chase-freedom-unlimited-10082293c.png",
+    "image": "https://res.cloudinary.com/dpgkzplbu/image/upload/v1659027029/better-cred/chase-freedom-unlimited-10082293c_iazxqv.png",
     "link": "https://creditcards.chase.com/cash-back-credit-cards/freedom/unlimited?CELL=6TKV",
     "annual_fee": 0,
     "foreign_fee": 3.0,
@@ -31,7 +31,7 @@
   "pk": 2,
   "fields": {
     "name": "Active Cash Card",
-    "image": "https://cdn.wallethub.com/common/product/images/creditcards/500/wells-fargo-active-cash-card-15273346c.png",
+    "image": "https://res.cloudinary.com/dpgkzplbu/image/upload/v1659027038/better-cred/wells-fargo-active-cash-card-15273346c_y9cbxo.png",
     "link": "https://creditcards.wellsfargo.com/active-cash-credit-card/?sub_channel=WEB&vendor_code=WF&product_code=CC&subproduct_code=AC&cx_nm=CXNAME_CSM&FPID=012688IDF40000",
     "annual_fee": 0,
     "foreign_fee": 3.0,
@@ -55,7 +55,7 @@
   "pk": 3,
   "fields": {
     "name": "Sapphire Preferred",
-    "image": "https://cdn.wallethub.com/common/product/images/creditcards/500/chase-sapphire-reserve-credit-card-17201842c.png",
+    "image": "https://res.cloudinary.com/dpgkzplbu/image/upload/v1661266337/better-cred/j7qjtxml1yy1rqqg24bp.jpg",
     "link": "https://creditcards.chase.com/rewards-credit-cards/sapphire/preferred?CELL=6TKV",
     "annual_fee": 95,
     "foreign_fee": 0.0,
@@ -82,7 +82,7 @@
   "pk": 4,
   "fields": {
     "name": "Sapphire Reserve",
-    "image": "https://cdn.wallethub.com/common/product/images/creditcards/500/chase-sapphire-reserve-credit-card-17201842c.png",
+    "image": "https://res.cloudinary.com/dpgkzplbu/image/upload/v1659027047/better-cred/chase-sapphire-reserve-credit-card-17201842c_wa3aog.png",
     "link": "https://creditcards.chase.com/rewards-credit-cards/sapphire/reserve?CELL=6TKV",
     "annual_fee": 550,
     "foreign_fee": 0.0,
@@ -109,7 +109,7 @@
   "pk": 5,
   "fields": {
     "name": "Double Cash Card",
-    "image": "https://cdn.wallethub.com/common/product/images/creditcards/500/citi-double-cash-card-1235121c.png",
+    "image": "https://res.cloudinary.com/dpgkzplbu/image/upload/v1661266363/better-cred/citi-double-cash-card-1235121c_az3fj5.png",
     "link": "https://www.citi.com/credit-cards/citi-double-cash-credit-card",
     "annual_fee": 0,
     "foreign_fee": 3.0,
@@ -133,7 +133,7 @@
   "pk": 6,
   "fields": {
     "name": "Savor Cash Rewards",
-    "image": "https://ecm.capitalone.com/WCM/card/products/savor-card-art/tablet.png",
+    "image": "https://res.cloudinary.com/dpgkzplbu/image/upload/v1661266370/better-cred/tablet_ufdhyb.png",
     "link": "https://www.capitalone.com/credit-cards/savor-dining-rewards/",
     "annual_fee": 95,
     "foreign_fee": 0.0,
@@ -162,7 +162,7 @@
   "pk": 7,
   "fields": {
     "name": "Custom Cash Card",
-    "image": "https://cdn.wallethub.com/common/product/images/creditcards/500/citi-custom-cash-card-09333345c.png",
+    "image": "https://res.cloudinary.com/dpgkzplbu/image/upload/v1661266379/better-cred/citi-custom-cash-card-09333345c_oawv9y.png",
     "link": "https://www.citi.com/credit-cards/citi-custom-cash-credit-card?category=view-all-credit-cards&intc=megamenu~creditcards~vac&afc=135",
     "annual_fee": 0,
     "foreign_fee": 3.0,
