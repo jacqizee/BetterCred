@@ -16,7 +16,7 @@ import LockRoundedIcon from '@mui/icons-material/LockRounded'
 import CloseIcon from '@mui/icons-material/Close'
 
 // Helpers
-import { registerForm, handleFormChange } from '../helpers/auth'
+import { registerForm, handleFormChange } from '../helpers/forms'
 
 // Styling
 import { loginModalStyle } from '../styles/Styling'

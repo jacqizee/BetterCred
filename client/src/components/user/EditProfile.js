@@ -3,6 +3,7 @@ import axios from 'axios'
 
 // Helpers
 import { handleLogOut } from '../helpers/auth.js'
+import { handleFormChange } from '../helpers/forms'
 
 // MUI Components
 import Box from '@mui/material/Box'
@@ -20,11 +21,6 @@ const EditProfile = ({ profileDetails, setProfileDetails, userId, token }) => {
 
   // Form Submit State
   const [ submitted, setSubmitted ] = useState(false)
-
-  // Handle Form Change
-  const handleChange = (e) => {
-    setProfileDetails({ ...profileDetails, [e.target.name]: e.target.value })
-  }
 
   // Handle Form Submit
   const handleSubmit = async (e) => {
@@ -97,7 +93,7 @@ const EditProfile = ({ profileDetails, setProfileDetails, userId, token }) => {
           name='username'
           value={profileDetails.username} label='Username'
           variant='standard'
-          onChange={handleChange}
+          onChange={() => handleFormChange(profileDetails, setProfileDetails)}
           error={Boolean(formErrors.username)}
           helperText={formErrors.username}
           sx={{ mt: 1 }} />
@@ -107,7 +103,7 @@ const EditProfile = ({ profileDetails, setProfileDetails, userId, token }) => {
           name='first_name'
           value={profileDetails.first_name} label='First Name'
           variant='standard'
-          onChange={handleChange}
+          onChange={() => handleFormChange(profileDetails, setProfileDetails)}
           error={Boolean(formErrors.first_name)}
           helperText={formErrors.first_name}
           sx={{ mt: 1 }} />
@@ -117,7 +113,7 @@ const EditProfile = ({ profileDetails, setProfileDetails, userId, token }) => {
           name='last_name'
           value={profileDetails.last_name} label='Last Name'
           variant='standard'
-          onChange={handleChange}
+          onChange={() => handleFormChange(profileDetails, setProfileDetails)}
           error={Boolean(formErrors.last_name)}
           helperText={formErrors.last_name}
           sx={{ mt: 1 }} />
@@ -128,7 +124,7 @@ const EditProfile = ({ profileDetails, setProfileDetails, userId, token }) => {
           name='email'
           value={profileDetails.email} label='Email'
           variant='standard'
-          onChange={handleChange}
+          onChange={() => handleFormChange(profileDetails, setProfileDetails)}
           error={Boolean(formErrors.email)}
           helperText={formErrors.email}
           sx={{ mt: 1 }} />
@@ -139,7 +135,7 @@ const EditProfile = ({ profileDetails, setProfileDetails, userId, token }) => {
           name='password'
           value={profileDetails.password} label='Password'
           variant='standard'
-          onChange={handleChange}
+          onChange={() => handleFormChange(profileDetails, setProfileDetails)}
           error={Boolean(formErrors.password)}
           helperText={formErrors.password}
           required
@@ -152,7 +148,7 @@ const EditProfile = ({ profileDetails, setProfileDetails, userId, token }) => {
           value={profileDetails.password_confirmation}
           label='Password Confirmation'
           variant='standard'
-          onChange={handleChange}
+          onChange={() => handleFormChange(profileDetails, setProfileDetails)}
           error={Boolean(formErrors.password_confirmation)}
           helperText={formErrors.password_confirmation}
           required
