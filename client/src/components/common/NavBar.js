@@ -10,21 +10,9 @@ import { DarkModeSwitch } from '../styles/NavBar'
 import { getPayload, handleLogOut } from '../helpers/auth'
 
 // MUI Components
-import AppBar from '@mui/material/AppBar'
-import Box from '@mui/material/Box'
-import Toolbar from '@mui/material/Toolbar'
-import Typography from '@mui/material/Typography'
-import Button from '@mui/material/Button'
-import Drawer from '@mui/material/Drawer'
-import List from '@mui/material/List'
-import ListItem from '@mui/material/ListItem'
-import ListItemButton from '@mui/material/ListItemButton'
-import useScrollTrigger from '@mui/material/useScrollTrigger'
-import Slide from '@mui/material/Slide'
-import ListItemText from '@mui/material/ListItemText'
-import Menu from '@mui/material/Menu'
-import MenuItem from '@mui/material/MenuItem'
-import Collapse from '@mui/material/Collapse'
+import { AppBar, Box, Toolbar, Typography, Button, Drawer,
+  List, ListItem, ListItemButton, useScrollTrigger, Slide,
+  ListItemText, Menu, MenuItem, Collapse } from '../styles/MaterialUI'
 
 // Styling
 import { flexRowCentered } from '../styles/Styling'

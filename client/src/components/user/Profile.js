@@ -12,13 +12,7 @@ import Error from '../utilities/Error'
 import { getLocalToken, confirmUser } from '../helpers/auth.js'
 
 // MUI Components
-import Box from '@mui/material/Box'
-import List from '@mui/material/List'
-import ListItem from '@mui/material/ListItem'
-import ListItemText from '@mui/material/ListItemText'
-import Slide from '@mui/material/Slide'
-import BottomNavigation from '@mui/material/BottomNavigation'
-import BottomNavigationAction from '@mui/material/BottomNavigationAction'
+import { Box, List, ListItem, ListItemText, Slide, BottomNavigation, BottomNavigationAction } from '../styles/MaterialUI'
 
 const Profile = () => {
 
@@ -47,20 +41,8 @@ const Profile = () => {
     password_confirmation: '',
   })
 
+  // Get Profile Details on Page Load
   useEffect(() => {
-    // Confirm User is Logged In + Owner
-    if (!token || !confirmUser(userId)) {
-      nav('/')
-    }
-
-    if (location.state) {
-      setCurrentPage(location.state.profileDest)
-      location.state.profileDest === 'my profile' ? setEditProfileDeco('underline') : setMyCardsDeco('underline')
-    } else {
-      setCurrentPage('my profile')
-    }
-
-    // Get Profile Details
     const getProfileDetails = async () => {
       try {
         const { data } = await axios.get(`/api/auth/profile/${userId}/`, {
@@ -76,20 +58,29 @@ const Profile = () => {
       setLoading(false)
     }
     getProfileDetails()
+  }, [])
+
+  // Confirm User is Logged In + Owner
+  useEffect(() => {
+    if (!token || !confirmUser(userId)) {
+      nav('/')
+    }
+
+    if (location.state) {
+      setCurrentPage(location.state.profileDest)
+    }
   }, [location.state])
 
-  const handleMenu = (e) => {
-    setCurrentPage(e.target.innerHTML)
-    if (e.target.innerHTML === 'my profile') {
+  useEffect(() => {
+    if (currentPage === 'my profile') {
       setEditProfileDeco('underline')
       setMyCardsDeco('none')
     }
-
-    if (e.target.innerHTML === 'my cards') {
-      setMyCardsDeco('underline')
+    if (currentPage === 'my cards') {
       setEditProfileDeco('none')
+      setMyCardsDeco('underline')
     }
-  }
+  }, [currentPage])
 
   return (
     <>
@@ -103,12 +94,12 @@ const Profile = () => {
 
                 {/* My Profile */}
                 <ListItem>
-                  <ListItemText onClick={handleMenu} sx={{ textDecoration: editProfileDeco, '&:hover': { cursor: 'pointer' } }}>my profile</ListItemText>
+                  <ListItemText onClick={(e) => setCurrentPage(e.target.innerHTML)} sx={{ textDecoration: editProfileDeco, '&:hover': { cursor: 'pointer' } }}>my profile</ListItemText>
                 </ListItem>
 
                 {/* My Cards */}
                 <ListItem>
-                  <ListItemText onClick={handleMenu} sx={{ textDecoration: myCardsDeco, '&:hover': { cursor: 'pointer' } }}>my cards</ListItemText>
+                  <ListItemText onClick={(e) => setCurrentPage(e.target.innerHTML)} sx={{ textDecoration: myCardsDeco, '&:hover': { cursor: 'pointer' } }}>my cards</ListItemText>
                 </ListItem>
                 
               </List>
@@ -117,8 +108,8 @@ const Profile = () => {
 
           {/* Bottom Navigation - xs screens only */}
           <BottomNavigation showLabels sx={{ display: { xs: 'inline-flex', sm: 'none' }, position: 'fixed', width: '100%', bottom: 0, zIndex: 10 }}>
-            <BottomNavigationAction label='my profile' onClick={handleMenu}/>
-            <BottomNavigationAction label='my cards' onClick={handleMenu}/>
+            <BottomNavigationAction label='my profile' onClick={(e) => setCurrentPage(e.target.innerHTML)}/>
+            <BottomNavigationAction label='my cards' onClick={(e) => setCurrentPage(e.target.innerHTML)}/>
           </BottomNavigation>
 
           {currentPage === 'my profile' ? 
