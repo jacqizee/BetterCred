@@ -40,7 +40,7 @@ const Navigation = ({ mode, setMode }) => {
   const nav = useNavigate()
 
   // Navbar Menu Items
-  const menu = ['cards', 'bonuses', 'learn']
+  const mainMenu = ['cards', 'bonuses', 'learn']
 
   // Drawer State
   const [ drawerOpen, setDrawerOpen ] = useState(false)
@@ -121,7 +121,7 @@ const Navigation = ({ mode, setMode }) => {
 
               {/* Menu Items */}
               <Box sx={{ ml: 2 }}>
-                {menu.map(item => <Typography component={Link} to={`/${item}`} key={item} sx={{ textDecoration: 'none' }}><Button sx={{ color: 'secondary.light', textTransform: 'none' }}>{item}</Button></Typography>)}
+                {mainMenu.map(item => <Typography component={Link} to={`/${item}`} key={item} sx={{ textDecoration: 'none' }}><Button sx={{ color: 'secondary.light', textTransform: 'none' }}>{item}</Button></Typography>)}
               </Box>
               
               <Box sx={ flexRowCentered }>
@@ -166,7 +166,7 @@ const Navigation = ({ mode, setMode }) => {
                   <List color='primary' sx={{ textDecoration: 'none' }}>
 
                     {/* Menu Items */}
-                    {menu.map(item => {
+                    {mainMenu.map(item => {
                       return (
                         <ListItem key={item}>
                           <ListItemButton component={Link} to={`/${item}`}  sx={{ textDecoration: 'none' }} onClick={toggleDrawer(false)}>

@@ -13,7 +13,7 @@ jobs:
       postgres:
         image: postgres:latest
         env:
-          DJANGO_SECRET_KEY: django-insecure-@o-)qrym-cn6_*mx8dnmy#m4*$j%8wyy+l=)va&pe)9e7@o4i)
+          SECRET_KEY: django-insecure-@o-)qrym-cn6_*mx8dnmy#m4*$j%8wyy+l=)va&pe)9e7@o4i)
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: postgres
@@ -48,6 +48,8 @@ jobs:
         pipenv install
 
     - name: Run DB migrations
+      env: 
+        SECRET_KEY: django-insecure-@o-)qrym-cn6_*mx8dnmy#m4*$j%8wyy+l=)va&pe)9e7@o4i)
       run: |
         pipenv run python manage.py migrate
 
