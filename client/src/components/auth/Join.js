@@ -2,14 +2,7 @@ import { useState } from 'react'
 import axios from 'axios'
 
 // MUI Components
-import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
-import Button from '@mui/material/Button'
-import IconButton from '@mui/material/IconButton'
-import Modal from '@mui/material/Modal'
-import TextField from '@mui/material/TextField'
-import Grid from '@mui/material/Grid'
-import Link from '@mui/material/Link'
+import { Box, Typography, Button, IconButton, Modal, TextField, Grid, Link } from '../styles/MaterialUI'
 
 // Icons
 import LockRoundedIcon from '@mui/icons-material/LockRounded'

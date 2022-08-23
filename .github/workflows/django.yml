@@ -49,8 +49,12 @@ jobs:
 
     - name: Run DB migrations
       env: 
-        SECRET_KEY: django-insecure-@o-)qrym-cn6_*mx8dnmy#m4*$j%8wyy+l=)va&pe)9e7@o4i)
-        DEBUG: True
+        SECRET_KEY: d/&HxVIENE@yzzN
+        DB_NAME: postgres
+        DB_USER: postgres
+        DB_PASSWORD: postgres
+        DJANGO_ALLOWED_HOSTS: localhost 127.0.0.1 [::1]
+        DEBUG_MODE: False
       run: |
         pipenv run python manage.py migrate
 
