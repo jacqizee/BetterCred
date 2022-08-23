@@ -7,7 +7,7 @@ import Error from '../utilities/Error.js'
 import Loading from '../utilities/Loading.js'
 
 // Helper Functions
-import { getLocalToken, getPayload } from '../helpers/auth'
+import { getLocalToken, getPayload, handleLogOut } from '../helpers/auth'
 import { handleWalletButton } from '../helpers/creditCards'
 
 // MUI Components
@@ -60,8 +60,8 @@ const CreditCardShow = () => {
         }
         console.log(data)
       } catch (error) {
-        console.log(error.response.data.detail)
         setErrors(true)
+        handleLogOut()
       }
       setLoading(false)
     }

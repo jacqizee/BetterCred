@@ -16,5 +16,5 @@ export const confirmUser = (userId) => {
 
 export const handleLogOut = () => {
   window.localStorage.removeItem('bettercred')
-  window.location.reload(false)
+  window.location.replace('/cards')
 }

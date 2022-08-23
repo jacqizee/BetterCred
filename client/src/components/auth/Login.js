@@ -57,8 +57,8 @@ const Login = ({ loginOpen, setLoginOpen, joinOpen, setJoinOpen }) => {
       setLoggedIn(true)
       setFormData(clearedForm)
       setLoginOpen(false)
+      window.location.reload()
     } catch (error) {
-      console.log(error.response)
       setFormErrors(error.response.data.detail)
       setFormData(clearedForm)
     }
