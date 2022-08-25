@@ -17,6 +17,7 @@ import Loading from '../utilities/Loading.js'
 import { creditRangeIcon, rewardIcon, iconStyle } from '../styles/Icons'
 import HorizontalRuleRoundedIcon from '@mui/icons-material/HorizontalRuleRounded'
 import SearchIcon from '@mui/icons-material/Search'
+import CashBackIcons from './CashBackIcons'
 
 // Styling
 import { flexCentered, flexRowCentered } from '../styles/Styling'
@@ -133,7 +134,7 @@ const CreditCards = () => {
                     {/* Reward Icons */}
                     <Box sx={{ ...flexRowCentered, flexWrap: 'wrap', borderRadius: 10, minWidth: '50%', mb: 1 }}>
                       { card.cash_back_category.length > 0 ?
-                        card.cash_back_category.map((category, index) => <Box key={index} sx={{ color: 'secondary.contrastText' }}>{rewardIcon(category)}</Box>) :
+                        card.cash_back_category.map((category, index) => <Box key={index} sx={{ color: 'secondary.contrastText' }}><CashBackIcons category={category} /></Box>) :
                         <Box><Icon sx={ iconStyle }><HorizontalRuleRoundedIcon sx={{ p: .5 }} /></Icon></Box> }
                     </Box>
                     

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import axios from 'axios'
 
 // Error Handling
@@ -11,10 +11,11 @@ import { getLocalToken, getPayload, handleLogOut } from '../helpers/auth'
 import { handleWalletButton, displayFeatures } from '../helpers/creditCards'
 
 // MUI Components
-import { Box, Typography, Divider, Icon, Button, List } from '../styles/MaterialUI'
+import { Box, Typography, Icon, Button, List } from '../styles/MaterialUI'
 
 // Icons
-import { creditRangeIcon, rewardIcon, iconStyle } from '../styles/Icons'
+import { creditRangeIcon, iconStyle } from '../styles/Icons'
+import CashBackIcons from './CashBackIcons'
 import HorizontalRuleRoundedIcon from '@mui/icons-material/HorizontalRuleRounded'
 
 // Styling
@@ -33,6 +34,13 @@ const CreditCardShow = () => {
   // Auth Helpers
   const token = getLocalToken()
   const payload = getPayload()
+
+  const cardStats = {
+    'Credit Score': creditRangeIcon(cardData.credit_range),
+    'Annual Fee': `$${cardData.annual_fee}`,
+    'Foreign Transaction Fee': `${cardData.foreign_fee}%`,
+    'Regular APY': `${cardData['regular_APR_min']} - ${cardData['regular_APR_max']}%`,
+  }
 
   // Get Card Data
   useEffect(() => {
@@ -60,21 +68,21 @@ const CreditCardShow = () => {
   return (
     <>
       { loading ? <Loading /> : errors ? <Error /> :
-        <Box sx={{ minHeight: '100vh',
+        <Box sx={{ minHeight: '95vh',
           height: 'fit-content',
           width: '100vw',
           bgcolor: 'background.default',
           display: 'flex',
           flexDirection: { xs: 'column', md: 'row' },
           alignItems: { xs: 'center', md: 'flex-start' },
-          py: { xs: 5, md: 10 },
+          pt: { xs: 5, md: 10 },
         }}>
           <Box id='card-tile'
-            sx={{ ...flexCentered, bgcolor: 'background.paperContrast', borderRadius: 15, width: { xs: '85vw', md: '28vw' }, mx: 3, height: 'fit-content', mt: -3 }}>
+            sx={{ ...flexCentered, bgcolor: 'background.paperContrast', pb: 3, borderRadius: 8, width: { xs: '85vw', md: '28vw' }, mx: 3, height: 'fit-content' }}>
             {/* Card Name */}
             <Typography
               variant='h6'
-              sx={{ mt: 5, px: 2, py: 1, width: 'fit-content', textAlign: 'center', bgcolor: 'primary.light', color: 'primary.contrastText', borderRadius: 2 }}>{cardData.name}</Typography>
+              sx={{ px: 2, py: 1, width: '100%', textAlign: 'center', bgcolor: 'primary.main', color: 'primary.contrastText', borderRadius: '12px 12px 0 0' }}>{cardData.name}</Typography>
 
             {/* Card Image */}
             <Box
@@ -85,8 +93,8 @@ const CreditCardShow = () => {
 
             {/* Reward Icons */}
             <Box sx={{ ...flexRowCentered, flexWrap: 'wrap', my: 1 }}>
-              { cardData.cash_back_category.length ?
-                cardData.cash_back_category.map((category, index) => <Box key={index} sx={{ color: 'secondary.contrastText' }}>{rewardIcon(category)}</Box>) :
+              { cardData.cash_back_category.length > 0 ?
+                cardData.cash_back_category.map((category, index) => <Box key={index} sx={{ color: 'secondary.contrastText' }}><CashBackIcons category={category} /></Box>) :
                 <Box><Icon sx={ iconStyle }><HorizontalRuleRoundedIcon sx={{ p: .5 }} /></Icon></Box> }
             </Box>
                         
@@ -102,7 +110,7 @@ const CreditCardShow = () => {
               variant='caption'
               href={cardData.link}
               target='__blank__'
-              sx={{ mt: 1, mb: 6, color: 'primary.contrastText' }}>Head to Issuer Site</Typography>
+              sx={{ mt: 1, color: 'primary.contrastText' }}>Head to Issuer Site</Typography>
           </Box>
 
           <Box id='main-section' sx={{ width: { xs: '85vw', md: '72vw' }, px: 3, mr: { xs: 0, md: 3 } }}>
@@ -110,46 +118,24 @@ const CreditCardShow = () => {
             <Box id='card-details'
               sx={{ display: 'flex',
                 flexWrap: 'wrap',
-                bgcolor: 'primary.dark',
                 color: 'white',
                 justifyContent: 'space-evenly',
-                p: 1,
-                borderRadius: 5,
+                my: { xs: 2, sm: 0 },
               }}>
-              
-              {/* Credit Score */}
-              <Box sx={{ textAlign: 'center', m: 1 }}>
-                <Typography variant='body1'>Credit Score</Typography>
-                <Typography variant='subtitle1' sx={{ mt: .35 }}>{creditRangeIcon(cardData.credit_range)}</Typography>
-              </Box>
-
-              <Divider orientation="vertical" variant="middle" flexItem />
-
-              {/* Annual Fee */}
-              <Box sx={{ textAlign: 'center', m: 1 }}>
-                <Typography variant='body1'>Annual Fee</Typography>
-                <Typography variant='subtitle1'>${cardData.annual_fee}</Typography>
-              </Box>
-
-              <Divider orientation="vertical" variant="middle" flexItem />
-
-              {/* Foreign Transaction Fee */}
-              <Box sx={{ textAlign: 'center', m: 1 }}>
-                <Typography variant='body1'>Foreign Transaction Fee</Typography>
-                <Typography variant='subtitle1'>{cardData.foreign_fee}%</Typography>
-              </Box>
-
-              <Divider orientation="vertical" variant="middle" flexItem />
-
-              {/* Regular APR */}
-              <Box sx={{ textAlign: 'center', m: 1 }}>
-                <Typography variant='body1'>Regular APY</Typography>
-                <Typography variant='subtitle1'>{cardData['regular_APR_min']} - {cardData['regular_APR_max']}%</Typography>
-              </Box>
+            
+              {/* Card Stats */}
+              { Object.keys(cardStats).map((key, i) => (
+                <>
+                  <Box key={i} sx={{ textAlign: 'center', flexGrow: 1, m: 1, bgcolor: 'primary.dark', py: 1, borderRadius: 2 }}>
+                    <Typography variant='body1'>{key}</Typography>
+                    <Typography variant='subtitle1' sx={{ mt: .35 }}>{cardStats[key]}</Typography>
+                  </Box>
+                </>
+              )) }
             </Box>
 
             {/* Pros and Cons */}
-            <Box id='pros-cons' sx={{ px: 1, py: 3, my: 4, color: 'primary.contrastText', bgcolor: 'background.paperContrast', borderRadius: 5 }}>
+            <Box id='pros-cons' sx={{ px: 1, py: 3, my: 2, color: 'primary.contrastText', bgcolor: 'background.paperContrast', borderRadius: 5 }}>
               <Box sx={{ width: '100%', display: 'flex', flexDirection: { xs: 'column', md: 'row' }, justifyContent: 'space-evenly' }}>
                 
                 {/* Pros */}
