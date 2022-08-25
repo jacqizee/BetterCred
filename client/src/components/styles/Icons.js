@@ -34,17 +34,15 @@ const Excellent = createSvgIcon(
   'Excellent'
 )
 
+const creditRangeIcons = {
+  'Poor': <Poor />,
+  'Fair': <Fair />,
+  'Good': <Good />,
+  'Excellent': <Excellent />,
+}
+
 export const creditRangeIcon = (creditRange) => {
-  switch (creditRange) {
-    case 1:
-      return <Chip icon={<Poor />} label='Poor' color='primary' />
-    case 2:
-      return <Chip icon={<Fair />} label='Fair' color='primary' />
-    case 3:
-      return <Chip icon={<Good />} label='Good' color='primary' />
-    case 4:
-      return <Chip icon={<Excellent />} label='Excellent' color='primary' />
-  }
+  return <Chip icon={creditRangeIcons[creditRange]} label={creditRange} color='primary' />
 }
 
 export const iconStyle = {
@@ -54,25 +52,20 @@ export const iconStyle = {
   m: .5,
 }
 
+const rewardIcons = {
+  'Restaurants': <RestaurantRoundedIcon sx={{ p: .5 }} />,
+  'Gas Stations': <LocalGasStationRoundedIcon sx={{ p: .5 }} />,
+  'Travel': <AirplaneTicketRoundedIcon sx={{ p: .5 }} />,
+  'Streaming Services': <LiveTvRoundedIcon sx={{ p: .5 }} />,
+  'Rotating': <ThreeSixtyRoundedIcon sx={{ p: .5 }} />,
+  'Transit': <DirectionsTransitRoundedIcon sx={{ p: .5 }} />,
+  'Grocery Stores': <LocalGroceryStoreRoundedIcon sx={{ p: .5 }} />,
+  'Drugstores': <MedicationRoundedIcon sx={{ p: .5 }} />,
+  'Entertainment': <AttractionsRoundedIcon sx={{ p: .5 }} />,
+}
+
 export const rewardIcon = (category) => {
-  switch (category) {
-    case 1:
-      return <Icon sx={ iconStyle }><RestaurantRoundedIcon sx={{ p: .5 }} /></Icon>
-    case 2:
-      return <Icon sx={ iconStyle }><LocalGasStationRoundedIcon sx={{ p: .5 }} /></Icon>
-    case 3:
-      return <Icon sx={ iconStyle }><AirplaneTicketRoundedIcon sx={{ p: .5 }} /></Icon>
-    case 4:
-      return <Icon sx={ iconStyle }><LiveTvRoundedIcon sx={{ p: .5 }} /></Icon>
-    case 5:
-      return <Icon sx={ iconStyle }><ThreeSixtyRoundedIcon sx={{ p: .5 }} /></Icon>
-    case 6:
-      return <Icon sx={ iconStyle }><DirectionsTransitRoundedIcon sx={{ p: .5 }} /></Icon>
-    case 7:
-      return <Icon sx={ iconStyle }><LocalGroceryStoreRoundedIcon sx={{ p: .5 }} /></Icon>
-    case 8:
-      return <Icon sx={ iconStyle }><MedicationRoundedIcon sx={{ p: .5 }} /></Icon>
-    case 9:
-      return <Icon sx={ iconStyle }><AttractionsRoundedIcon sx={{ p: .5 }} /></Icon>
-  }
+  return (
+    <Icon sx={ iconStyle }>{rewardIcons[category]}</Icon>
+  )
 }

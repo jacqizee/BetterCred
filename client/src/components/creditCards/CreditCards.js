@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import axios from 'axios'
 
 // Helpers
 import { getLocalToken } from '../helpers/auth'
+import { getCards } from '../helpers/creditCards'
 
 // MUI Components
-import { Box, Grid, Card, CardContent, Typography, Button, Divider, Icon, Tooltip, Zoom, TextField, Chip } from '../styles/MaterialUI'
+import { Box, Grid, Card, CardContent, Typography, Button, Divider, Icon, Tooltip, Zoom, TextField, Chip, FormControl, InputLabel,
+  MenuItem, Select } from '../styles/MaterialUI'
 
 // Error Handling
 import Error from '../utilities/Error.js'
@@ -35,6 +36,7 @@ const CreditCards = () => {
   // Search and Filter
   const [ filteredCards, setFilteredCards ] = useState([])
   const [ searchTerm, setSearchTerm ] = useState('')
+  const [ sortAnnualFee, setSortAnnualFee ] = useState('select')
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value)
@@ -42,30 +44,28 @@ const CreditCards = () => {
 
   // When search term is changed, filter credit cards
   useEffect(() => {
-    if (!cards) return  
-    const filterCards = searchTerm.length ? cards.filter(card => {
+    if (!cards) return
+    const sorted = [...cards]
+    if (sortAnnualFee !== 'select') {
+      if (sortAnnualFee === 'low') {
+        sorted.sort((a, b) => a.annual_fee - b.annual_fee)
+      } else {
+        sorted.sort((a, b) => b.annual_fee - a.annual_fee)
+      }
+    }
+
+    const filterCards = searchTerm.length ? sorted.filter(card => {
       return (
         card.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         card.issuer.name.toLowerCase().includes(searchTerm.toLowerCase())
       )
-    }) : cards
+    }) : sorted
     setFilteredCards(filterCards)
-  }, [searchTerm])
+  }, [searchTerm, sortAnnualFee])
 
   // Get Card Data
   useEffect(() => {
-    const getCards = async () => {
-      try {
-        const { data } = await axios.get('/api/credit/')
-        setCards(data)
-        console.log(data)
-      } catch (error) {
-        console.log(error)
-        setError(true)
-      }
-      setLoading(false)
-    }
-    getCards()
+    getCards(setError, setLoading, setCards)
   }, [])
 
   return (
@@ -75,7 +75,7 @@ const CreditCards = () => {
       <Typography variant='subtitle2' sx={{ mb: 2, color: 'primary.contrastText' }}>Find a credit card that meets your credit range and matches your reward preferences</Typography>
       
       {/* Filters */}
-      <Box sx={{ mb: 2, display: 'flex', justifyContent: 'center' }}>
+      <Box sx={{ mb: 2, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         {/* Search Box */}
         <Box sx={{ display: 'flex', alignItems: 'flex-end', color: 'primary.contrastText' }}>
           <SearchIcon sx={{ my: 0.5, mr: 1 }} />
@@ -88,24 +88,28 @@ const CreditCards = () => {
           />
         </Box>
 
-        {/* <FormControl fullWidth>
-          <InputLabel id="demo-simple-select-label">Age</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={age}
-            label="Age"
-            onChange={handleChange}
-          >
-            <MenuItem value={10}>Ten</MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
-          </Select>
-        </FormControl> */}
+        {/* Sort by Annual Fee */}
+        <Box>
+          <FormControl fullWidth>
+            <InputLabel id="sort-fee">Annual Fee</InputLabel>
+            <Select
+              labelId="sort-fee"
+              id="sort-fee"
+              value={sortAnnualFee}
+              label="sort-fee"
+              size='small'
+              onChange={(e) => setSortAnnualFee(e.target.value)}
+            >
+              <MenuItem value={'select'} selected disabled>Select</MenuItem>
+              <MenuItem value={'low'}>Low to High</MenuItem>
+              <MenuItem value={'high'}>High to Low</MenuItem>
+            </Select>
+          </FormControl>
+        </Box>
       </Box>
 
       <Grid container columnSpacing={3} rowSpacing={2}>
-        { loading ? <Loading /> : error ? <Error /> : ( searchTerm.length ? filteredCards : cards).map(card => {
+        { loading ? <Loading /> : error ? <Error /> : (filteredCards.length ? filteredCards : cards).map(card => {
           return (
             <Zoom key={card.id} in={true} timeout={{ enter: 500 }}>
               <Grid item xs={12} sm={6} md={4}>

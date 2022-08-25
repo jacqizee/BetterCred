@@ -60,3 +60,15 @@ export const displayFeatures = (type, cardData) => {
   }
   return elements
 }
+
+export const getCards = async (setError, setLoading, setCards) => {
+  try {
+    const { data } = await axios.get('/api/credit/')
+    setCards(data)
+    console.log(data)
+  } catch (error) {
+    console.log(error)
+    setError(true)
+  }
+  setLoading(false)
+}

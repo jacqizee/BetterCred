@@ -1,10 +1,14 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import ModelSerializer, StringRelatedField
 from ..models import CreditCard
 
 from issuers.serializers.common import IssuerSerializer
+from credit_ranges.serializers.common import CreditRangeSerializer
 
 class CreditCardSerializer(ModelSerializer):
     issuer = IssuerSerializer()
+    credit_range = StringRelatedField()
+    network = StringRelatedField()
+    cash_back_category = StringRelatedField(many=True)
 
     class Meta:
         model = CreditCard
