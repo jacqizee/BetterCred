@@ -91,7 +91,7 @@ const Join = ({ loginOpen, setLoginOpen, joinOpen, setJoinOpen }) => {
                 label='Email'
                 variant='filled'
                 value={formData.email}
-                onChange={() => handleFormChange(setFormData, formData)}
+                onChange={(e) => handleFormChange(e, setFormData, formData)}
                 error={Boolean(formErrors.email)}
                 helperText={formErrors.email}
                 fullWidth />
@@ -104,7 +104,7 @@ const Join = ({ loginOpen, setLoginOpen, joinOpen, setJoinOpen }) => {
                 label='First Name'
                 variant='filled'
                 value={formData.first_name}
-                onChange={() => handleFormChange(setFormData, formData)}
+                onChange={(e) => handleFormChange(e, setFormData, formData)}
                 error={Boolean(formErrors.first_name)}
                 helperText={formErrors.first_name}
                 fullWidth />
@@ -117,7 +117,7 @@ const Join = ({ loginOpen, setLoginOpen, joinOpen, setJoinOpen }) => {
                 label='Last Name'
                 variant='filled'
                 value={formData.last_name}
-                onChange={() => handleFormChange(setFormData, formData)}
+                onChange={(e) => handleFormChange(e, setFormData, formData)}
                 error={Boolean(formErrors.last_name)}
                 helperText={formErrors.last_name}
                 fullWidth />
@@ -130,7 +130,7 @@ const Join = ({ loginOpen, setLoginOpen, joinOpen, setJoinOpen }) => {
                 label='Username'
                 variant='filled'
                 value={formData.username}
-                onChange={() => handleFormChange(setFormData, formData)}
+                onChange={(e) => handleFormChange(e, setFormData, formData)}
                 error={Boolean(formErrors.username)}
                 helperText={formErrors.username}
                 fullWidth />
@@ -144,7 +144,7 @@ const Join = ({ loginOpen, setLoginOpen, joinOpen, setJoinOpen }) => {
                 label='Password'
                 variant='filled'
                 value={formData.password}
-                onChange={() => handleFormChange(setFormData, formData)}
+                onChange={(e) => handleFormChange(e, setFormData, formData)}
                 error={Boolean(formErrors.password)}
                 helperText={formErrors.password}
                 fullWidth />
@@ -160,7 +160,7 @@ const Join = ({ loginOpen, setLoginOpen, joinOpen, setJoinOpen }) => {
                 value={formData.password_confirmation}
                 error={Boolean(formErrors.password_confirmation)}
                 helperText={formErrors.password_confirmation}
-                onChange={() => handleFormChange(setFormData, formData)}
+                onChange={(e) => handleFormChange(e, setFormData, formData)}
                 fullWidth />
             </Grid>
 
