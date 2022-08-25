@@ -84,24 +84,24 @@ const CreditCards = () => {
             name='search-field'
             value={searchTerm}
             label='Search'
-            variant='standard'
+            variant='outlined'
+            size='small'
             onChange={handleSearch}
           />
         </Box>
 
         {/* Sort by Annual Fee */}
-        <Box>
+        <Box sx={{ ml: 3 }}>
           <FormControl fullWidth>
-            <InputLabel id="sort-fee">Annual Fee</InputLabel>
             <Select
               labelId="sort-fee"
+              displayEmpty
               id="sort-fee"
               value={sortAnnualFee}
-              label="sort-fee"
               size='small'
               onChange={(e) => setSortAnnualFee(e.target.value)}
             >
-              <MenuItem value={'select'} selected disabled>Select</MenuItem>
+              <MenuItem value={'select'} selected disabled>Annual Fee</MenuItem>
               <MenuItem value={'low'}>Low to High</MenuItem>
               <MenuItem value={'high'}>High to Low</MenuItem>
             </Select>
