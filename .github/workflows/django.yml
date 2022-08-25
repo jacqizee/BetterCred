@@ -48,7 +48,7 @@ jobs:
 
     - name: Run DB migrations
       env: 
-        SECRET_KEY: d/&HxVIENE@yzzN
+        SECRET: d/&HxVIENE@yzzN
         DB_NAME: postgres
         DB_USER: postgres
         DB_PASSWORD: postgres
