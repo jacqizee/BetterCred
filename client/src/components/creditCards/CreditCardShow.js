@@ -16,7 +16,6 @@ import { Box, Typography, Icon, Button, List } from '../styles/MaterialUI'
 // Icons
 import { creditRangeIcon, iconStyle } from '../styles/Icons'
 import CashBackIcon from './CashBackIcons'
-import HorizontalRuleRoundedIcon from '@mui/icons-material/HorizontalRuleRounded'
 
 // Styling
 import { flexCentered, flexRowCentered } from '../styles/Styling'
