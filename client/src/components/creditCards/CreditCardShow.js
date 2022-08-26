@@ -15,7 +15,7 @@ import { Box, Typography, Icon, Button, List } from '../styles/MaterialUI'
 
 // Icons
 import { creditRangeIcon, iconStyle } from '../styles/Icons'
-import CashBackIcons from './CashBackIcons'
+import CashBackIcon from './CashBackIcons'
 import HorizontalRuleRoundedIcon from '@mui/icons-material/HorizontalRuleRounded'
 
 // Styling
@@ -94,8 +94,8 @@ const CreditCardShow = () => {
             {/* Reward Icons */}
             <Box sx={{ ...flexRowCentered, flexWrap: 'wrap', my: 1 }}>
               { cardData.cash_back_category.length > 0 ?
-                cardData.cash_back_category.map((category, index) => <Box key={index} sx={{ color: 'secondary.contrastText' }}><CashBackIcons category={category} /></Box>) :
-                <Box><Icon sx={ iconStyle }><HorizontalRuleRoundedIcon sx={{ p: .5 }} /></Icon></Box> }
+                cardData.cash_back_category.map((category, index) => <CashBackIcon category={category} key={index} />) :
+                <CashBackIcon category={'None'} /> }
             </Box>
                         
             {/* Add to Wallet Button */}
@@ -125,12 +125,10 @@ const CreditCardShow = () => {
             
               {/* Card Stats */}
               { Object.keys(cardStats).map((key, i) => (
-                <>
-                  <Box key={i} sx={{ textAlign: 'center', flexGrow: 1, m: 1, bgcolor: 'primary.dark', py: 1, borderRadius: 2 }}>
-                    <Typography variant='body1'>{key}</Typography>
-                    <Typography variant='subtitle1' sx={{ mt: .35 }}>{cardStats[key]}</Typography>
-                  </Box>
-                </>
+                <Box key={i} sx={{ textAlign: 'center', flexGrow: 1, m: 1, bgcolor: 'primary.dark', py: 1, borderRadius: 2 }}>
+                  <Typography variant='body1'>{key}</Typography>
+                  <Typography variant='subtitle1' sx={{ mt: .35 }}>{cardStats[key]}</Typography>
+                </Box>
               )) }
             </Box>
 

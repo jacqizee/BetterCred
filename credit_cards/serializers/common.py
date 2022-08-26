@@ -4,18 +4,10 @@ from ..models import CreditCard
 from issuers.serializers.common import IssuerSerializer
 from credit_ranges.serializers.common import CreditRangeSerializer
 
-class CreditCardSerializer(ModelSerializer):
-    issuer = IssuerSerializer()
-    credit_range = StringRelatedField()
-    network = StringRelatedField()
-    cash_back_category = StringRelatedField(many=True)
-
-    class Meta:
-        model = CreditCard
-        fields = '__all__'
-
 class SimpleCreditCardSerializer(ModelSerializer):
     issuer = IssuerSerializer()
+    credit_range = StringRelatedField()
+    cash_back_category = StringRelatedField(many=True)
 
     class Meta:
         model = CreditCard
@@ -30,3 +22,10 @@ class SimpleCreditCardSerializer(ModelSerializer):
             'base_reward_rate',
             'issuer'
         )
+
+class CreditCardSerializer(SimpleCreditCardSerializer):
+    network = StringRelatedField()
+
+    class Meta(SimpleCreditCardSerializer.Meta):
+        model = CreditCard
+        fields = '__all__'

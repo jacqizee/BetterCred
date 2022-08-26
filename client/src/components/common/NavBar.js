@@ -52,7 +52,6 @@ const Navigation = ({ mode, setMode }) => {
   }
 
   const handleProfileNav = (e) => {
-    console.log(e.target.innerText)
     nav(`/profile/${getPayload().sub}/`, { state: { profileDest: e.target.innerText } })
   }
 

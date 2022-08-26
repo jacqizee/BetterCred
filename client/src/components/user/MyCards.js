@@ -2,11 +2,12 @@ import { Link } from 'react-router-dom'
 
 // Helpers
 import { deleteWalletCard } from '../helpers/creditCards'
-import { rewardIcon } from '../styles/Icons'
+
+// Icons
+import CashBackIcon from '../creditCards/CashBackIcons'
 
 // MUI Components
 import { Box, Typography, Button, TextField, Divider, Alert, Slide, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Icon } from '../styles/MaterialUI'
-import HorizontalRuleRoundedIcon from '@mui/icons-material/HorizontalRuleRounded'
 
 const MyCards = ({ profileDetails, setProfileDetails, userId, token }) => {
 
@@ -73,9 +74,9 @@ const MyCards = ({ profileDetails, setProfileDetails, userId, token }) => {
 
                       {/* Reward Icons */}
                       <Box sx={{ display: 'flex', mb: -.5 }}>
-                        { card.cash_back_category.length ?
-                          card.cash_back_category.map((category, index) => <Box key={index} sx={{ color: 'secondary.contrastText' }}>{rewardIcon(category)}</Box>) :
-                          <Box><Icon><HorizontalRuleRoundedIcon sx={{ p: .5 }} /></Icon></Box> }
+                        { card.cash_back_category.length > 0 ?
+                          card.cash_back_category.map((category, index) => <CashBackIcon category={category} key={index} />) :
+                          <CashBackIcon category={'None'} /> }
                       </Box>
 
                       {/* Key Details */}

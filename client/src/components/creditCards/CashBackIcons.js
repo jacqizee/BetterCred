@@ -1,6 +1,3 @@
-// cardData.cash_back_category.length ?
-//                 cardData.cash_back_category.map((category, index) => <Box key={index} sx={{ color: 'secondary.contrastText' }}>{rewardIcon(category)}</Box>) :
-//                 
 import Icon from '@mui/material/Icon'
 import Box from '@mui/material/Box'
 
@@ -16,13 +13,6 @@ import MedicationRoundedIcon from '@mui/icons-material/MedicationRounded'
 import AttractionsRoundedIcon from '@mui/icons-material/AttractionsRounded'
 import HorizontalRuleRoundedIcon from '@mui/icons-material/HorizontalRuleRounded'
 
-export const iconStyle = {
-  borderRadius: 5,
-  bgcolor: 'primary.dark',
-  color: 'white',
-  m: .5,
-}
-
 const rewardIcons = {
   'Restaurants': <RestaurantRoundedIcon sx={{ p: .5 }} />,
   'Gas Stations': <LocalGasStationRoundedIcon sx={{ p: .5 }} />,
@@ -33,12 +23,24 @@ const rewardIcons = {
   'Grocery Stores': <LocalGroceryStoreRoundedIcon sx={{ p: .5 }} />,
   'Drugstores': <MedicationRoundedIcon sx={{ p: .5 }} />,
   'Entertainment': <AttractionsRoundedIcon sx={{ p: .5 }} />,
+  'None': <HorizontalRuleRoundedIcon sx={{ p: .5 }} />,
 }
 
-const CashBackIcons = ({ category }) => {
+const iconStyle = {
+  borderRadius: 5,
+  bgcolor: 'primary.dark',
+  color: 'white',
+  m: .5,
+}
+
+const CashBackIcon = ({ category }) => {
   return (
-    <Box sx={{ color: 'secondary.contrastText' }}><Icon sx={ iconStyle }>{rewardIcons[category]}</Icon></Box>
+    <Box sx={{ color: 'secondary.contrastText' }}>
+      <Box sx={{ color: 'secondary.contrastText' }}>
+        <Icon sx={ iconStyle }>{rewardIcons[category]}</Icon>
+      </Box>
+    </Box>
   )
 }
 
-export default CashBackIcons
+export default CashBackIcon
