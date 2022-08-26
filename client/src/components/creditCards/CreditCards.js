@@ -14,10 +14,9 @@ import Error from '../utilities/Error.js'
 import Loading from '../utilities/Loading.js'
 
 // Icons
-import { creditRangeIcon, iconStyle } from '../styles/Icons'
+import { creditRangeIcon } from '../styles/Icons'
 import SearchIcon from '@mui/icons-material/Search'
 import CashBackIcon from './CashBackIcons'
-import HorizontalRuleRoundedIcon from '@mui/icons-material/HorizontalRuleRounded'
 
 // Styling
 import { flexCentered, flexRowCentered } from '../styles/Styling'
@@ -38,6 +37,7 @@ const CreditCards = () => {
   const [ filteredCards, setFilteredCards ] = useState([])
   const [ searchTerm, setSearchTerm ] = useState('')
   const [ sortAnnualFee, setSortAnnualFee ] = useState('select')
+  const [ filterCreditScore, setFilterCreditScore ] = useState('select')
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value)
@@ -46,7 +46,8 @@ const CreditCards = () => {
   // When search term is changed, filter credit cards
   useEffect(() => {
     if (!cards) return
-    const sorted = [...cards]
+
+    let sorted = [...cards]
     if (sortAnnualFee !== 'select') {
       if (sortAnnualFee === 'low') {
         sorted.sort((a, b) => a.annual_fee - b.annual_fee)
@@ -55,14 +56,21 @@ const CreditCards = () => {
       }
     }
 
-    const filterCards = searchTerm.length ? sorted.filter(card => {
-      return (
-        card.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        card.issuer.name.toLowerCase().includes(searchTerm.toLowerCase())
-      )
-    }) : sorted
-    setFilteredCards(filterCards)
-  }, [searchTerm, sortAnnualFee])
+    if (searchTerm.length) {
+      sorted = sorted.filter(card => {
+        return (
+          card.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          card.issuer.name.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+      })
+    }
+
+    if (filterCreditScore !== 'select') {
+      sorted = sorted.filter(card => card.credit_range === filterCreditScore)
+    }
+
+    setFilteredCards(sorted)
+  }, [searchTerm, sortAnnualFee, filterCreditScore])
 
   // Get Card Data
   useEffect(() => {
@@ -91,22 +99,39 @@ const CreditCards = () => {
         </Box>
 
         {/* Sort by Annual Fee */}
-        <Box sx={{ ml: 3 }}>
-          <FormControl fullWidth>
-            <Select
-              labelId="sort-fee"
-              displayEmpty
-              id="sort-fee"
-              value={sortAnnualFee}
-              size='small'
-              onChange={(e) => setSortAnnualFee(e.target.value)}
-            >
-              <MenuItem value={'select'} selected disabled>Annual Fee</MenuItem>
-              <MenuItem value={'low'}>Low to High</MenuItem>
-              <MenuItem value={'high'}>High to Low</MenuItem>
-            </Select>
-          </FormControl>
-        </Box>
+        <FormControl sx={{ ml: 3, width: 'fit-contents' }}>
+          <Select
+            labelId="sort-fee"
+            displayEmpty
+            id="sort-fee"
+            value={sortAnnualFee}
+            size='small'
+            onChange={(e) => setSortAnnualFee(e.target.value)}
+          >
+            <MenuItem value={'select'} selected disabled>Annual Fee</MenuItem>
+            <MenuItem value={'low'}>Low to High</MenuItem>
+            <MenuItem value={'high'}>High to Low</MenuItem>
+          </Select>
+        </FormControl>
+
+        {/* Filter by Credit Score */}
+        <FormControl sx={{ ml: 3, width: 'fit-contents' }}>
+          <Select
+            labelId="filter-credit"
+            displayEmpty
+            id="filter-credit"
+            value={filterCreditScore}
+            size='small'
+            onChange={(e) => setFilterCreditScore(e.target.value)}
+          >
+            <MenuItem value={'select'} selected disabled>Credit Score</MenuItem>
+            <MenuItem value={'Bad'}>Bad</MenuItem>
+            <MenuItem value={'Fair'}>Fair</MenuItem>
+            <MenuItem value={'Good'}>Good</MenuItem>
+            <MenuItem value={'Excellent'}>Excellent</MenuItem>
+          </Select>
+        </FormControl>
+
       </Box>
 
       <Grid container columnSpacing={3} rowSpacing={2}>
