@@ -14,10 +14,9 @@ import Error from '../utilities/Error.js'
 import Loading from '../utilities/Loading.js'
 
 // Icons
-import { creditRangeIcon, iconStyle } from '../styles/Icons'
+import { creditRangeIcon } from '../styles/Icons'
 import SearchIcon from '@mui/icons-material/Search'
 import CashBackIcon from './CashBackIcons'
-import HorizontalRuleRoundedIcon from '@mui/icons-material/HorizontalRuleRounded'
 
 // Styling
 import { flexCentered, flexRowCentered } from '../styles/Styling'
@@ -37,32 +36,52 @@ const CreditCards = () => {
   // Search and Filter
   const [ filteredCards, setFilteredCards ] = useState([])
   const [ searchTerm, setSearchTerm ] = useState('')
-  const [ sortAnnualFee, setSortAnnualFee ] = useState('select')
+  const [ cardFilters, setCardFilters ] = useState({
+    annualFee: '',
+    creditScore: '',
+  })
 
-  const handleSearch = (e) => {
-    setSearchTerm(e.target.value)
+  const handleFilterClick = (e) => {
+    if (cardFilters[e.target.name] === e.target.value) {
+      setCardFilters({ ...cardFilters, [e.target.name]: '' })
+    } else {
+      setCardFilters({ ...cardFilters, [e.target.name]: e.target.value })
+    }
   }
 
   // When search term is changed, filter credit cards
   useEffect(() => {
     if (!cards) return
-    const sorted = [...cards]
-    if (sortAnnualFee !== 'select') {
-      if (sortAnnualFee === 'low') {
+
+    const { annualFee, creditScore } = cardFilters
+
+    let sorted = [...cards]
+
+    if (searchTerm.length) {
+      const filtered = sorted.filter(card => {
+        return (
+          card.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          card.issuer.name.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+      }).length
+
+      filtered.length ? sorted = filtered : ''
+    }
+
+    if (annualFee !== '') {
+      if (annualFee === 'low') {
         sorted.sort((a, b) => a.annual_fee - b.annual_fee)
       } else {
         sorted.sort((a, b) => b.annual_fee - a.annual_fee)
       }
     }
 
-    const filterCards = searchTerm.length ? sorted.filter(card => {
-      return (
-        card.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        card.issuer.name.toLowerCase().includes(searchTerm.toLowerCase())
-      )
-    }) : sorted
-    setFilteredCards(filterCards)
-  }, [searchTerm, sortAnnualFee])
+    if (creditScore !== '') {
+      sorted = sorted.filter(card => card.credit_range === creditScore)
+    }
+
+    setFilteredCards(sorted)
+  }, [searchTerm, cardFilters])
 
   // Get Card Data
   useEffect(() => {
@@ -76,9 +95,9 @@ const CreditCards = () => {
       <Typography variant='subtitle2' sx={{ mb: 2, color: 'primary.contrastText' }}>Find a credit card that meets your credit range and matches your reward preferences</Typography>
       
       {/* Filters */}
-      <Box sx={{ mb: 2, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <Box sx={{ mb: 2, display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%' }}>
         {/* Search Box */}
-        <Box sx={{ display: 'flex', alignItems: 'flex-end', color: 'primary.contrastText' }}>
+        <Box sx={{ display: 'flex', alignItems: 'flex-end', color: 'primary.contrastText', mr: 2 }}>
           <SearchIcon sx={{ my: 0.5, mr: 1 }} />
           <TextField
             name='search-field'
@@ -86,27 +105,51 @@ const CreditCards = () => {
             label='Search'
             variant='outlined'
             size='small'
-            onChange={handleSearch}
+            onChange={(e) => setSearchTerm(e.target.value)}
           />
         </Box>
 
         {/* Sort by Annual Fee */}
-        <Box sx={{ ml: 3 }}>
-          <FormControl fullWidth>
-            <Select
-              labelId="sort-fee"
-              displayEmpty
-              id="sort-fee"
-              value={sortAnnualFee}
-              size='small'
-              onChange={(e) => setSortAnnualFee(e.target.value)}
-            >
-              <MenuItem value={'select'} selected disabled>Annual Fee</MenuItem>
-              <MenuItem value={'low'}>Low to High</MenuItem>
-              <MenuItem value={'high'}>High to Low</MenuItem>
-            </Select>
-          </FormControl>
-        </Box>
+        <FormControl sx={{ width: 'fit-contents', mr: 2 }}>
+          <Select
+            labelId="sort-fee"
+            displayEmpty
+            id="sort-fee"
+            name="annualFee"
+            value={cardFilters.annualFee}
+            size='small'
+            onChange={handleFilterClick}
+          >
+            <MenuItem value={''} selected disabled>Annual Fee</MenuItem>
+            <MenuItem value={'low'}>Low to High</MenuItem>
+            <MenuItem value={'high'}>High to Low</MenuItem>
+          </Select>
+        </FormControl>
+
+        {/* Filter by Credit Score */}
+        <FormControl sx={{ width: 'fit-contents', mr: 2 }}>
+          <Select
+            labelId="filter-credit"
+            displayEmpty
+            id="filter-credit"
+            value={cardFilters.creditScore}
+            name="creditScore"
+            size='small'
+            onChange={handleFilterClick}
+          >
+            <MenuItem value={''} selected disabled>Credit Score</MenuItem>
+            <MenuItem value={'Bad'}>Bad</MenuItem>
+            <MenuItem value={'Fair'}>Fair</MenuItem>
+            <MenuItem value={'Good'}>Good</MenuItem>
+            <MenuItem value={'Excellent'}>Excellent</MenuItem>
+          </Select>
+        </FormControl>
+        
+        <Button onClick={() => setCardFilters({
+          annualFee: '',
+          creditScore: '',
+        })}>Clear</Button>
+
       </Box>
 
       <Grid container columnSpacing={3} rowSpacing={2}>

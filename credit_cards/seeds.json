@@ -189,5 +189,77 @@
       9
     ]
   }
+},
+{
+  "model": "credit_cards.creditcard",
+  "pk": 8,
+  "fields": {
+    "name": "Platinum Secured",
+    "image": "https://applynow.capitalone.com/static/images/PlatinumSecuredCard_sm.89016866.png",
+    "link": "https://www.capitalone.com/credit-cards/platinum-secured/",
+    "annual_fee": 0,
+    "foreign_fee": 0.0,
+    "base_reward_rate": 0.0,
+    "regular_APR_min": 22.99,
+    "regular_APR_max": 22.99,
+    "pro_1": "Great for Poor/No Credit Users",
+    "pro_2": "Automatic Credit Line Reviews",
+    "pro_3": "Refundable Deposits & Upgrades",
+    "con_1": "No rewards",
+    "con_2": "",
+    "con_3": "",
+    "issuer": 3,
+    "network": 3,
+    "credit_range": 1,
+    "cash_back_category": []
+  }
+},
+{
+  "model": "credit_cards.creditcard",
+  "pk": 9,
+  "fields": {
+    "name": "Platinum",
+    "image": "https://ecm.capitalone.com/WCM/card/products/platinum-card-art-updated.png",
+    "link": "https://www.capitalone.com/credit-cards/platinum/",
+    "annual_fee": 0,
+    "foreign_fee": 0.0,
+    "base_reward_rate": 0.0,
+    "regular_APR_min": 22.99,
+    "regular_APR_max": 22.99,
+    "pro_1": "No annual fee",
+    "pro_2": "Automatic Credit Line Reviews",
+    "pro_3": "$0 Fraud Liability if your card is ever lost or stolen",
+    "con_1": "No cash back offers",
+    "con_2": "Great for those looking to build credit",
+    "con_3": "",
+    "issuer": 3,
+    "network": 3,
+    "credit_range": 2,
+    "cash_back_category": []
+  }
+},
+{
+  "model": "credit_cards.creditcard",
+  "pk": 10,
+  "fields": {
+    "name": "QuicksilverOne",
+    "image": "https://ecm.capitalone.com/WCM/card/products/quicksilverone-card-art.png",
+    "link": "https://www.capitalone.com/credit-cards/quicksilverone/",
+    "annual_fee": 39,
+    "foreign_fee": 0.0,
+    "base_reward_rate": 1.5,
+    "regular_APR_min": 22.99,
+    "regular_APR_max": 22.99,
+    "pro_1": "Earn unlimited 1.5% cash back on every purchase, every day",
+    "pro_2": "Automatic credit line reviews",
+    "pro_3": "$0 Fraud Liability if your card is ever lost or stolen.",
+    "con_1": "Annual fee",
+    "con_2": "Great for those looking to build credit",
+    "con_3": "",
+    "issuer": 3,
+    "network": 3,
+    "credit_range": 2,
+    "cash_back_category": []
+  }
 }
 ]
