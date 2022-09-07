@@ -16,11 +16,13 @@ import { Box, Typography, Icon, Button, List } from '../styles/MaterialUI'
 // Icons
 import { creditRangeIcon, iconStyle } from '../styles/Icons'
 import CashBackIcon from './CashBackIcons'
+import bgDark from '../../assets/background-dark.webp'
+import bgLight from '../../assets/background-light.jpeg'
 
 // Styling
 import { flexCentered, flexRowCentered } from '../styles/Styling'
 
-const CreditCardShow = () => {
+const CreditCardShow = ({ mode }) => {
 
   const { cardId } = useParams()
   const [ cardData, setCardData ] = useState(false)
@@ -70,7 +72,16 @@ const CreditCardShow = () => {
         <Box sx={{ minHeight: '95vh',
           height: 'fit-content',
           width: '100vw',
-          bgcolor: 'background.default',
+          background: `${ mode === 'dark' ?
+            `linear-gradient(
+              rgba(0, 0, 0, 0.15), 
+              rgba(0, 0, 0, 0.15)
+            ), url(${bgDark})` :
+            `linear-gradient(
+              rgba(256, 256, 256, 0.45), 
+              rgba(256, 256, 256, 0.45)
+            ), url(${bgLight})`}`,
+          backgroundSize: 'cover',
           display: 'flex',
           flexDirection: { xs: 'column', md: 'row' },
           alignItems: { xs: 'center', md: 'flex-start' },
@@ -119,7 +130,7 @@ const CreditCardShow = () => {
                 flexWrap: 'wrap',
                 color: 'white',
                 justifyContent: 'space-evenly',
-                my: { xs: 2, sm: 0 },
+                my: { xs: 2, md: 0 },
               }}>
             
               {/* Card Stats */}
@@ -133,7 +144,7 @@ const CreditCardShow = () => {
 
             {/* Pros and Cons */}
             <Box id='pros-cons' sx={{ px: 1, py: 3, my: 2, color: 'primary.contrastText', bgcolor: 'background.paperContrast', borderRadius: 5 }}>
-              <Box sx={{ width: '100%', display: 'flex', flexDirection: { xs: 'column', md: 'row' }, justifyContent: 'space-evenly' }}>
+              <Box sx={{ width: '100%', display: 'flex', flexDirection: { xs: 'column', md: 'row' }, alignItems: { xs: 'center', md: 'flex-start' }, justifyContent: 'space-evenly' }}>
                 
                 {/* Pros */}
                 <Box sx={{ width: { xs: '95%', md: '50%' }, mx: { xs: 1, md: 2 } }}>

@@ -63,7 +63,7 @@ const CreditCards = () => {
           card.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
           card.issuer.name.toLowerCase().includes(searchTerm.toLowerCase())
         )
-      }).length
+      })
 
       filtered.length ? sorted = filtered : ''
     }

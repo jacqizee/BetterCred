@@ -22,7 +22,7 @@ const App = () => {
         <Routes>
           <Route path='/' element={<Home mode={mode} />} />
           <Route path='/cards' element={<CreditCards />} />
-          <Route path='/cards/:cardId' element={<CreditCardShow />} />
+          <Route path='/cards/:cardId' element={<CreditCardShow mode={mode} />} />
           <Route path='/profile/:userId' element={<Profile />} />
           <Route path='/learn' element={<UnderConstruction />} />
           <Route path='/bonuses' element={<UnderConstruction />} />

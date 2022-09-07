@@ -19,8 +19,8 @@ const theme = (mode) => ({
         defaultContrast: 'rgba(48, 48, 48, 0.50)',
         defaultMoreContrast: 'rgba(48, 48, 48, 0.25)',
         paper: '#ffffff',
-        paperContrast: 'rgba(0, 0, 0, 0.10)',
-        paperMoreContrast: 'rgba(0, 0, 0, 0.15)',
+        paperContrast: '#e5e5e5',
+        paperMoreContrast: '#c3c3c3',
       },
     } : {
       primary: {
@@ -40,8 +40,8 @@ const theme = (mode) => ({
         defaultContrast: 'rgba(256, 256, 256, 0.50)',
         defaultMoreContrast: 'rgba(256, 256, 256, 0.25)',
         paper: '#424242',
-        paperContrast: 'rgba(256, 256, 256, 0.15)',
-        paperMoreContrast: 'rgba(256, 256, 256, 0.25)',
+        paperContrast: '#4f4f4f',
+        paperMoreContrast: '#8f8f8f',
       },
     },
   },
