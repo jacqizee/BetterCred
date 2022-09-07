@@ -147,7 +147,7 @@ class ProfileView(APIView):
         return Response(status = status.HTTP_204_NO_CONTENT)
 
 # Endpoint: /profile/<int:pk>/wallet
-# Methods: POST
+# Methods: GET, POST, DELETE
 class WalletView(APIView):
     permission_classes = (IsAuthenticated, )
 
