@@ -1,0 +1,1 @@
+export const mainMenu = ['cards', 'bonuses', 'learn']

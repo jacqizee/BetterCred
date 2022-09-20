@@ -5,7 +5,15 @@ import Switch from '@mui/material/Switch'
 import DarkModeRoundedIcon from '@mui/icons-material/DarkModeRounded'
 import LightModeRoundedIcon from '@mui/icons-material/LightModeRounded'
 
-export const DarkModeSwitch = ({ mode, switchStatus, handleModeChange }) => {
+const handleModeChange = (e, setMode) => {
+  let newMode
+  e.target.value === 'light' ? newMode = 'dark' : newMode = 'light'
+
+  setMode(newMode)
+  window.localStorage.setItem('bettercred-mode', newMode)
+}
+
+export const DarkModeSwitch = ({ mode, setMode, switchStatus }) => {
   return (
     <Switch 
       checked={switchStatus}
