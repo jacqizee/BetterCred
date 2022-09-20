@@ -9,11 +9,11 @@ import CashBackIcon from '../icons/CashBackIcons'
 // MUI Components
 import { Box, Typography, Button, Divider, Slide, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '../styles/MaterialUI'
 
-const MyCards = ({ profileDetails, setProfileDetails, userId, token }) => {
+const MyWallet = ({ profileDetails, setProfileDetails, userId, token }) => {
 
   return (
     <Slide in={true} direction='up'>
-      <Box id='my-cards'
+      <Box id='my-wallet'
         sx={{
           width: { xs: '100%', sm: '75%' },
           maxWidth: '850px',
@@ -128,4 +128,4 @@ const MyCards = ({ profileDetails, setProfileDetails, userId, token }) => {
   )
 }
 
-export default MyCards
+export default MyWallet

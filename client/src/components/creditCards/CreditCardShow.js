@@ -11,7 +11,7 @@ import { getLocalToken, getPayload, handleLogOut } from '../helpers/auth'
 import { handleWalletButton, displayFeatures } from '../helpers/creditCards'
 
 // MUI Components
-import { Box, Typography, Icon, Button, List } from '../styles/MaterialUI'
+import { Box, Typography, Button, List } from '../styles/MaterialUI'
 
 // Icons
 import CreditRangeIcon from '../icons/CreditRangeIcon'
