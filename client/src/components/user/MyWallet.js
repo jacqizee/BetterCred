@@ -26,7 +26,7 @@ const MyCards = ({ profileDetails, setProfileDetails, userId, token }) => {
           height: 'fit-content' }}>
       
         {/* Heading and Subheading */}
-        <Typography variant='h5' sx={{ color: 'primary.contrastText' }}>My Cards</Typography>
+        <Typography variant='h5' sx={{ color: 'primary.contrastText' }}>My Wallet</Typography>
         <Typography variant='body1' sx={{ color: 'primary.contrastText', mb: 1 }}>View cards saved to your wallet</Typography>
         <Divider sx={{ my: 1 }} />
 

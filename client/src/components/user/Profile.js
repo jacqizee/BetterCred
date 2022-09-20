@@ -4,7 +4,7 @@ import axios from 'axios'
 
 // Components
 import EditProfile from './EditProfile'
-import MyCards from './MyCards'
+import MyWallet from './MyWallet'
 import Loading from '../utilities/Loading'
 import Error from '../utilities/Error'
 
@@ -33,7 +33,7 @@ const Profile = () => {
   // Menu States
   const [ currentPage, setCurrentPage ] = useState('')
   const [ editProfileDeco, setEditProfileDeco ] = useState('none')
-  const [ myCardsDeco, setMyCardsDeco ] = useState('none')
+  const [ myWalletDeco, setMyWalletDeco ] = useState('none')
 
   // Edit Form Details
   const [ profileDetails, setProfileDetails ] = useState({
@@ -75,11 +75,11 @@ const Profile = () => {
   useEffect(() => {
     if (currentPage === 'my profile') {
       setEditProfileDeco('underline')
-      setMyCardsDeco('none')
+      setMyWalletDeco('none')
     }
-    if (currentPage === 'my cards') {
+    if (currentPage === 'my wallet') {
       setEditProfileDeco('none')
-      setMyCardsDeco('underline')
+      setMyWalletDeco('underline')
     }
   }, [currentPage])
 
@@ -100,7 +100,7 @@ const Profile = () => {
 
                 {/* My Cards */}
                 <ListItem>
-                  <ListItemText onClick={(e) => setCurrentPage(e.target.innerHTML)} sx={{ textDecoration: myCardsDeco, '&:hover': { cursor: 'pointer' } }}>my cards</ListItemText>
+                  <ListItemText onClick={(e) => setCurrentPage(e.target.innerHTML)} sx={{ textDecoration: myWalletDeco, '&:hover': { cursor: 'pointer' } }}>my wallet</ListItemText>
                 </ListItem>
                 
               </List>
@@ -110,13 +110,13 @@ const Profile = () => {
           {/* Bottom Navigation - xs screens only */}
           <BottomNavigation showLabels sx={{ display: { xs: 'inline-flex', sm: 'none' }, position: 'fixed', width: '100%', bottom: 0, zIndex: 10 }}>
             <BottomNavigationAction label='my profile' onClick={(e) => setCurrentPage(e.target.innerHTML)}/>
-            <BottomNavigationAction label='my cards' onClick={(e) => setCurrentPage(e.target.innerHTML)}/>
+            <BottomNavigationAction label='my wallet' onClick={(e) => setCurrentPage(e.target.innerHTML)}/>
           </BottomNavigation>
 
           {currentPage === 'my profile' ? 
             <EditProfile profileDetails={profileDetails} setProfileDetails={setProfileDetails} userId={userId} token={token} />
-            : currentPage === 'my cards' ?
-              <MyCards profileDetails={profileDetails} setProfileDetails={setProfileDetails} userId={userId} token={token} /> : ''
+            : currentPage === 'my wallet' ?
+              <MyWallet profileDetails={profileDetails} setProfileDetails={setProfileDetails} userId={userId} token={token} /> : ''
           }
         </Box>
       }

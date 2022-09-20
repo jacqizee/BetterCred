@@ -32,7 +32,7 @@ const NavBar = ({ mode, setMode }) => {
 
   const profileMenu = {
     'my profile': handleProfileNav,
-    'my cards': handleProfileNav,
+    'my wallet': handleProfileNav,
     'logout': handleLogOut,
   }
 
