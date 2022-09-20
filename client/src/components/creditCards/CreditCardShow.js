@@ -14,13 +14,13 @@ import { handleWalletButton, displayFeatures } from '../helpers/creditCards'
 import { Box, Typography, Icon, Button, List } from '../styles/MaterialUI'
 
 // Icons
-import { creditRangeIcon, iconStyle } from '../styles/Icons'
-import CashBackIcon from './CashBackIcons'
+import CreditRangeIcon from '../icons/CreditRangeIcon'
+import CashBackIcon from '../icons/CashBackIcons'
 import bgDark from '../../assets/background-dark.webp'
 import bgLight from '../../assets/background-light.jpeg'
 
 // Styling
-import { flexCentered, flexRowCentered } from '../styles/Styling'
+import { flexCentered, flexRowCentered } from '../styles/styling'
 
 const CreditCardShow = ({ mode }) => {
 
@@ -37,7 +37,7 @@ const CreditCardShow = ({ mode }) => {
   const payload = getPayload()
 
   const cardStats = {
-    'Credit Score': creditRangeIcon(cardData.credit_range),
+    'Credit Score': <CreditRangeIcon creditRange={cardData.credit_range} />,
     'Annual Fee': `$${cardData.annual_fee}`,
     'Foreign Transaction Fee': `${cardData.foreign_fee}%`,
     'Regular APY': `${cardData['regular_APR_min']} - ${cardData['regular_APR_max']}%`,

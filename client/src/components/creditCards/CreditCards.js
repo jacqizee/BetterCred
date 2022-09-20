@@ -14,12 +14,12 @@ import Error from '../utilities/Error.js'
 import Loading from '../utilities/Loading.js'
 
 // Icons
-import { creditRangeIcon } from '../styles/Icons'
+import CreditRangeIcon from '../icons/CreditRangeIcon'
 import SearchIcon from '@mui/icons-material/Search'
-import CashBackIcon from './CashBackIcons'
+import CashBackIcon from '../icons/CashBackIcons'
 
 // Styling
-import { flexCentered, flexRowCentered } from '../styles/Styling'
+import { flexCentered, flexRowCentered } from '../styles/styling'
 
 const CreditCards = () => {
 
@@ -188,7 +188,7 @@ const CreditCards = () => {
                         {/* Credit Score */}
                         <Box sx={{ textAlign: 'center' }}>
                           <Typography variant='body1' sx={{ lineHeight: 1.25, mb: .5 }}>Credit Score</Typography>
-                          { creditRangeIcon(card.credit_range) }
+                          <CreditRangeIcon creditRange={card.credit_range} />
                         </Box>
                         <Divider orientation="vertical" flexItem />
 

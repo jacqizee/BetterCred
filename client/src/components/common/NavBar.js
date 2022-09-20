@@ -15,7 +15,7 @@ import { AppBar, Box, Toolbar, Typography, Button, Drawer,
   ListItemText, Menu, MenuItem, Collapse } from '../styles/MaterialUI'
 
 // Styling
-import { flexRowCentered } from '../styles/Styling'
+import { flexRowCentered } from '../styles/styling'
 
 // Icons
 import MenuIcon from '@mui/icons-material/Menu'
@@ -56,8 +56,8 @@ const Navigation = ({ mode, setMode }) => {
   }
 
   const profileMenu = {
-    'my cards': handleProfileNav,
     'my profile': handleProfileNav,
+    'my cards': handleProfileNav,
     'logout': handleLogOut,
   }
 

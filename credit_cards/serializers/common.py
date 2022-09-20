@@ -2,7 +2,6 @@ from rest_framework.serializers import ModelSerializer, StringRelatedField
 from ..models import CreditCard
 
 from issuers.serializers.common import IssuerSerializer
-from credit_ranges.serializers.common import CreditRangeSerializer
 
 class SimpleCreditCardSerializer(ModelSerializer):
     issuer = IssuerSerializer()

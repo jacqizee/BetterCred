@@ -4,7 +4,7 @@ import { Box, Typography } from '../styles/MaterialUI'
 
 import WorriedCard from '../../assets/worried-card.gif'
 
-import { flexCentered } from '../styles/Styling'
+import { flexCentered } from '../styles/styling'
 
 const Error = () => {
   return (

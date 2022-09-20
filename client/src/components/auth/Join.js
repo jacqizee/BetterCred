@@ -1,38 +1,29 @@
 import { useState } from 'react'
 import axios from 'axios'
 
-// MUI Components
+// Components
 import { Box, Typography, Button, IconButton, Modal, TextField, Grid, Link } from '../styles/MaterialUI'
+import CloseButton from '../buttons/CloseButton'
 
 // Icons
 import LockRoundedIcon from '@mui/icons-material/LockRounded'
-import CloseIcon from '@mui/icons-material/Close'
 
 // Helpers
-import { registerForm, handleFormChange } from '../helpers/forms'
+import { handleFormChange } from '../helpers/forms'
+import { handleSwap, handleOpen, handleClose, registerForm } from './util'
 
 // Styling
-import { loginModalStyle } from '../styles/Styling'
+import { loginModalStyle } from '../styles/styling'
 
 const Join = ({ loginOpen, setLoginOpen, joinOpen, setJoinOpen }) => {
 
   // Error Handling
   const [ formErrors, setFormErrors ] = useState(false)
 
-  // Handle Modal Open and Close
-  const handleOpen = () => setJoinOpen(true)
-  const handleClose = () => setJoinOpen(false)
-
   // State of Modal Submit Button
   const [ registered, setRegistered ] = useState(false)
 
   const [ formData, setFormData ] = useState(registerForm)
-
-  // Handle Modal Swap Join -> Login
-  const handleSwap = (e) => {
-    setJoinOpen(false)
-    setLoginOpen(true)
-  }
 
   // Handle Form Submit
   const handleSubmit = async (e) => {
@@ -40,17 +31,9 @@ const Join = ({ loginOpen, setLoginOpen, joinOpen, setJoinOpen }) => {
     try {
       const response = await axios.post('/api/auth/register/', formData)
       setRegistered(true)
-      setFormData({
-        username: '',
-        email: '',
-        first_name: '',
-        last_name: '',
-        password: '',
-        password_confirmation: '',
-        profile_picture: '',
-      })
-      setJoinOpen(false)
-      setLoginOpen(true)
+      setFormData(registerForm)
+      setFormErrors(false)
+      handleSwap(joinOpen, setJoinOpen, loginOpen, setLoginOpen)
     } catch (error) {
       console.log(error.response.data.message)
       setFormErrors(error.response.data.message)
@@ -60,18 +43,16 @@ const Join = ({ loginOpen, setLoginOpen, joinOpen, setJoinOpen }) => {
   return (
     <Box>
       {/* Join Button */}
-      <Button color='secondary' variant='contained' onClick={handleOpen} sx={{ textTransform: 'none', mr: 1 }}>join</Button>
+      <Button color='secondary' variant='contained' onClick={() => handleOpen(setJoinOpen)} sx={{ textTransform: 'none', mr: 1 }}>join</Button>
       <Modal
         open={joinOpen}
-        onClose={handleClose}
+        onClose={() => handleClose(setJoinOpen)}
         aria-labelledby="register-modal"
         aria-describedby="modal with register form"
       >
         <Box sx={loginModalStyle}>
           {/* Close Icon (X) */}
-          <IconButton onClick={handleClose} sx={{ position: 'fixed', right: '2.25rem', top: '1.25rem' }} >
-            <CloseIcon />
-          </IconButton>
+          <CloseButton setModalOpen={ setJoinOpen }/>
 
           {/* Lock Icon */}
           <LockRoundedIcon sx={{ color: 'primary.contrastText', bgcolor: 'background.default', p: 1, height: '2.5rem', width: '2.5rem', borderRadius: 10 }} />
@@ -181,7 +162,7 @@ const Join = ({ loginOpen, setLoginOpen, joinOpen, setJoinOpen }) => {
           </Grid>
 
           {/* Modal Swap */}
-          <Typography>Already a Member? <Link onClick={handleSwap} underline='hover' sx={{ '&:hover': { cursor: 'pointer' } }}>Login</Link></Typography>
+          <Typography>Already a Member? <Link onClick={() => handleSwap(joinOpen, setJoinOpen, loginOpen, setLoginOpen, setFormErrors)} underline='hover' sx={{ '&:hover': { cursor: 'pointer' } }}>Login</Link></Typography>
         </Box>
       </Modal>
     </Box>

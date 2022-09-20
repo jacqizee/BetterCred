@@ -3,19 +3,25 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from rest_framework.exceptions import NotFound
+from rest_framework.pagination import PageNumberPagination
 
 from .models import CreditCard
-from .serializers.common import CreditCardSerializer
+from .serializers.common import CreditCardSerializer, SimpleCreditCardSerializer
 from .serializers.populated import PopulatedCreditCardSerializer
 
 # Create your views here.
 
-class AllCreditCardView(APIView):
+class CreditCardPagination(PageNumberPagination):
+    page_size = 12
+
+class AllCreditCardView(APIView, CreditCardPagination):
     permission_classes = (IsAuthenticatedOrReadOnly, )
     
     # GET request - returns all credit cards
-    def get(self, _request):
-        serialized_credit_cards = CreditCardSerializer(CreditCard.objects.all(), many=True)
+    def get(self, request):
+        cards = CreditCard.objects.all()
+        paginate_cards = self.paginate_queryset(cards, request, view=self)
+        serialized_credit_cards = SimpleCreditCardSerializer(paginate_cards, many=True)
         return Response(serialized_credit_cards.data)
     
 class OneCreditCardView(APIView):

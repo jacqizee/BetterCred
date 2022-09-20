@@ -155,7 +155,9 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'jwt_auth.authentication.JWTAuthentication'
-    ]
+    ],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 6
 }
 
 STATICFILES_DIRS = (

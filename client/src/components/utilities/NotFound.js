@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { Box, Typography } from '../styles/MaterialUI'
 
 import AngryCard from '../../assets/angry-card.gif'
-import { flexCentered } from '../styles/Styling'
+import { flexCentered } from '../styles/styling'
 
 const NotFound = () => {
   return (

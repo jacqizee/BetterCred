@@ -1,40 +1,30 @@
 import { useState } from 'react'
 import axios from 'axios'
 
-// MUI Components
-import { Box, Typography, Button, IconButton, Modal, TextField, Grid, Link } from '../styles/MaterialUI'
+// Components
+import { Box, Typography, Button, Modal, TextField, Grid, Link } from '../styles/MaterialUI'
+import CloseButton from '../buttons/CloseButton'
 
 // Icons
 import LockRoundedIcon from '@mui/icons-material/LockRounded'
-import CloseIcon from '@mui/icons-material/Close'
 
 // Helpers
-import { loginForm, handleFormChange } from '../helpers/forms'
+import { handleFormChange } from '../helpers/forms'
+import { handleSwap, handleOpen, handleClose, loginForm } from './util'
 
 // Styling
-import { loginModalStyle } from '../styles/Styling'
+import { loginModalStyle } from '../styles/styling'
 
 const Login = ({ loginOpen, setLoginOpen, joinOpen, setJoinOpen }) => {
 
   // Error Handling
   const [ formErrors, setFormErrors ] = useState(false)
 
-  // Handle Modal Open and Close
-  const handleOpen = () => setLoginOpen(true)
-  const handleClose = () => setLoginOpen(false)
-
   // State of Modal Submit Button
   const [ loggedIn, setLoggedIn ] = useState(false)
 
   // Form Data State
-
   const [ formData, setFormData ] = useState(loginForm)
-
-  // Swap from Login Modal to Join Modal
-  const handleSwap = (e) => {
-    setLoginOpen(false)
-    setJoinOpen(true)
-  }
 
   // Handle Form Submit
   const handleSubmit = async (e) => {
@@ -43,30 +33,27 @@ const Login = ({ loginOpen, setLoginOpen, joinOpen, setJoinOpen }) => {
       const { data } = await axios.post('/api/auth/login/', formData)
       window.localStorage.setItem('bettercred', data.token)
       setLoggedIn(true)
-      setFormData(loginForm)
       setLoginOpen(false)
       window.location.reload()
     } catch (error) {
       setFormErrors(error.response.data.detail)
-      setFormData(loginForm)
     }
+    setFormData(loginForm)
   }
 
   return (
     <Box>
       {/* Login Button */}
-      <Button color='secondary' variant='outlined' onClick={handleOpen} sx={{ textTransform: 'none', mr: 1 }}>login</Button>
+      <Button color='secondary' variant='outlined' onClick={() => handleOpen(setLoginOpen)} sx={{ textTransform: 'none', mr: 1 }}>login</Button>
       <Modal
         open={loginOpen}
-        onClose={handleClose}
+        onClose={() => handleClose(setLoginOpen)}
         aria-labelledby="login-modal"
         aria-describedby="modal with login form"
       >
         <Box sx={loginModalStyle}>
           {/* Close Icon */}
-          <IconButton onClick={handleClose} sx={{ position: 'fixed', right: '2.25rem', top: '1.25rem' }} >
-            <CloseIcon />
-          </IconButton>
+          <CloseButton setModalOpen={ setLoginOpen }/>
 
           {/* Lock Icon */}
           <LockRoundedIcon sx={{ color: 'primary.contrastText', bgcolor: 'background.default', p: 1, height: '2.5rem', width: '2.5rem', borderRadius: 10 }} />
@@ -120,7 +107,7 @@ const Login = ({ loginOpen, setLoginOpen, joinOpen, setJoinOpen }) => {
           </Grid>
 
           {/* Modal Swap */}
-          <Typography>Need an account? <Link onClick={handleSwap} underline='hover' sx={{ '&:hover': { cursor: 'pointer' } }}>Join</Link></Typography>
+          <Typography>Need an account? <Link onClick={() => handleSwap(joinOpen, setJoinOpen, loginOpen, setLoginOpen, setFormErrors)} underline='hover' sx={{ '&:hover': { cursor: 'pointer' } }}>Join</Link></Typography>
         </Box>
       </Modal>
     </Box>

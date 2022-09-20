@@ -1,7 +1,7 @@
 import { Box, Typography } from '../styles/MaterialUI'
 
 import BouncingCards from '../../assets/bouncing-cards.gif'
-import { flexCentered } from '../styles/Styling'
+import { flexCentered } from '../styles/styling'
 
 const Loading = () => {
   return (

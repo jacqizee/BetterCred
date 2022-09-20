@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { Box, Typography, Zoom } from '../styles/MaterialUI'
 
 import Construction from '../../assets/under-construction.gif'
-import { flexCentered } from '../styles/Styling'
+import { flexCentered } from '../styles/styling'
 
 const UnderConstruction = () => {
   return (

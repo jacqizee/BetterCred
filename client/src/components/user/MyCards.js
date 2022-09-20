@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom'
 import { deleteWalletCard } from '../helpers/creditCards'
 
 // Icons
-import CashBackIcon from '../creditCards/CashBackIcons'
+import CashBackIcon from '../icons/CashBackIcons'
 
 // MUI Components
-import { Box, Typography, Button, TextField, Divider, Alert, Slide, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Icon } from '../styles/MaterialUI'
+import { Box, Typography, Button, Divider, Slide, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '../styles/MaterialUI'
 
 const MyCards = ({ profileDetails, setProfileDetails, userId, token }) => {
 
@@ -82,7 +82,7 @@ const MyCards = ({ profileDetails, setProfileDetails, userId, token }) => {
                       {/* Key Details */}
                       <Box sx={{ display: 'flex', width: '100%' }}>
 
-                        <TableContainer sx={{ my: 1, bgcolor: 'background.paperContrast', borderRadius: 1 }}>
+                        <TableContainer sx={{ my: 1, bgcolor: 'background.paperMoreContrast', borderRadius: 1 }}>
                           <Table aria-label="simple table" size='small'>
 
                             <TableHead>
