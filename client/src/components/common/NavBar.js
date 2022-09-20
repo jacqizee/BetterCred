@@ -36,7 +36,6 @@ const NavBar = ({ mode, setMode }) => {
     'logout': handleLogOut,
   }
 
-
   // Light/Dark Mode on Local Storage
   useEffect(() => {
     if (window.localStorage.getItem('bettercred-mode')) {

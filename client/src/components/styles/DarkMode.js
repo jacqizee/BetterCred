@@ -17,7 +17,7 @@ export const DarkModeSwitch = ({ mode, setMode, switchStatus }) => {
   return (
     <Switch 
       checked={switchStatus}
-      onChange={handleModeChange}
+      onChange={(e) => handleModeChange(e, setMode)}
       value={mode}
       color='secondary'
       icon={<LightModeRoundedIcon sx={{ bgcolor: '#000', borderRadius: 5, p: .5 }} />}
